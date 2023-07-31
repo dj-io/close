@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
+import UserState from './UserState.ts';
 
-
+const reducers = {
+    UserState,
+}
 // COMBINE ALL APP REDUCERS 
-const reducers = combineReducers({});
-
-export default reducers;
+export default combineReducers(reducers);
