@@ -15,6 +15,7 @@ import { Submit } from '../buttons/Submit.tsx';
 interface IFormProps {
     initialValues: any;
     fields: Array[];
+    buttonLabel: string;
 }
 
 /**
@@ -47,7 +48,7 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                         onSubmit={formikProps.handleSubmit}
                     >
                         {props.fields.map((field) => <InputField row={field} isSubmitting={formikProps.isSubmitting} />)}
-                        <Submit label="Login" />
+                        <Submit label={props.buttonLabel} />
                     </form>
                 )}
             </Formik>

@@ -5,6 +5,7 @@ import { StyledCard } from './Signup.Styles.ts';
 import { signUpfields } from '../../common/constants/formFields.ts';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import { ISignupDispatchToProps, ISignupStateToProps } from '../../types/user.ts';
+import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 
 
 
@@ -31,8 +32,9 @@ class Signup extends React.Component<SignupProps> {
         return (
             <>
                 <StyledCard sx={{ minWidth: 275 }}>
-                    <Form fields={signUpfields} initialValues={{}} />
-                    <Confirm label="Have an account?" func={() => this.props.userHasAccount(true)} />
+                    <Form buttonLabel="Sign up" fields={signUpfields} initialValues={{}} />
+                    <Typography>{UserActionTypes.HAS_ACCOUNT}</Typography>
+                    <Confirm label="Sign in" func={() => this.props.userHasAccount(true)} />
                 </StyledCard>
             </>
         );

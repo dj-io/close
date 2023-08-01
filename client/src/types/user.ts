@@ -13,3 +13,11 @@ export interface ISigninStateToProps {
 export interface ISigninDispatchToProps {
     userHasAccount: Function;
 }
+
+export interface IProfileStateToProps {
+    hasAccount: boolean
+}
+
+export interface IProfileDispatchToProps {
+    userHasAccount: Function;
+}

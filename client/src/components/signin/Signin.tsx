@@ -4,6 +4,8 @@ import { Form } from '../../common/components/form/Form.tsx';
 import { signInfields } from '../../common/constants/formFields.ts';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import { ISigninDispatchToProps, ISigninStateToProps } from '../../types/user.ts';
+import { UserActionTypes } from '../../common/enums/UserActionType.ts';
+import { Typography } from '@mui/material';
 
 interface ISigninProps {
 
@@ -20,20 +22,13 @@ class Signin extends React.Component<SigninProps> {
 
     }
 
-    componentDidUpdate(prevProps: any, prevState: any) {
-        console.log("=== nooo conditionn ==", prevProps, this.props)
-
-        if (prevProps.hasAccount !== this.props.hasAccount) {
-            console.log("=== stateee ==", this.props.hasAccount)
-        }
-    }
-
-    render() {
+    render(): JSX.Element {
         return (
             <>
                 <StyledCard sx={{ minWidth: 275 }}>
-                    <Form fields={signInfields} initialValues={{}} />
-                    <Confirm label="Don't have an account?" func={() => this.props.userHasAccount(false)} />
+                    <Form buttonLabel="Sign in" fields={signInfields} initialValues={{}} />
+                    <Typography> {UserActionTypes.NO_ACCOUNT} </Typography>
+                    <Confirm label="Signup" func={() => this.props.userHasAccount(false)} />
                 </StyledCard>
             </>
         );
