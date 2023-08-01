@@ -1,4 +1,4 @@
-import { UserActions } from "../actionTypes/UserActionTypes";
+import { UserActions } from "../actionTypes/UserActionTypes.ts";
 
 
 export const userHasAccount = (hasAccount: boolean) => ({

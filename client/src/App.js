@@ -1,10 +1,13 @@
 import './App.css';
-import Signup from './components/signup/Signup.tsx';
+import { Signup, Signin } from './components/index.ts';
 
-function App() {
+function App({ hasAccount }) {
+
+  console.log("=== yuppp ===", hasAccount)
   return (
     <div className="App">
-      <Signup />
+      {hasAccount && <Signin />}
+      {!hasAccount && <Signup />}
     </div>
   );
 }

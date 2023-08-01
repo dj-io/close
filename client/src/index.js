@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { AppContainer as App } from './App.Container';
 import reportWebVitals from './reportWebVitals';
 import reducers from './redux/reducers/index';
 import { legacy_createStore as createStore } from 'redux';

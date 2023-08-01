@@ -27,17 +27,12 @@ class Signup extends React.Component<SignupProps> {
 
     }
 
-    componentDidMount() {
-        console.log("=== propsss ===", this.props)
-    }
-
     render(): JSX.Element {
         return (
             <>
                 <StyledCard sx={{ minWidth: 275 }}>
-
                     <Form fields={signUpfields} initialValues={{}} />
-                    <Confirm label="Have an account?" />
+                    <Confirm label="Have an account?" func={() => this.props.userHasAccount(true)} />
                 </StyledCard>
             </>
         );

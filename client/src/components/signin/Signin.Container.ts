@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { userHasAccount } from '../../redux/actions/UserActions.ts';
-import Signup from './Signup.tsx';
-import { ISignupDispatchToProps, ISignupStateToProps } from '../../types/user.ts';
+import Signin from './Signin.tsx';
+import { ISigninDispatchToProps, ISigninStateToProps } from '../../types/user.ts';
 
 
 /**
@@ -11,7 +11,7 @@ import { ISignupDispatchToProps, ISignupStateToProps } from '../../types/user.ts
  * @param state Close State
  * @returns 
  */
-const mapStateToprops = (state: any): ISignupStateToProps => ({
+const mapStateToprops = (state: any): ISigninStateToProps => ({
     hasAccount: state.UserState.hasAccount,
 });
 
@@ -21,11 +21,11 @@ const mapStateToprops = (state: any): ISignupStateToProps => ({
  * @param dispatch 
  * @returns 
  */
-const mapDispatchToProps = (dispatch: any): ISignupDispatchToProps => ({
+const mapDispatchToProps = (dispatch: any): ISigninDispatchToProps => ({
     userHasAccount: bindActionCreators(userHasAccount, dispatch),
 });
 
-export const SignupContainer = connect(
+export const SigninContainer = connect(
     mapStateToprops,
     mapDispatchToProps,
-)(Signup)
+)(Signin)

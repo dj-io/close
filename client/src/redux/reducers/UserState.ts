@@ -5,7 +5,7 @@ export interface UserStateConfig {
 }
 
 const initialState: UserStateConfig = {
-    hasAccount: false,
+    hasAccount: true,
 }
 
 export default function reduce(state: UserStateConfig = initialState, action: any) {
@@ -13,11 +13,14 @@ export default function reduce(state: UserStateConfig = initialState, action: an
         case UserActions.USER_ACCOUNT: {
             return {
                 ...state,
-                hasAccount: action.payload.hasAccount,
+                hasAccount: action.payload,
             }
         }
 
-        default:
-            return state;
+        default: {
+            return {
+                ...state,
+            }
+        }
     }
 }
