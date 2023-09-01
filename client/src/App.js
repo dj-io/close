@@ -1,4 +1,3 @@
-import './App.css';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Signup, Signin, Nav, Profile } from './components/index.ts';
 
@@ -11,9 +10,10 @@ function App({ hasAccount }) {
         <Nav />
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
+          {/* <Route path='/home' component={Home} />
+          <Route path='/find' component={Find} />
+          <Route path='/share' component={Share} /> */}
           <Route path='/profile' element={<Profile />} />
-          {/* <Route path='/feed' component={Feed} />
-          <Route path='/find' component={Find} /> */}
         </Routes>
       </Router>
     </div>
