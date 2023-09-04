@@ -9,6 +9,12 @@ interface IInputFieldProps {
     isSubmitting: boolean;
 }
 
+/**
+ * Common Field Functional component
+ * Reusable Field component 
+ * @param props @interface IInputFieldProps 
+ * @returns 
+ */
 export const InputField: React.FC<IInputFieldProps> = ({ row, isSubmitting }) => {
 
     return (
