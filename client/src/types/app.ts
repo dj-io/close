@@ -7,9 +7,10 @@ export interface IHomeDispatchToProps {
 }
 
 export interface IFindStateToProps {
-    hasAccount: boolean
+    isFindOpen: boolean
 }
 
 export interface IFindDispatchToProps {
-    userHasAccount: Function;
+    openFind: Function;
+    findUsers: Functions;
 }

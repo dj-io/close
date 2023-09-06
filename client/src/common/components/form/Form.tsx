@@ -16,6 +16,7 @@ interface IFormProps {
     initialValues: any;
     fields: Array[];
     buttonLabel: string;
+    submit: Function;
 }
 
 /**
@@ -48,7 +49,7 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                         onSubmit={formikProps.handleSubmit}
                     >
                         {props.fields.map((field) => <InputField row={field} isSubmitting={formikProps.isSubmitting} />)}
-                        <Submit label={props.buttonLabel} />
+                        <Submit func={props.submit} label={props.buttonLabel} />
                     </form>
                 )}
             </Formik>

@@ -4,10 +4,12 @@ import { ProfileContainer } from './profile/Profile.Container.ts';
 import { NavContainer } from './navigation/Navigation.Container.ts';
 import { HomeContainer } from './home/Home.Container.ts';
 import { FindContainer } from './find/Find.Container.ts';
+import { ShareContainer } from './share/Share.Container.js';
 
 export const Home = HomeContainer;
 export const Signin = SigninContainer;
 export const Signup = SignupContainer;
 export const Profile = ProfileContainer;
 export const Nav = NavContainer;
-exort const Find = FindContainer;
+export const Find = FindContainer;
+export const Share = ShareContainer;

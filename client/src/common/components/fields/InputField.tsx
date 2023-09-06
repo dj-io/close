@@ -20,7 +20,7 @@ export const InputField: React.FC<IInputFieldProps> = ({ row, isSubmitting }) =>
     return (
         <>
             <StyledField
-                type="text"
+                type={row.type}
                 name={row.name}
                 id={row.id}
                 label={row.label}

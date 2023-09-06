@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import App from './App.js';
+import Share from './Share.ts';
 
 /**
  * Used to access application state
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 });
 
-export const AppContainer = connect(
+export const ShareContainer = connect(
     mapStateToprops,
     mapDispatchToProps,
-)(App)
+)(Share)
