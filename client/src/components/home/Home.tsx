@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PostCard } from '../../common/components/card/PostCard.js';
+import { PostCard } from '../../common/components/card/PostCard.tsx';
 
 
 interface IHomeProps {

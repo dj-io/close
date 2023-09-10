@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Share from './Share.ts';
+import Share from './Share.tsx';
 
 /**
  * Used to access application state

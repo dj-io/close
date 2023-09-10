@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Post } from './components/home/Post.tsx';
-import { Signup, Signin, Nav, Profile, Home } from './components/index.ts';
+import { Signup, Signin, Nav, Profile, Home, Find } from './components/index.ts';
 
 function App({ hasAccount }) {
 

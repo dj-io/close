@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dialog } from '../../common/components/dialog/Dialog.tsx';
+import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import { shareFields } from '../../common/constants/formFields.ts';
 import SelectMedia from './SelectMedia.tsx'
 import Caption from './Caption.tsx';
@@ -21,11 +21,11 @@ class Share extends React.Component<ShareProps> {
     render(): JSX.Element {
         return (
             <>
-                <Dialog>
+                <ConfirmDialog>
                     // Set render condition (if file uploaded)
                     <SelectMedia />
                     <Caption />
-                </Dialog>
+                </ConfirmDialog>
             </>
         );
     }

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Find from './Find.js';
+import Find from './Find.tsx';
 import { openFind, findUsers } from '../../redux/actions/AppActions.ts';
 import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.js';
 

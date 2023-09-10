@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import MultiField from '../../common/components/fields/MultiField.js';
+import Avatar from '@mui/material/Avatar';
+import MultiField from '../../common/components/fields/MultiField.tsx';
 
 interface ICaption {
     avatar: string;
@@ -27,7 +28,7 @@ const Caption: React.FC<ICaption> = ({ avatar, userName, img, isSubmitting }) =>
                         {avatar}
                     </Avatar>
                 }
-                action={ }
+
                 title={userName}
                 subheader=''
             />

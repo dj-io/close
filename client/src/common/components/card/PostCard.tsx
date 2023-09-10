@@ -1,8 +1,11 @@
+import { Link } from 'react-router-dom';
+import ShortTextIcon from '@mui/icons-material/ShortText';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -11,7 +14,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import ShortTextIcon from '@mui/icons-material/ShortText';
 import { ExpandMore } from './PostCard.Styles.ts';
 
 
@@ -106,23 +108,23 @@ export const PostCard: React.FC<IPostcardProps> = ({
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    {Object.values(comments).map(comment) => (
-                    <CardHeader
-                        avatar={
-                            <Avatar sx={{ bgcolor: red[500] }} aria-label="profile-pic">
-                                {avatar}
-                            </Avatar>
-                        }
-                        action={
-                            <IconButton aria-label="settings">
-                                <FavoriteIcon />
-                            </IconButton>
-                        }
-                        title={userName}
-                        title={comment}
-                        subheader={commentTime}
-                    />
-                    )}
+                    {Object.values(comments).map(comment => (
+                        <CardHeader
+                            avatar={
+                                <Avatar sx={{ bgcolor: red[500] }} aria-label="profile-pic">
+                                    {avatar}
+                                </Avatar>
+                            }
+                            action={
+                                <IconButton aria-label="settings">
+                                    <FavoriteIcon />
+                                </IconButton>
+                            }
+                            title={userName}
+                            title={comment}
+                            subheader={commentTime}
+                        />
+                    ))}
                 </CardContent>
             </Collapse>
         </Card >

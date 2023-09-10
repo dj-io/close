@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { Grid } from '@mui/material';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
 import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
 import { FindDrawer, FindHeader, Seperate } from './Find.Styles.ts';
-import { Grid } from '@mui/material';
 import { Form } from '../../common/components/form/Form.tsx';
 import { FindFields } from '../../common/constants/formFields.ts';
 
@@ -52,7 +54,7 @@ class Find extends React.Component<FindProps> {
                                         {user.pic}
                                     </Avatar>
                                 }
-                                action={ }
+
                                 title={user.userName}
                                 subheader={user.fullName}
                             />

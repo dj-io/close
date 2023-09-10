@@ -4,7 +4,7 @@ import { ProfileContainer } from './profile/Profile.Container.ts';
 import { NavContainer } from './navigation/Navigation.Container.ts';
 import { HomeContainer } from './home/Home.Container.ts';
 import { FindContainer } from './find/Find.Container.ts';
-import { ShareContainer } from './share/Share.Container.js';
+import { ShareContainer } from './share/Share.Container.ts';
 
 export const Home = HomeContainer;
 export const Signin = SigninContainer;

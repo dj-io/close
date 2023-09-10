@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import { BootstrapDialog } from './Dialog.Styles';
+import { BootstrapDialog } from './Dialog.Styles.ts';
 import CardMedia from '@mui/material/CardMedia';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -23,7 +23,7 @@ interface IDialog {
  * @param props @interface IDialog 
  * @returns 
  */
-export const Dialog: React.FC<IDialog> = ({ label, children, confirmLabel }) => {
+export const ConfirmDialog: React.FC<IDialog> = ({ label, children, confirmLabel }) => {
 
     const [open, setOpen] = React.useState(false);
 

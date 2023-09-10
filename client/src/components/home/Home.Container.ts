@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Home from './Home.js';
+import Home from './Home.tsx';
 import { IHomeDispatchToProps, IHomeStateToProps } from '../../types/app.js';
 
 
