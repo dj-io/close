@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 
 interface IMultiField {
@@ -10,7 +11,12 @@ interface IMultiField {
 
 const MultiField: React.FC<IMultiField> = ({ row, maxRows, isSubmitting }) => {
     return (
-        <>
+        <Grid
+            container
+            spacing={1}
+            justifyContent="center"
+        >
+
             <TextField
                 multiline
                 id={row.id}
@@ -18,7 +24,8 @@ const MultiField: React.FC<IMultiField> = ({ row, maxRows, isSubmitting }) => {
                 maxRows={maxRows}
                 disabled={isSubmitting}
             />
-        </>
+        </Grid>
+
 
     );
 }

@@ -3,6 +3,11 @@ import { Card } from '@mui/material';
 
 export const StyledCard = styled(Card)({
     '&&': {
-        width: '500px'
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '325px',
+        borderBottom: '2px solid green'
     }
 })

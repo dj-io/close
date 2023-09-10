@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Grid from '@mui/material/Grid';
 import { useState, useEffect } from 'react';
 
 import { StyledField } from '../../styles/Fields.Styles.ts';
@@ -18,7 +19,11 @@ interface IInputFieldProps {
 export const InputField: React.FC<IInputFieldProps> = ({ row, isSubmitting }) => {
 
     return (
-        <>
+        <Grid
+            container
+            spacing={1}
+            justifyContent="center"
+        >
             <StyledField
                 type={row.type}
                 name={row.name}
@@ -26,7 +31,9 @@ export const InputField: React.FC<IInputFieldProps> = ({ row, isSubmitting }) =>
                 label={row.label}
                 variant="outlined"
                 disabled={isSubmitting}
+                sx={{ minWidth: 275 }}
             />
-        </>
+        </Grid>
+
     );
 }

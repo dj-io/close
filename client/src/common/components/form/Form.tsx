@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Grid from '@mui/material/Grid';
 import { Formik, FormikProps } from 'formik';
 import { useState, useEffect } from 'react';
 import { validationSchema } from '../../utils/validation.ts';
@@ -33,26 +34,24 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
 
 
     return (
-        <>
-            <Formik
-                initialValues={props.initialValues}
-                validationSchema={validationSchema}
-                onSubmit={handleOnSubmit}
-                enableReinitialize
-            >
-                {(formikProps: FormikProps<FormValues>) => (
-                    <form
-                        id="submit"
-                        name="submit"
-                        onBlur={formikProps.handleBlur}
-                        onChange={formikProps.handleChange}
-                        onSubmit={formikProps.handleSubmit}
-                    >
-                        {props.fields.map((field) => <InputField row={field} isSubmitting={formikProps.isSubmitting} />)}
-                        <Submit func={props.submit} label={props.buttonLabel} />
-                    </form>
-                )}
-            </Formik>
-        </>
+        <Formik
+            initialValues={props.initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleOnSubmit}
+            enableReinitialize
+        >
+            {(formikProps: FormikProps<FormValues>) => (
+                <form
+                    id="submit"
+                    name="submit"
+                    onBlur={formikProps.handleBlur}
+                    onChange={formikProps.handleChange}
+                    onSubmit={formikProps.handleSubmit}
+                >
+                    {props.fields.map((field) => <InputField row={field} isSubmitting={formikProps.isSubmitting} />)}
+                    <Submit func={props.submit} label={props.buttonLabel} />
+                </form>
+            )}
+        </Formik>
     );
 }

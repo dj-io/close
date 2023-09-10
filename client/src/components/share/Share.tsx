@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
-import { shareFields } from '../../common/constants/formFields.ts';
 import SelectMedia from './SelectMedia.tsx'
 import Caption from './Caption.tsx';
 interface IShareProps {
