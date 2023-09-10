@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Dialog } from '../../common/components/dialog/Dialog.tsx';
 import { shareFields } from '../../common/constants/formFields.ts';
-
+import SelectMedia from './SelectMedia.tsx'
+import Caption from './Caption.tsx';
 interface IShareProps {
 
 }
@@ -21,10 +22,9 @@ class Share extends React.Component<ShareProps> {
         return (
             <>
                 <Dialog>
-
-                    Drag photos and videos here
-                    <Form buttonLabel="Select from computer" fields={shareFields} initialValues={{}} />
-
+                    // Set render condition (if file uploaded)
+                    <SelectMedia />
+                    <Caption />
                 </Dialog>
             </>
         );
