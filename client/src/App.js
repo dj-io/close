@@ -8,7 +8,7 @@ function App({ hasAccount }) {
   return (
     <div className="App">
       <Router>
-        {/* <Nav /> */}
+        <Nav />
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
           <Route path='/home' element={<Home />} />

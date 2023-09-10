@@ -35,12 +35,12 @@ class Signup extends React.Component<SignupProps> {
                 spacing={0}
                 alignItems="center"
                 justifyContent="center"
-                sx={{ minHeight: '100vh' }}
+                sx={{ minHeight: '75vh' }}
             >
                 {/* <Grid item xs={3}> */}
                 <StyledCard sx={{ minWidth: 275 }}>
                     <Form buttonLabel="Sign up" fields={signUpfields} initialValues={{}} />
-                    <Typography>{UserActionTypes.HAS_ACCOUNT}</Typography>
+                    <Typography sx={{ marginTop: '10px' }}>{UserActionTypes.HAS_ACCOUNT}</Typography>
                     <Confirm label="Sign in" func={() => this.props.userHasAccount(true)} />
                 </StyledCard>
                 {/* </Grid> */}

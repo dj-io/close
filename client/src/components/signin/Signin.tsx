@@ -31,11 +31,11 @@ class Signin extends React.Component<SigninProps> {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{ minHeight: '100vh' }}
+                sx={{ minHeight: '75vh' }}
             >
                 <StyledCard sx={{ minWidth: 275 }}>
                     <Form buttonLabel="Sign in" fields={signInfields} initialValues={{}} />
-                    <Typography> {UserActionTypes.NO_ACCOUNT} </Typography>
+                    <Typography sx={{ marginTop: '10px' }}> {UserActionTypes.NO_ACCOUNT} </Typography>
                     <Confirm label="Signup" func={() => this.props.userHasAccount(false)} />
                 </StyledCard>
             </Grid>

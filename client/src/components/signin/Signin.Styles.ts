@@ -8,6 +8,6 @@ export const StyledCard = styled(Card)({
         justifyContent: 'center',
         alignItems: 'center',
         width: '325px',
-        borderBottom: '2px solid green'
+        // borderBottom: '2px solid green'
     }
 })

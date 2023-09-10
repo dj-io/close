@@ -12,7 +12,7 @@ export const Submit: React.FC<ISubmit> = ({ label, func }) => {
     return (
         <Grid
             container
-            spacing={1}
+            spacing={0}
             justifyContent="center"
         >
             <SubmitButton onClick={func} variant="contained">{label}</SubmitButton>

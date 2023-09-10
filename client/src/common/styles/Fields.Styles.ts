@@ -4,6 +4,15 @@ import TextField from '@mui/material/TextField';
 
 export const StyledField = styled(TextField)({
     '&&': {
-        margin: '10px'
+        marginTop: '25px',
+        '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: '#228B22',
+        },
+
+
+        '& label': {
+            color: '#228B22'
+        },
+
     },
 })

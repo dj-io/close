@@ -19,8 +19,15 @@ export const FindDrawer = styled(Drawer)((props: any) => ({
     }
 }));
 
-export const Seperate: any = styled('div')(() => ({
-    borderBottom: '1px solid #fff',
+export const Divide = styled('div')(() => ({
+    borderRight: '1px solid #228B22',
+    width: '100px',
+    opacity: '0.2',
+    margin: 0,
+}))
+
+export const Seperate: any = styled('div')((props) => ({
+    borderBottom: '1px solid #228B22',
     width: 'calc(100% - 3px)',
     opacity: '0.2',
     margin: 0,
