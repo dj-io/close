@@ -23,13 +23,13 @@ export type FindProps = IFindStateToProps & IFindDispatchToProps & IFindProps;
  */
 class Find extends React.Component<FindProps> {
     state: IFindState = {
-
+        direction: 'left'
     }
 
     users = [{
         pic: 'https://i.pinimg.com/736x/31/44/7e/31447e25b7bc3429f83520350ed13c15.jpg',
         userName: 'chillBro',
-        fullName: 'mace greplul'
+        fullName: 'mace greplul',
     }]
 
     render(): JSX.Element {
@@ -48,12 +48,13 @@ class Find extends React.Component<FindProps> {
                     width={this.props.isFindOpen ? 360 : 10}
                     elevation={1}
                     variant='persistent'
-                    anchor='left'
+                    anchor={this.state.direction}
                     open={this.props.isFindOpen}
+                    onClose={!this.props.isFindOpen}
                 >
                     <FindHeader>
                         <Grid sx={{ marginBottom: '25px', }} container direction='column' alignItems='start'>
-                            <Typography sx={{ marginRight: 32, color: '#3C414270' }} variant='h3'>Search </Typography >
+                            <Typography sx={{ marginRight: 32, color: '#3C414270', fontWeight: 'bold' }} variant='h4'>Find </Typography >
                             {/* TODO: update form with start/end adornments use enter as submit*/}
                             <Form buttonLabel="Find" fields={FindFields} submit={() => this.props.getUsers()} initialValues={{}} />
                         </Grid>
