@@ -6,14 +6,14 @@ export const SubmitButton = styled(Button)({
     '&&': {
         marginTop: '10px',
         minWidth: 275,
-        backgroundColor: '#2BB02B',
+        backgroundColor: '#238636',
         borderRadius: '9px',
-
+        color: '#3C4142'
     }
 })
 
 export const ConfirmButton = styled(Button)({
     '&&': {
-        color: '#228B22'
+        color: '#238636'
     }
 })

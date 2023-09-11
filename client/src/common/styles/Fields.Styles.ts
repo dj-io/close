@@ -6,12 +6,12 @@ export const StyledField = styled(TextField)({
     '&&': {
         marginTop: '25px',
         '& .Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#228B22',
+            borderColor: '#238636',
         },
 
 
         '& label': {
-            color: '#228B22'
+            color: '#238636'
         },
 
     },

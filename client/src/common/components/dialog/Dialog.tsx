@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { BootstrapDialog } from './Dialog.Styles.ts';
@@ -15,6 +16,10 @@ interface IDialog {
     label: string;
     confirmLabel: string;
     children: React.ReactElement;
+    title: string;
+    openDialog: Function;
+    closeDialog: Function;
+    isOpen: boolean;
 }
 
 /**
@@ -23,47 +28,42 @@ interface IDialog {
  * @param props @interface IDialog 
  * @returns 
  */
-export const ConfirmDialog: React.FC<IDialog> = ({ label, children, confirmLabel }) => {
+export const ConfirmDialog: React.FC<IDialog> = ({ label, children, confirmLabel, title, openDialog, closeDialog, isOpen }) => {
 
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [open, setOpen] = React.useState(isOpen);
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={openDialog}>
                 {label}
             </Button>
             <BootstrapDialog
-                onClose={handleClose}
+                onClose={closeDialog}
                 aria-labelledby="customized-dialog-title"
-                open={open}
+                open={isOpen}
             >
                 <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
                     {title}
                 </DialogTitle>
-                <IconButton
-                    aria-label="close"
-                    onClick={handleClose}
-                    sx={{
-                        position: 'absolute',
-                        right: 8,
-                        top: 8,
-                        color: (theme) => theme.palette.grey[500],
-                    }}
-                >
-                    <CloseIcon />
-                </IconButton>
+                <Link to='/home' id='home' >
+                    <IconButton
+                        aria-label="close"
+                        onClick={closeDialog}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                </Link>
                 <DialogContent dividers>
                     {children}
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
+                    <Button autoFocus onClick={closeDialog}>
                         {confirmLabel}
                     </Button>
                 </DialogActions>

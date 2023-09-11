@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import ShortTextIcon from '@mui/icons-material/ShortText';
 import Card from '@mui/material/Card';
@@ -23,6 +24,7 @@ import { ExpandMore } from './PostCard.Styles.ts';
  * @prop {any} initialValues - sets form initial values
  */
 interface IPostCardProps {
+    postId: any;
     avatar: string;
     userName: string;
     media: string;
@@ -30,6 +32,7 @@ interface IPostCardProps {
     caption: string;
     commentTime: Date;
     comments: Object // make IComment interface
+    expand?: boolean;
 }
 
 /**
@@ -45,23 +48,21 @@ export const PostCard: React.FC<IPostcardProps> = ({
     likes,
     caption,
     comments,
-    commentTime
+    commentTime,
+    postId,
+    expand,
 }) => {
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = React.useState(expand);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, width: '350px', marginTop: '32px' }}>
             <CardHeader
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        {avatar}
-                    </Avatar>
-                }
+                avatar={<Avatar alt="Apple" src={avatar} />}
                 action={
                     <IconButton aria-label="settings">
                         <MoreVertIcon />
@@ -72,7 +73,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
             />
             <CardMedia
                 component="img"
-                height="194"
+                height="auto"
                 image={media}
                 alt="Paella dish"
             />
@@ -86,7 +87,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
-                    <Link id='post-link' to={`/posts/${comment}`}>
+                    <Link id='post-link' to={`/home/${postId}`}>
                         {/* <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
@@ -97,6 +98,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                         {/* </ExpandMore> */}
                     </Link>
                 </IconButton>
+                <IconButton aria-label="share">{likes} likes </IconButton>
                 {/* <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
@@ -108,21 +110,16 @@ export const PostCard: React.FC<IPostcardProps> = ({
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    {Object.values(comments).map(comment => (
+                    {comments?.map(comment => (
                         <CardHeader
-                            avatar={
-                                <Avatar sx={{ bgcolor: red[500] }} aria-label="profile-pic">
-                                    {avatar}
-                                </Avatar>
-                            }
+                            avatar={<Avatar alt="Apple" src={comment.picture} />}
                             action={
                                 <IconButton aria-label="settings">
                                     <FavoriteIcon />
                                 </IconButton>
                             }
-                            title={userName}
-                            title={comment}
-                            subheader={commentTime}
+                            title={comment.userName}
+                            subheader={comment.comment}
                         />
                     ))}
                 </CardContent>

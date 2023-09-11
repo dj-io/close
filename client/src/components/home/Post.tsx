@@ -1,6 +1,7 @@
 import * as React from 'react';
-import ShortTextIcon from '@mui/icons-material/ShortText';
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import ShortTextIcon from '@mui/icons-material/ShortText';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import { PostCard } from '../../common/components/card/PostCard.tsx';
 
@@ -9,12 +10,69 @@ interface IPost {
 }
 
 
-export const Post: React.FC<IPost> = ({ match }) => {
+export const Post: React.FC<IPost> = () => {
+
+    const [open, setOpen] = useState(true);
+
+    const posts = [{
+        id: 1,
+        picture: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
+        userName: 'gleam',
+        post: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
+        likes: 2,
+        caption: 'hello world',
+        comments: [{
+            userName: 'yoomeng',
+            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
+            comment: 'this a dope pic fr',
+            commentTime: 'now'
+
+        }],
+        commentTime: 'now'
+    },
+    {
+        id: 2,
+        picture: 'https://images.pexels.com/photos/5615665/pexels-photo-5615665.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+        userName: 'nelle',
+        post: 'https://images.pexels.com/photos/5615665/pexels-photo-5615665.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500J',
+        likes: 2,
+        caption: 'hello world',
+        comments: [{
+            userName: 'hello',
+            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
+            comment: 'this a dope pic fr',
+            commentTime: 'now'
+
+        },
+        {
+            userName: 'yerp',
+            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
+            comment: 'this a dope pic ',
+            commentTime: 'later'
+
+        }],
+        commentTime: 'now'
+    }]
+
+    const postId = useParams().post
+    const post = posts.find((post) => post.id == postId)
+
+    useEffect(() => {
+        console.log("== match ===", post)
+    }, [])
 
     return (
-        <ConfirmDialog label={<ShortTextIcon />} title="user name" >
+        <ConfirmDialog isOpen={open} openDialog={() => setOpen(true)} closeDialog={() => setOpen(false)} label={<ShortTextIcon />} title={post.userName} >
             <PostCard
-
+                postId={post.id}
+                avatar={post.picture}
+                userName={post.userName}
+                media={post.post}
+                likes={post.likes}
+                caption={post.caption}
+                comments={post.comments}
+                commentTime={post.commentTime}
+                expand={true}
             />
         </ConfirmDialog>
     );

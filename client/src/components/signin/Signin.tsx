@@ -35,7 +35,7 @@ class Signin extends React.Component<SigninProps> {
             >
                 <StyledCard sx={{ minWidth: 275 }}>
                     <Form buttonLabel="Sign in" fields={signInfields} initialValues={{}} />
-                    <Typography sx={{ marginTop: '10px' }}> {UserActionTypes.NO_ACCOUNT} </Typography>
+                    <Typography sx={{ marginTop: '10px', color: '#3C414270' }}> {UserActionTypes.NO_ACCOUNT} </Typography>
                     <Confirm label="Signup" func={() => this.props.userHasAccount(false)} />
                 </StyledCard>
             </Grid>
