@@ -34,11 +34,11 @@ export const ConfirmDialog: React.FC<IDialog> = ({ label, children, confirmLabel
 
     return (
         <div>
-            <Button variant="outlined" onClick={openDialog}>
+            {/* <Button variant="contained" onClick={openDialog}>
                 {label}
-            </Button>
+            </Button> */}
             <BootstrapDialog
-                onClose={closeDialog}
+                onClose={(event, reason) => { if (reason && reason !== 'backdropClick') closeDialog() }}
                 aria-labelledby="customized-dialog-title"
                 open={isOpen}
             >

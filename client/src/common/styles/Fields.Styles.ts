@@ -9,6 +9,8 @@ export const StyledField = styled(TextField)({
             borderColor: '#238636',
         },
 
+        '& .MuiInput-underline:after': { borderBottomColor: '#238636' },
+
 
         '& label': {
             color: '#238636'

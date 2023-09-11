@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import ShortTextIcon from '@mui/icons-material/ShortText';
+import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,11 +12,16 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
+import InputAdornment from '@mui/material/InputAdornment';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { ExpandMore } from './PostCard.Styles.ts';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import { ExpandMore } from './PostCard.Styles.js';
+import MultiField from '../fields/MultiField.tsx';
+import { commentFields } from '../../constants/formFields.ts';
+import { InputLabel } from '@mui/material';
 
 
 /**
@@ -122,6 +128,16 @@ export const PostCard: React.FC<IPostcardProps> = ({
                             subheader={comment.comment}
                         />
                     ))}
+                    {
+                        commentFields.map((field) => (
+                            <MultiField
+                                row={field}
+                                maxRows={4}
+                                isSubmitting={false}
+                            />
+                        ))
+                    }
+
                 </CardContent>
             </Collapse>
         </Card >

@@ -44,3 +44,5 @@ export const FindFields = [{ id: '1', name: 'find', label: 'Find', type: 'text',
 export const shareFields = [{ id: '1', name: 'share', label: 'Share', type: 'file' }]
 
 export const captionFields = [{ id: '1', label: 'Write a caption...', name: 'caption' }]
+
+export const commentFields = [{ id: '1', label: 'Write a comment...', name: 'comment' }]

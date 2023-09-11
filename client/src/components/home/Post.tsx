@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ShortTextIcon from '@mui/icons-material/ShortText';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
-import { PostCard } from '../../common/components/card/PostCard.tsx';
+import { PostCard } from '../../common/components/cards/PostCard.tsx';
 
 interface IPost {
 
@@ -62,7 +62,13 @@ export const Post: React.FC<IPost> = () => {
     }, [])
 
     return (
-        <ConfirmDialog isOpen={open} openDialog={() => setOpen(true)} closeDialog={() => setOpen(false)} label={<ShortTextIcon />} title={post.userName} >
+        <ConfirmDialog
+            isOpen={open}
+            openDialog={() => setOpen(true)}
+            closeDialog={() => setOpen(false)}
+            label={<ShortTextIcon />}
+            title={post.userName}
+        >
             <PostCard
                 postId={post.id}
                 avatar={post.picture}

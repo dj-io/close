@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import { PostCard } from '../../common/components/card/PostCard.tsx';
+import { PostCard } from '../../common/components/cards/PostCard.tsx';
 
 
 interface IHomeProps {
