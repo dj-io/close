@@ -59,7 +59,8 @@ class Home extends React.Component<HomeProps> {
 
         }],
         commentTime: 'now'
-    }]
+    }
+    ]
 
     render(): JSX.Element {
         return (

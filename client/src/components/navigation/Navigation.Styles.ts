@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Grid, Tooltip } from "@mui/material";
+import { Avatar, Grid, Tooltip } from "@mui/material";
 import { styled } from "@mui/system";
 import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
 
@@ -10,6 +10,12 @@ export const StyledTip = styled(Tooltip)(() => ({
         margin: '32px 24px 0px 0px',
     }
 }));
+
+export const NavLink = styled(Link)((props: any) => ({
+    '&&': {
+        color: props.$page ? '#228B22' : '#3C4142',
+    }
+}))
 
 export const IconLink = styled(PersonSearchTwoToneIcon)((props: any) => ({
     '&&': {
@@ -26,5 +32,12 @@ export const NavWrapper = styled(Grid)(() => ({
         maxWidth: '140px',
         borderRight: '1px solid #3C414250',
         position: 'fixed',
+    }
+}))
+
+export const CustomAvatar = styled(Avatar)((props: any) => ({
+    '&&': {
+        borderRadius: '50%',
+        boxShadow: props.page && '0 0 0 3px #228B22'
     }
 }))

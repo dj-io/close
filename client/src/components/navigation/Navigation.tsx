@@ -6,18 +6,28 @@ import Grid from '@mui/material/Grid';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
-import { StyledTip, IconLink, NavWrapper } from './Navigation.Styles.ts';
+import { StyledTip, IconLink, NavWrapper, CustomAvatar } from './Navigation.Styles.ts';
 import { Find } from '../index.ts';
 
+
+
+interface IPages {
+    home: boolean,
+    find: boolean,
+    share: boolean,
+    profile: boolean,
+}
 interface INavigationProps {
 
 }
 
 interface INavigationState {
-
+    profileIcon: string;
+    pages: IPages;
 }
 
 export type NavProps = INavStateToProps & INavDispatchToProps & INavProps;
+
 
 class Navigation extends React.Component<NavProps> {
     state: INavigationState = {
@@ -27,14 +37,23 @@ class Navigation extends React.Component<NavProps> {
             find: false,
             share: false,
             profile: false,
-        }
+        },
+        profile: [{
+            userId: 1,
+        }],
 
     }
+
 
     onNavSelect = (page, open) => {
         const newState = { ...this.state.pages };
         newState[page] = open;
         this.setState(newState)
+    }
+
+    closeFind = (page, open) => {
+        this.onNavSelect(page, open);
+        if (this.props.isFindOpen) this.props.openFind(false)
     }
 
     render(): JSX.Element {
@@ -48,7 +67,7 @@ class Navigation extends React.Component<NavProps> {
             >
                 <StyledTip title="Home" placement="right">
                     <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
-                        <HomeTwoToneIcon onClick={() => this.onNavSelect('home', !this.state.home)} fontSize="large" />
+                        <HomeTwoToneIcon onClick={() => this.closeFind('home', !this.state.home)} fontSize="large" />
                     </Link>
                 </StyledTip>
                 <StyledTip title="Find" placement="right">
@@ -63,12 +82,12 @@ class Navigation extends React.Component<NavProps> {
                 </StyledTip>
                 <StyledTip title="Share" placement="right">
                     <Link style={{ color: this.state.share ? '#228B22' : '#3C4142' }} to='/share' id='share' >
-                        <AddAPhotoTwoToneIcon onClick={() => this.onNavSelect('share', !this.state.share)} fontSize="large" />
+                        <AddAPhotoTwoToneIcon onClick={() => this.closeFind('share', !this.state.share)} fontSize="large" />
                     </Link>
                 </StyledTip>
                 <StyledTip title="Profile" placement="right">
-                    <Link to='/profile' id='profile' >
-                        <Avatar onClick={() => this.onNavSelect('profile', !this.state.profile)} sx={{ borderRadius: '50%', boxShadow: this.state.profile && '0 0 0 3px #228B22' }} alt="Apple" src={this.state.profileIcon} />
+                    <Link to={`/profile/${this.state.profile.userId}`} id='profile' >
+                        <CustomAvatar onClick={() => this.closeFind('profile', !this.state.profile)} page={this.state.profile} alt="Apple" src={this.state.profileIcon} />
                     </Link>
                 </StyledTip>
             </NavWrapper>

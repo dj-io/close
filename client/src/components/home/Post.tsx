@@ -52,6 +52,29 @@ export const Post: React.FC<IPost> = () => {
 
         }],
         commentTime: 'now'
+    },
+    {
+        id: 3,
+        picture: 'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+        userName: 'Mr Sir',
+        post: 'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
+        likes: 2,
+        caption: 'yupski',
+        comments: [{
+            userName: 'thisguy',
+            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
+            comment: 'this a dope pic g',
+            commentTime: 'now'
+
+        },
+        {
+            userName: 'yerp',
+            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
+            comment: 'this a dope pic ',
+            commentTime: 'later'
+
+        }],
+        commentTime: 'now'
     }]
 
     const postId = useParams().post

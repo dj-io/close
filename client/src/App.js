@@ -15,9 +15,10 @@ function App({ hasAccount }) {
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/home/:post' element={<Post />} />
+          <Route key='home-post' exact path='/home/:post' element={<Post />} />
           {/* <Route path='/share' element={<Share />} /> */}
-          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/profile/:profileId' element={<Profile />} />
+          <Route key='profile-post' exact path='/user/:post' element={<Post />} />
         </Routes>
       </Router>
     </div>
