@@ -12,7 +12,7 @@ import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.js';
  * @returns 
  */
 const mapStateToprops = (state: any): IFindStateToProps => ({
-    isFindOpen: state.UserState.isFindOpen,
+    isFindOpen: state.FindState.isFindOpen,
 });
 
 /**

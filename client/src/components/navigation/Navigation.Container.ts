@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Navigation from './Navigation.tsx';
+import { openFind } from '../../redux/actions/AppActions.ts';
 import { INavDispatchToProps, INavStateToProps } from '../../types/user.ts';
 
 
@@ -11,7 +12,7 @@ import { INavDispatchToProps, INavStateToProps } from '../../types/user.ts';
  * @returns 
  */
 const mapStateToprops = (state: any): INavStateToProps => ({
-
+    isFindOpen: state.FindState.isFindOpen,
 });
 
 /**
@@ -21,7 +22,7 @@ const mapStateToprops = (state: any): INavStateToProps => ({
  * @returns 
  */
 const mapDispatchToProps = (dispatch: any): INavDispatchToProps => ({
-
+    openFind: bindActionCreators(openFind, dispatch),
 });
 
 export const NavContainer = connect(

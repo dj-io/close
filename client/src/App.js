@@ -11,11 +11,11 @@ function App({ hasAccount }) {
     <div className="App">
       <Router >
         <Nav />
+        <Find />
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
           <Route path='/home' element={<Home />} />
           <Route path='/home/:post' element={<Post />} />
-          <Route path='/find' element={<Find />} />
           {/* <Route path='/share' element={<Share />} /> */}
           <Route path='/profile/:id' element={<Profile />} />
         </Routes>

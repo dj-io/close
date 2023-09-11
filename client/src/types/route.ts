@@ -1,7 +1,7 @@
 export interface INavStateToProps {
-    hasAccount: boolean
+    isFindOpen: boolean
 }
 
 export interface INavDispatchToProps {
-    userHasAccount: Function;
+    openFind: Function;
 }
