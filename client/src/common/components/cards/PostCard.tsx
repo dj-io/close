@@ -66,7 +66,13 @@ export const PostCard: React.FC<IPostcardProps> = ({
     };
 
     return (
-        <Card sx={{ maxWidth: 345, width: '350px', marginTop: '32px', boxShadow: 'none' }}>
+        <Card sx={{
+            maxWidth: 500,
+            width: '400px',
+            marginTop: '32px',
+            boxShadow: 'none'
+        }}
+        >
             <CardHeader
                 avatar={<Avatar alt="Apple" src={avatar} />}
                 action={

@@ -40,7 +40,7 @@ const MultiField: React.FC<IMultiField> = ({ row, maxRows, rows, isSubmitting })
                                 onClick={() => { }}
                                 onMouseDown={() => { }}
                             >
-                                <PostAddIcon sx={{ color: '#238636', position: 'fixed' }} />
+                                <PostAddIcon sx={{ color: '#238636' }} />
                             </IconButton>
                         </InputAdornment>
                 }}
