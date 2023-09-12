@@ -11,10 +11,11 @@ import { StyledField } from '../../styles/Fields.Styles.ts';
 interface IMultiField {
     row: Object // make IRow
     maxRows: Number;
+    rows: Number;
     isSubmitting: boolean;
 }
 
-const MultiField: React.FC<IMultiField> = ({ row, maxRows, isSubmitting }) => {
+const MultiField: React.FC<IMultiField> = ({ row, maxRows, rows, isSubmitting }) => {
     return (
         <Grid
             container
@@ -26,19 +27,20 @@ const MultiField: React.FC<IMultiField> = ({ row, maxRows, isSubmitting }) => {
                 multiline
                 id={row.id}
                 label={row.label}
-                maxRows={maxRows}
                 disabled={isSubmitting}
                 variant="standard"
                 sx={{ width: '100%' }}
                 InputProps={{
+                    maxRows,
+                    rows,
                     endAdornment:
-                        <InputAdornment position="end">
+                        <InputAdornment position="start">
                             <IconButton
                                 aria-label="post a comment"
                                 onClick={() => { }}
                                 onMouseDown={() => { }}
                             >
-                                <PostAddIcon sx={{ color: '#238636' }} />
+                                <PostAddIcon sx={{ color: '#238636', position: 'fixed' }} />
                             </IconButton>
                         </InputAdornment>
                 }}

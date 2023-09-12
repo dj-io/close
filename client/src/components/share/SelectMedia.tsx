@@ -6,10 +6,10 @@ import InputField from '../../common/components/fields/InputField.tsx';
 import { Grid } from '@mui/material';
 
 interface ISelectMedia {
-
+    handleUpload: Function;
 }
 
-const SelectMedia: React.FC<ISelectMedia> = () => {
+const SelectMedia: React.FC<ISelectMedia> = ({ handleUpload }) => {
     return (
         <Grid
             container
@@ -19,7 +19,7 @@ const SelectMedia: React.FC<ISelectMedia> = () => {
             justifyContent="center"
             sx={{ width: 'auto' }}
         >
-            {shareFields.map((field) => <InputField row={field} isSubmitting={false} />)}
+            {shareFields.map((field) => <InputField handleChange={handleUpload} row={field} isSubmitting={false} />)}
         </Grid>
     );
 }

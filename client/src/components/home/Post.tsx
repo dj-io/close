@@ -91,6 +91,7 @@ export const Post: React.FC<IPost> = () => {
             closeDialog={() => setOpen(false)}
             label={<ShortTextIcon />}
             title={post.userName}
+            spacing={2}
         >
             <PostCard
                 postId={post.id}

@@ -11,6 +11,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 
 interface IDialog {
     label: string;
@@ -20,6 +21,9 @@ interface IDialog {
     openDialog: Function;
     closeDialog: Function;
     isOpen: boolean;
+    spacing: number;
+    enableBack?: boolean;
+    back?: Function;
 }
 
 /**
@@ -35,22 +39,36 @@ export const ConfirmDialog: React.FC<IDialog> = ({
     title,
     openDialog,
     closeDialog,
-    isOpen
+    isOpen,
+    spacing,
+    enableBack,
+    back,
 }) => {
 
     const [open, setOpen] = React.useState(isOpen);
 
     return (
         <div>
-            {/* <Button variant="contained" onClick={openDialog}>
-                {label}
-            </Button> */}
             <BootstrapDialog
                 onClose={(event, reason) => { if (reason && reason !== 'backdropClick') closeDialog() }}
                 aria-labelledby="customized-dialog-title"
                 open={isOpen}
+                spacing={spacing}
             >
-                <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+                {enableBack &&
+                    <IconButton
+                        aria-label="close"
+                        onClick={back}
+                        sx={{
+                            position: 'absolute',
+                            left: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <ArrowBackTwoToneIcon />
+                    </IconButton>}
+                <DialogTitle sx={{ m: 0, p: 2, marginLeft: enableBack && '32px' }} id="customized-dialog-title">
                     {title}
                 </DialogTitle>
                 <Link to='/home' id='home' >

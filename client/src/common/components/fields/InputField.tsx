@@ -6,9 +6,10 @@ import { SubmitButton } from '../../styles/Buttons.Styles.ts';
 interface IInputField {
     row: Object;
     isSubmitting: boolean;
+    handleChange: Function;
 }
 
-const InputField: React.FC<IInputField> = ({ row, isSubmitting }) => {
+const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange }) => {
     return (
         <Grid
             container
@@ -19,11 +20,12 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting }) => {
         >
             <FormHelperText>{row.inputTitle}</FormHelperText>
             <CustomInput
-                accept="image/*"
+                accept="image/*, video/mp4, video/x-m4v, video/*"
                 style={{ display: 'none' }}
                 id={row.name}
                 multiple
                 type={row.type}
+                onChange={handleChange}
             />
             <InputLabel htmlFor={row.name}>
                 <SubmitButton disabled={isSubmitting} variant="contained" component="span">

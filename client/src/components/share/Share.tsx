@@ -8,7 +8,9 @@ interface IShareProps {
 }
 
 interface IShareState {
-
+    open: boolean;
+    file: string;
+    mediaType: string;
 }
 
 export type ShareProps = IShareStateToProps & IShareDispatchToProps & IShareProps
@@ -16,23 +18,31 @@ export type ShareProps = IShareStateToProps & IShareDispatchToProps & IShareProp
 class Share extends React.Component<ShareProps> {
     state: IShareState = {
         open: true,
+        file: '',
+        mediaType: 'img',
     }
 
     setOpen = ({ open }) => this.setState({ open });
+
+    handleUpload = (e) => {
+        this.setState({ file: URL.createObjectURL(e.target.files[0]) });
+        if (!e.target.files[0].type.startsWith('image')) this.setState({ mediaType: 'video' });
+    }
 
     render(): JSX.Element {
         return (
             <>
                 <ConfirmDialog
+                    title="Share New Post"
+                    spacing={!this.state.file && 20}
+                    enableBack={true}
                     isOpen={this.state.open}
                     openDialog={() => this.setOpen(true)}
                     closeDialog={() => this.setOpen(false)}
-                    label=''
-                    title="Share New Post"
+                    back={() => this.setState({ file: '' })}
                 >
-                    {/*// Set render condition (if file uploaded)*/}
-                    <SelectMedia />
-                    {/* <Caption /> */}
+                    {!this.state.file && <SelectMedia handleUpload={this.handleUpload} />}
+                    {this.state.file && <Caption img={this.state.file} mediaType={this.state.mediaType} />}
                 </ConfirmDialog>
             </>
         );
