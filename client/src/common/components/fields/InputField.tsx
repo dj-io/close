@@ -1,39 +1,37 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
-import { useState, useEffect } from 'react';
+import { CustomInput } from '../../styles/Fields.Styles.ts';
+import { Button, Grid, InputLabel, FormHelperText } from '@mui/material';
+import { SubmitButton } from '../../styles/Buttons.Styles.ts';
 
-import { StyledField } from '../../styles/Fields.Styles.ts';
-
-
-interface IInputFieldProps {
-    row: any;
+interface IInputField {
+    row: Object;
     isSubmitting: boolean;
 }
 
-/**
- * Common Field Functional component
- * Reusable Field component 
- * @param props @interface IInputFieldProps 
- * @returns 
- */
-export const InputField: React.FC<IInputFieldProps> = ({ row, isSubmitting }) => {
-
+const InputField: React.FC<IInputField> = ({ row, isSubmitting }) => {
     return (
         <Grid
             container
-            spacing={1}
+            spacing={0}
+            direction="column"
+            alignItems="center"
             justifyContent="center"
         >
-            <StyledField
+            <FormHelperText>{row.inputTitle}</FormHelperText>
+            <CustomInput
+                accept="image/*"
+                style={{ display: 'none' }}
+                id={row.name}
+                multiple
                 type={row.type}
-                name={row.name}
-                id={row.id}
-                label={row.label}
-                variant="outlined"
-                disabled={isSubmitting}
-                sx={{ minWidth: 275 }}
             />
+            <InputLabel htmlFor={row.name}>
+                <SubmitButton disabled={isSubmitting} variant="contained" component="span">
+                    {row.label}
+                </SubmitButton>
+            </InputLabel>
         </Grid>
-
     );
 }
+
+export default InputField;

@@ -5,6 +5,8 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import Avatar from '@mui/material/Avatar';
 import MultiField from '../../common/components/fields/MultiField.tsx';
+import { red } from '@mui/material/colors';
+import { captionFields } from '../../common/constants/formFields.ts';
 
 interface ICaption {
     avatar: string;
@@ -20,23 +22,22 @@ const Caption: React.FC<ICaption> = ({ avatar, userName, img, isSubmitting }) =>
                 component="img"
                 height="194"
                 image={img}
-                alt="Paella dish"
+                alt="uploaded image"
             />
             <CardHeader
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="profile-pic">
-                        {avatar}
-                    </Avatar>
-                }
-
+                avatar={<Avatar alt="Apple" src={avatar} />}
                 title={userName}
                 subheader=''
             />
-            <MultiField
-                maxRows={4}
-                row={captionFields}
-                isSubmitting={isSubmitting}
-            />
+            {
+                captionFields.map((field) => (
+                    <MultiField
+                        maxRows={4}
+                        row={field}
+                        isSubmitting={isSubmitting}
+                    />
+                ))
+            }
         </>
     );
 }

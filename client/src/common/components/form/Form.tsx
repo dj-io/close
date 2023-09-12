@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { validationSchema } from '../../utils/validation.ts';
 import { FormValues } from '../../types.ts';
 
-import { InputField } from '../fields/InputField.tsx';
+import { TextField } from '../fields/TextField.tsx';
 import { Submit } from '../buttons/Submit.tsx';
 
 /**
@@ -48,8 +48,8 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                     onChange={formikProps.handleChange}
                     onSubmit={formikProps.handleSubmit}
                 >
-                    {props.fields.map((field) => <InputField row={field} isSubmitting={formikProps.isSubmitting} />)}
-                    <Submit func={props.submit} label={props.buttonLabel} />
+                    {props.fields.map((field) => <TextField row={field} isSubmitting={formikProps.isSubmitting} />)}
+                    {props.buttonLabel && <Submit func={props.submit} label={props.buttonLabel} />}
                 </form>
             )}
         </Formik>

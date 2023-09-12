@@ -1,5 +1,6 @@
 import { styled } from "@mui/system";
 import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
 
 
 export const StyledField = styled(TextField)({
@@ -17,4 +18,10 @@ export const StyledField = styled(TextField)({
         },
 
     },
+});
+
+export const CustomInput = styled(Input)({
+    '&&': {
+
+    }
 })

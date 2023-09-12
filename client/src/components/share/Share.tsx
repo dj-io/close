@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Grid } from '@mui/material';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import SelectMedia from './SelectMedia.tsx'
 import Caption from './Caption.tsx';
@@ -14,16 +15,24 @@ export type ShareProps = IShareStateToProps & IShareDispatchToProps & IShareProp
 
 class Share extends React.Component<ShareProps> {
     state: IShareState = {
-
+        open: true,
     }
+
+    setOpen = ({ open }) => this.setState({ open });
 
     render(): JSX.Element {
         return (
             <>
-                <ConfirmDialog>
-                    // Set render condition (if file uploaded)
+                <ConfirmDialog
+                    isOpen={this.state.open}
+                    openDialog={() => this.setOpen(true)}
+                    closeDialog={() => this.setOpen(false)}
+                    label=''
+                    title="Share New Post"
+                >
+                    {/*// Set render condition (if file uploaded)*/}
                     <SelectMedia />
-                    <Caption />
+                    {/* <Caption /> */}
                 </ConfirmDialog>
             </>
         );

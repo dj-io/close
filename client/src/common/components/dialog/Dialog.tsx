@@ -28,7 +28,15 @@ interface IDialog {
  * @param props @interface IDialog 
  * @returns 
  */
-export const ConfirmDialog: React.FC<IDialog> = ({ label, children, confirmLabel, title, openDialog, closeDialog, isOpen }) => {
+export const ConfirmDialog: React.FC<IDialog> = ({
+    label,
+    children,
+    confirmLabel,
+    title,
+    openDialog,
+    closeDialog,
+    isOpen
+}) => {
 
     const [open, setOpen] = React.useState(isOpen);
 
