@@ -41,7 +41,7 @@ export const signUpfields = [
 
 export const FindFields = [{ id: '1', name: 'find', label: 'Find', type: 'text', }]
 
-export const shareFields = [{ id: '1', inputTitle: 'Upload photos and videos here', name: 'share-photos', label: 'Select from computer', type: 'file' }]
+export const shareFields = [{ id: '1', inputTitle: 'Drag photos and videos here', name: 'share-photos', label: 'Select from computer', type: 'file' }]
 
 export const captionFields = [{ id: '1', label: 'Write a caption...', name: 'caption' }]
 

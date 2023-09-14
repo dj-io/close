@@ -2,11 +2,11 @@ import { styled } from "@mui/system";
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 
-export const SubmitButton = styled(Button)({
+export const SubmitButton = styled(Button)((props: any) => ({
     '&&': {
         marginTop: '10px',
         minWidth: 275,
-        backgroundColor: '#238636',
+        backgroundColor: props.viewChange ? 'red' : '#238636',
         borderRadius: '9px',
         color: '#3C4142',
 
@@ -15,7 +15,7 @@ export const SubmitButton = styled(Button)({
             color: "#c0c0c0"
         }
     }
-})
+}))
 
 export const ConfirmButton = styled(Button)({
     '&&': {

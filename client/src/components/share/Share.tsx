@@ -24,9 +24,13 @@ class Share extends React.Component<ShareProps> {
 
     setOpen = ({ open }) => this.setState({ open });
 
-    handleUpload = (e) => {
-        this.setState({ file: URL.createObjectURL(e.target.files[0]) });
-        if (!e.target.files[0].type.startsWith('image')) this.setState({ mediaType: 'video' });
+    handleUpload = (files) => {
+        const file = URL.createObjectURL(files);
+
+        if (!files.type.startsWith('image'))
+            this.setState({ mediaType: 'video' });
+
+        this.setState({ file });
     }
 
     render(): JSX.Element {

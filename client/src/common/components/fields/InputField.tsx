@@ -23,7 +23,7 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange }) 
                 accept="image/*, video/mp4, video/x-m4v, video/*"
                 style={{ display: 'none' }}
                 id={row.name}
-                multiple
+                multiple={false}
                 type={row.type}
                 onChange={handleChange}
             />
