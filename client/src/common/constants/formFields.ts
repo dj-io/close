@@ -8,7 +8,7 @@ export const signInfields = [{
     id: '2',
     name: 'password',
     label: 'password',
-    type: 'text',
+    type: 'password',
 }]
 
 
@@ -23,7 +23,7 @@ export const signUpfields = [
         id: '2',
         name: 'email',
         label: 'Email',
-        type: 'text',
+        type: 'email',
     },
     {
         id: '3',
@@ -35,7 +35,7 @@ export const signUpfields = [
         id: '4',
         name: 'password',
         label: 'Password',
-        type: 'text',
+        type: 'password',
     },
 ]
 

@@ -3,11 +3,15 @@ import Grid from '@mui/material/Grid';
 import { useState, useEffect } from 'react';
 
 import { StyledField } from '../../styles/Fields.Styles.ts';
+import { Typography } from '@mui/material';
 
 
 interface ITextFieldProps {
     row: any;
+    handleChange: Function;
     isSubmitting: boolean;
+    errors: any;
+    touched: boolean;
 }
 
 /**
@@ -16,7 +20,13 @@ interface ITextFieldProps {
  * @param props @interface ITextFieldProps 
  * @returns 
  */
-export const TextField: React.FC<ITextFieldProps> = ({ row, isSubmitting }) => {
+export const TextField: React.FC<ITextFieldProps> = ({
+    row,
+    handleChange,
+    isSubmitting,
+    errors,
+    touched
+}) => {
     return (
         <Grid
             container
@@ -31,7 +41,23 @@ export const TextField: React.FC<ITextFieldProps> = ({ row, isSubmitting }) => {
                 variant="outlined"
                 disabled={isSubmitting}
                 sx={{ minWidth: 275 }}
+                onChange={handleChange}
             />
+            {errors[row.name] && touched[row.name] && (
+                <Grid item sm  >
+                    <Typography
+                        variant="text.secondary"
+                        sx={{
+                            color: 'red',
+                            marginLeft: 3,
+                            fontSize: 14,
+                            display: 'inline-block'
+                        }}
+                    >
+                        {errors[row.name]}
+                    </Typography>
+                </Grid>
+            )}
         </Grid>
 
     );

@@ -18,6 +18,8 @@ interface IFormProps {
     fields: Array[];
     buttonLabel: string;
     submit: Function;
+    change: Function;
+    validationSchema: Object;
 }
 
 /**
@@ -28,16 +30,16 @@ interface IFormProps {
  */
 export const Form: React.FC<IFormProps> = (props: IFormProps) => {
 
-    const handleOnSubmit = () => {
+    // const handleOnSubmit = () => {
 
-    }
+    // }
 
 
     return (
         <Formik
             initialValues={props.initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleOnSubmit}
+            validationSchema={props.validationSchema}
+            onSubmit={props.submit}
             enableReinitialize
         >
             {(formikProps: FormikProps<FormValues>) => (
@@ -48,8 +50,26 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                     onChange={formikProps.handleChange}
                     onSubmit={formikProps.handleSubmit}
                 >
-                    {props.fields.map((field) => <TextField row={field} isSubmitting={formikProps.isSubmitting} />)}
-                    {props.buttonLabel && <Submit func={props.submit} label={props.buttonLabel} />}
+                    {props.fields.map((field) =>
+                        <TextField
+                            handleChange={props.change}
+                            row={field}
+                            isSubmitting={formikProps.isSubmitting}
+                            errors={formikProps.errors}
+                            touched={formikProps.touched}
+                        />
+                    )}
+                    {props.buttonLabel &&
+                        <Submit
+                            func={props.submit}
+                            label={props.buttonLabel}
+                            disabledButton={
+                                !formikProps.isValid ||
+                                formikProps.isSubmitting ||
+                                !formikProps.values.username
+                            }
+                        />
+                    }
                 </form>
             )}
         </Formik>

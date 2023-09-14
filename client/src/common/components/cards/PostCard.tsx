@@ -91,7 +91,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    {caption}
+                    <span style={{ fontWeight: 'bold' }}>{userName}</span> {caption}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>

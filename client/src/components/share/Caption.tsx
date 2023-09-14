@@ -37,14 +37,18 @@ const Caption: React.FC<ICaption> = ({ avatar, userName, img, mediaType, isSubmi
                         height="194"
                         src={img}
                         alt="Paella dish"
-                        autoPlay style={{ width: 500, height: 300 }} />
+                        autoPlay
+                        loop
+                        controls
+                        style={{ width: 500, height: 300 }}
+                    />
                 </Grid>
                 <Grid item xs={12} sm container>
                     <Grid item xs container direction="column" spacing={0}>
                         {
                             captionFields.map((field) => (
                                 <MultiField
-                                    rows={4}
+                                    maxRows={6}
                                     row={field}
                                     isSubmitting={isSubmitting}
                                 />

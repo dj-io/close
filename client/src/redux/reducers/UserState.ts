@@ -17,6 +17,12 @@ export default function reduce(state: UserStateConfig = initialState, action: an
             }
         }
 
+        case `${UserActions.REGISTER_USER}_PENDING`: {
+            return { ...state };
+        }
+
+
+
         default: {
             return {
                 ...state,

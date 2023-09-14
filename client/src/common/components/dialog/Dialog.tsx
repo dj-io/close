@@ -71,20 +71,21 @@ export const ConfirmDialog: React.FC<IDialog> = ({
                 <DialogTitle sx={{ m: 0, p: 2, marginLeft: enableBack && '32px' }} id="customized-dialog-title">
                     {title}
                 </DialogTitle>
-                <Link to='/home' id='home' >
-                    <IconButton
-                        aria-label="close"
-                        onClick={closeDialog}
-                        sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500],
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
-                </Link>
+                <IconButton
+                    aria-label="close"
+                    onClick={() => {
+                        closeDialog();
+                        window.history.back()
+                    }}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
                 <DialogContent dividers>
                     {children}
                 </DialogContent>

@@ -8,7 +8,12 @@ export const SubmitButton = styled(Button)({
         minWidth: 275,
         backgroundColor: '#238636',
         borderRadius: '9px',
-        color: '#3C4142'
+        color: '#3C4142',
+
+        '&.Mui-disabled': {
+            background: "#eaeaea",
+            color: "#c0c0c0"
+        }
     }
 })
 

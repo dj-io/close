@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Find from './Find.tsx';
-import { openFind, findUsers } from '../../redux/actions/AppActions.ts';
-import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.js';
+import { find } from '../../redux/actions/UserActions.ts';
+import { openFind } from '../../redux/actions/AppActions.ts';
+import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
 
 
 /**
@@ -23,7 +24,7 @@ const mapStateToprops = (state: any): IFindStateToProps => ({
  */
 const mapDispatchToProps = (dispatch: any): IFindDispatchToProps => ({
     openFind: bindActionCreators(openFind, dispatch),
-    findUsers: bindActionCreators(findUsers, dispatch),
+    // find: bindActionCreators(findUsers, dispatch),
 });
 
 export const FindContainer = connect(

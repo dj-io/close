@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import { PostCard } from '../../common/components/cards/PostCard.tsx';
+import { Seperate } from './Home.Styles.ts';
 
 
 interface IHomeProps {
@@ -72,18 +73,20 @@ class Home extends React.Component<HomeProps> {
                 justifyContent="center"
                 sx={{ minHeight: '45vh', }}
             >
-
                 {this.posts.map((post) => (
-                    <PostCard
-                        postId={post.id}
-                        avatar={post.picture}
-                        userName={post.userName}
-                        media={post.post}
-                        likes={post.likes}
-                        caption={post.caption}
-                        comments={post.comments}
-                        commentTime={post.commentTime}
-                    />
+                    <>
+                        <PostCard
+                            postId={post.id}
+                            avatar={post.picture}
+                            userName={post.userName}
+                            media={post.post}
+                            likes={post.likes}
+                            caption={post.caption}
+                            comments={post.comments}
+                            commentTime={post.commentTime}
+                        />
+                        <Seperate />
+                    </>
                 ))}
             </Grid>
 

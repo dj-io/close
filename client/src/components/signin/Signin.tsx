@@ -7,6 +7,8 @@ import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import { ISigninDispatchToProps, ISigninStateToProps } from '../../types/user.ts';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { Typography } from '@mui/material';
+import { FormValues } from '../../common/types.ts';
+import { signinSchema } from '../../common/utils/validation.ts';
 
 interface ISigninProps {
 
@@ -23,6 +25,11 @@ class Signin extends React.Component<SigninProps> {
 
     }
 
+    initialValues: FormValues = {
+        username: '',
+        password: ''
+    }
+
     render(): JSX.Element {
         return (
             <Grid
@@ -34,9 +41,24 @@ class Signin extends React.Component<SigninProps> {
                 sx={{ minHeight: '75vh' }}
             >
                 <StyledCard sx={{ minWidth: 275 }}>
-                    <Form buttonLabel="Sign in" fields={signInfields} initialValues={{}} />
-                    <Typography sx={{ marginTop: '10px', color: '#3C414270' }}> {UserActionTypes.NO_ACCOUNT} </Typography>
-                    <Confirm label="Signup" func={() => this.props.userHasAccount(false)} />
+                    <Form
+                        buttonLabel="Sign in"
+                        fields={signInfields}
+                        validationSchema={signinSchema}
+                        initialValues={this.initialValues}
+                    />
+                    <Typography
+                        sx={{
+                            marginTop: '10px',
+                            color: '#3C414270'
+                        }}
+                    >
+                        {UserActionTypes.NO_ACCOUNT}
+                    </Typography>
+                    <Confirm
+                        label="Signup"
+                        func={() => this.props.userHasAccount(false)}
+                    />
                 </StyledCard>
             </Grid>
 

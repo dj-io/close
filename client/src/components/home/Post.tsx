@@ -80,10 +80,6 @@ export const Post: React.FC<IPost> = () => {
     const postId = useParams().post
     const post = posts.find((post) => post.id == postId)
 
-    useEffect(() => {
-        console.log("== match ===", post)
-    }, [])
-
     return (
         <ConfirmDialog
             isOpen={open}
