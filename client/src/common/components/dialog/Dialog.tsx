@@ -90,9 +90,9 @@ export const ConfirmDialog: React.FC<IDialog> = ({
                     {children}
                 </DialogContent>
                 <DialogActions>
-                    <Button autoFocus onClick={closeDialog}>
+                    {/* <Button autoFocus onClick={closeDialog}>
                         {confirmLabel}
-                    </Button>
+                    </Button> */}
                 </DialogActions>
             </BootstrapDialog>
         </div>

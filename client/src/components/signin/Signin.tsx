@@ -22,13 +22,24 @@ export type SigninProps = ISigninStateToProps & ISigninDispatchToProps & ISignin
 
 class Signin extends React.Component<SigninProps> {
     state: ISigninState = {
-
+        user: {}
     }
 
     initialValues: FormValues = {
         username: '',
         password: ''
     }
+
+    handleChange = (e) => {
+        const { name } = e.target;
+
+        this.setState({
+            user: {
+                ...this.state.user,
+                [name]: e.target.value
+            }
+        });
+    };
 
     render(): JSX.Element {
         return (
@@ -46,6 +57,8 @@ class Signin extends React.Component<SigninProps> {
                         fields={signInfields}
                         validationSchema={signinSchema}
                         initialValues={this.initialValues}
+                        disableValue='username'
+                        change={this.handleChange}
                     />
                     <Typography
                         sx={{

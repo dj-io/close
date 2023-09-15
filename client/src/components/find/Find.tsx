@@ -32,6 +32,10 @@ class Find extends React.Component<FindProps> {
         fullName: 'mace greplul',
     }]
 
+    initialValues = {
+        find: ''
+    }
+
     render(): JSX.Element {
         return (
 
@@ -56,7 +60,13 @@ class Find extends React.Component<FindProps> {
                         <Grid sx={{ marginBottom: '25px', }} container direction='column' alignItems='start'>
                             <Typography sx={{ marginRight: 32, color: '#3C414270', fontWeight: 'bold' }} variant='h4'>Find </Typography >
                             {/* TODO: update form with start/end adornments use enter as submit*/}
-                            <Form buttonLabel="Find" fields={FindFields} submit={() => this.props.getUsers()} initialValues={{}} />
+                            <Form
+                                buttonLabel="Find"
+                                fields={FindFields}
+                                submit={() => this.props.getUsers()}
+                                initialValues={this.initialValues}
+                                disableValue='find'
+                            />
                         </Grid>
                         <Seperate />
                     </FindHeader>

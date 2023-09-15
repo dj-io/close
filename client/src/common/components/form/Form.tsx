@@ -20,6 +20,7 @@ interface IFormProps {
     submit: Function;
     change: Function;
     validationSchema: Object;
+    disableValue: string;
 }
 
 /**
@@ -33,7 +34,6 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
     // const handleOnSubmit = () => {
 
     // }
-
 
     return (
         <Formik
@@ -66,7 +66,7 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                             disabledButton={
                                 !formikProps.isValid ||
                                 formikProps.isSubmitting ||
-                                !formikProps.values.username
+                                !formikProps.values[props.disableValue]
                             }
                         />
                     }

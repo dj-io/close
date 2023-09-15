@@ -41,7 +41,12 @@ class Signup extends React.Component<SignupProps> {
     handleChange = (e) => {
         const { name } = e.target;
 
-        this.setState({ user: { ...this.state.user, [name]: e.target.value } });
+        this.setState({
+            user: {
+                ...this.state.user,
+                [name]: e.target.value
+            }
+        });
         console.log("=== user", this.state)
     };
 
@@ -67,6 +72,7 @@ class Signup extends React.Component<SignupProps> {
                         validationSchema={signupSchema}
                         change={this.handleChange}
                         submit={this.handleRegistration}
+                        disableValue='username'
                     />
                     <Typography
                         sx={{
