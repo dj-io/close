@@ -8,7 +8,7 @@
 
 ## technologies used
 languages - HTML5, CSS3, Typescript, Java |
-libraries/tools - React.js, redux, react router, axios, yup, formik, react-easy-edit, material-ui
+libraries/tools - React.js, redux, react router, axios, yup, formik, react-easy-edit, material-ui, Styled-Components, Spring, PostgreSql
 
 
 ## problem statement
