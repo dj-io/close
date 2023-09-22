@@ -18,7 +18,7 @@ interface IPages {
     profile: boolean,
 }
 interface INavigationProps {
-
+    user: any //TODO: make IUser
 }
 
 interface INavigationState {
@@ -67,12 +67,18 @@ class Navigation extends React.Component<NavProps> {
             >
                 <StyledTip title="Home" placement="right">
                     <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
-                        <HomeTwoToneIcon onClick={() => this.closeFind('home', !this.state.home)} fontSize="large" />
+                        <HomeTwoToneIcon
+                            onClick={() => this.closeFind('home', !this.state.home)}
+                            fontSize="large"
+                        />
                     </Link>
                 </StyledTip>
                 <StyledTip title="Find" placement="right">
                     <IconLink
-                        style={{ color: this.props.isFindOpen && this.state.find ? '#228B22' : '#3C4142' }}
+                        style={{
+                            color: this.props.isFindOpen &&
+                                this.state.find ? '#228B22' : '#3C4142'
+                        }}
                         onClick={() => {
                             this.props.openFind(!this.props.isFindOpen)
                             this.onNavSelect('find', !this.state.find)
@@ -81,13 +87,24 @@ class Navigation extends React.Component<NavProps> {
                     />
                 </StyledTip>
                 <StyledTip title="Share" placement="right">
-                    <Link style={{ color: this.state.share ? '#228B22' : '#3C4142' }} to='/share' id='share' >
-                        <AddAPhotoTwoToneIcon onClick={() => this.closeFind('share', !this.state.share)} fontSize="large" />
+                    <Link style={{ color: this.state.share ? '#228B22' : '#3C4142' }}
+                        to='/share'
+                        id='share'
+                    >
+                        <AddAPhotoTwoToneIcon
+                            onClick={() => this.closeFind('share', !this.state.share)}
+                            fontSize="large"
+                        />
                     </Link>
                 </StyledTip>
                 <StyledTip title="Profile" placement="right">
-                    <Link to={`/profile/${this.state.profile.userId}`} id='profile' >
-                        <CustomAvatar onClick={() => this.closeFind('profile', !this.state.profile)} page={this.state.profile} alt="Apple" src={this.state.profileIcon} />
+                    <Link to={`/profile/${this.props.user.id}`} id='profile' >
+                        <CustomAvatar
+                            onClick={() => this.closeFind('profile', !this.state.profile)}
+                            page={this.state.profile}
+                            alt="Apple"
+                            src={this.state.profileIcon}
+                        />
                     </Link>
                 </StyledTip>
             </NavWrapper>

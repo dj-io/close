@@ -1,11 +1,17 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Avatar, CardContent, CardHeader, Typography } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
+import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
+import { Avatar, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
+import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 import { Seperate } from '../find/Find.Styles.ts';
+import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
+import { profiles } from '../../redux/actions/UserActions.ts';
+import { Submit } from '../../common/components/buttons/Submit.tsx';
 
 interface IProfileProps {
 
@@ -20,131 +26,95 @@ export type ProfileProps = IProfileStateToProps & IProfileDispatchToProps & IPro
 class Profile extends React.Component<ProfileProps> {
     state: IProfileState = {
         userLikes: 0,
+        posts: 0
     }
 
-    userProfile = [{
-        id: 1,
-        userName: 'mrSir',
-        profilePic: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
-        userBio: 'just a cool sir coolin mr cooper',
-        posts: [
-            {
-                id: 1,
-                postImg: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
-                likes: 3,
-                title: 'newPic'
+    posts = this.props.user?.post?.forEach(post => this.state.posts += 1);
+    likes = this.props.user?.post?.forEach(post => this.state.userLikes += post.likes);
+    following = this.props.user.followed.map((id) => id.followedId)
+        .find((id) => id === this.props.user.id);
 
-            },
-            {
-                id: 2,
-                postImg: 'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-                likes: 3,
-                title: 'another silhouette'
+    follow = async () => {
+        const { authorities, ...rest } = this.props.user
+        const data = {
+            ...rest,
+            followed: [
+                ...this.props.user.followed,
+                { followedId: this.props.user.id }
+            ]
+        };
 
-            }
-        ],
-    }];
+        share(data);
+    }
 
-    userPosts = [
-        {
-            id: 1,
-            picture: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
-            userName: 'gleam',
-            post: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
-            likes: 2,
-            caption: 'hello world',
-            comments: [{
-                userName: 'yoomeng',
-                picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
-                comment: 'this a dope pic fr',
-                commentTime: 'now'
-
-            }],
-            commentTime: 'now'
-        },
-        {
-            id: 3,
-            picture: 'https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80',
-            userName: 'nelle',
-            post: 'https://images.pexels.com/photos/5615665/pexels-photo-5615665.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500J',
-            likes: 5,
-            caption: 'hello world',
-            comments: [{
-                userName: 'hello',
-                picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
-                comment: 'this a dope pic fr',
-                commentTime: 'now'
-
-            },
-            {
-                userName: 'yerp',
-                picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
-                comment: 'this a dope pic ',
-                commentTime: 'later'
-
-            }],
-            commentTime: 'now'
-        }
-    ]
-
-    posts = this.userPosts.length;
-    likes = this.userPosts.map((like) => like.likes)
-        .forEach((like) => { this.state.userLikes += like })
 
     render(): JSX.Element {
+        const { picture, username, biography, post } = this.props.user;
+
         return (
             <Grid
                 container
-                spacing={0}
+                spacing={3}
                 direction="column"
                 alignItems="center"
-                justifyContent="start"
-            // sx={{ border: '1px solid red' }}
+                justifyContent="center"
+                sx={{ marginLeft: '4%' }}
             >
-                {this.userProfile.map((item) => (
-                    <Grid item sx={8}>
-                        <CardHeader
-                            avatar={
-                                <Avatar
-                                    alt="Mr sir"
-                                    src={item.profilePic}
-                                    sx={{ width: 204, height: 204 }}
-                                />}
-                            // action={
-                            //     <IconButton aria-label="settings">
-                            //         <FavoriteIcon />
-                            //     </IconButton>
-                            // }
-                            title={<Typography sx={{ fontWeight: 'bold', color: '#3C414270' }} variant='h4'> {item.userName} </Typography>}
-                            subheader={
-                                <Typography variant='button'>
-                                    {`${this.posts} posts ${this.state.userLikes} likes`} <br />
-                                    <Typography variant="body2" color="text.secondary">
-                                        {item.userBio}
-                                    </Typography>
+                <Grid item sx={8}>
+                    <CardHeader
+                        avatar={
+                            <Avatar
+                                alt={username}
+                                src={picture}
+                                sx={{ width: 204, height: 204 }}
+                            />
+                        }
+                        action={
+                            <IconButton aria-label="settings">
+                                <SettingsTwoToneIcon />
+                            </IconButton>
+                        }
+                        title={
+                            <Typography
+                                sx={{
+                                    fontWeight: 'bold',
+                                    color: '#3C414270'
+                                }}
+                                variant='h4'
+                            >
+                                {username}
+                            </Typography>
+                        }
+                        subheader={
+                            <Typography variant='button'>
+                                {`${this.state.posts} posts ${this.state.userLikes} likes`} <br />
+                                <Typography variant="body2" color="text.secondary">
+                                    {biography}
+                                    <Submit label="Follow" func={this.follow} disabledButton={this.following} />
                                 </Typography>
-                            }
-                        />
-                    </Grid>
-                ))}
+                            </Typography>
+                        }
+                    />
+                </Grid>
                 <Grid item xs={8}>
                     <Seperate />
                     <ImageList sx={{ width: 750, height: 450, marginTop: '32px' }} cols={3} rowHeight={164}>
-                        {this.userPosts.map((post) => (
-                            <Link id='profile-post-link' to={`/user/${post.id}`}>
-                                <ImageListItem key={post.picture}>
-                                    <img
-                                        src={`${post.picture}?w=164&h=164&fit=crop&auto=format`}
-                                        srcSet={`${post.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                                        alt={post.caption}
-                                        loading="lazy"
-                                    />
-                                </ImageListItem>
-                            </Link>
-                        ))}
+                        {post &&
+                            post.map((posts) => (
+                                <Link id='profile-post-link' to={`/user/${posts.id}`}>
+                                    <ImageListItem key={posts.picture}>
+                                        <img
+                                            src={`${posts.picture}?w=164&h=164&fit=crop&auto=format`}
+                                            srcSet={`${posts.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                            alt={posts.caption}
+                                            loading="lazy"
+                                        />
+                                    </ImageListItem>
+                                </Link>
+                            ))}
                     </ImageList>
                 </Grid>
-            </Grid>
+            </Grid >
         )
     }
 }

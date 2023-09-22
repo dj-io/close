@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import App from './App.js';
+import { profiles } from './redux/actions/UserActions.ts';
 
 /**
  * Used to access application state
@@ -10,6 +11,8 @@ import App from './App.js';
  */
 const mapStateToprops = (state) => ({
     hasAccount: state.UserState.hasAccount,
+    user: state.UserState.user,
+    foundUser: state.FindState.foundUser,
 });
 
 /**
@@ -19,7 +22,7 @@ const mapStateToprops = (state) => ({
  * @returns 
  */
 const mapDispatchToProps = (dispatch) => ({
-
+    profiles: bindActionCreators(profiles, dispatch),
 });
 
 export const AppContainer = connect(

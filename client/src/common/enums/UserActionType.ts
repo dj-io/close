@@ -7,4 +7,5 @@ export enum UserActionTypes {
     PASSWORD = 'Password is required',
     PASSWORD_LENGTH = 'Password cannot be more than 11 characters',
     IS_VALID_EMAIL = 'Must be a valid email',
+    RECENT = 'Recent',
 }

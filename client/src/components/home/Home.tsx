@@ -2,6 +2,8 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import { PostCard } from '../../common/components/cards/PostCard.tsx';
 import { Seperate } from './Home.Styles.ts';
+import { returnUsers } from '../../common/api/user/Users.Api.ts';
+import { IHomeStateToProps, IHomeDispatchToProps } from '../../types/app.ts';
 
 
 interface IHomeProps {
@@ -19,49 +21,20 @@ export type HomeProps = IHomeStateToProps & IHomeDispatchToProps & IHomeProps;
  * @class Home @extends React.Component<HomeProps>
  */
 class Home extends React.Component<HomeProps> {
-    state: IHomeState = {
+    state: IHomeState = {}
 
+    renderFeed = async () => {
+        const res = await returnUsers();
+
+        const following = this.props.user.followed.map((id) => id.followedId)
+        const users = res.data.filter((user) => following.includes(user.id))
+
+        this.props.feed(users)
     }
 
-    posts = [{
-        id: 1,
-        picture: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
-        userName: 'gleam',
-        post: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
-        likes: 2,
-        caption: 'hello world',
-        comments: [{
-            userName: 'yoomeng',
-            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
-            comment: 'this a dope pic fr',
-            commentTime: 'now'
-
-        }],
-        commentTime: 'now'
-    },
-    {
-        id: 2,
-        picture: 'https://images.pexels.com/photos/5615665/pexels-photo-5615665.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-        userName: 'nelle',
-        post: 'https://images.pexels.com/photos/5615665/pexels-photo-5615665.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500J',
-        likes: 2,
-        caption: 'hello world',
-        comments: [{
-            userName: 'hello',
-            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
-            comment: 'this a dope pic fr',
-            commentTime: 'now'
-
-        }, {
-            userName: 'yerp',
-            picture: 'https://wallpapers.com/images/hd/cool-profile-picture-87h46gcobjl5e4xu.jpg',
-            comment: 'this a dope pic ',
-            commentTime: 'later'
-
-        }],
-        commentTime: 'now'
+    componentDidMount() {
+        this.renderFeed();
     }
-    ]
 
     render(): JSX.Element {
         return (
@@ -73,21 +46,19 @@ class Home extends React.Component<HomeProps> {
                 justifyContent="center"
                 sx={{ minHeight: '45vh', }}
             >
-                {this.posts.map((post) => (
-                    <>
-                        <PostCard
-                            postId={post.id}
-                            avatar={post.picture}
-                            userName={post.userName}
-                            media={post.post}
-                            likes={post.likes}
-                            caption={post.caption}
-                            comments={post.comments}
-                            commentTime={post.commentTime}
-                        />
-                        <Seperate />
-                    </>
-                ))}
+                {this.props.following.length > 0 &&
+                    this.props.following.map((user) => (
+                        user.post.map((post) => (
+                            <>
+                                <PostCard
+                                    page="home"
+                                    post={post}
+                                    user={user}
+                                />
+                                <Seperate />
+                            </>
+                        ))
+                    ))}
             </Grid>
 
         );

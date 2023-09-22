@@ -1,16 +1,19 @@
 export interface IHomeStateToProps {
     hasAccount: boolean
+    user: any //TODO: make IUser
+    following: any //TODO: make IFollowing
 }
 
 export interface IHomeDispatchToProps {
-    userHasAccount: Function;
+    feed: Function;
 }
 
 export interface IFindStateToProps {
-    isFindOpen: boolean
+    isFindOpen: boolean;
+    foundUser: any; //TODO: make IUSER
 }
 
 export interface IFindDispatchToProps {
     openFind: Function;
-    find: Function;
+    returnFind: Function;
 }

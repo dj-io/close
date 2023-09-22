@@ -15,9 +15,20 @@ export interface ISigninDispatchToProps {
 }
 
 export interface IProfileStateToProps {
-    hasAccount: boolean
+    hasAccount: boolean,
+    user: any // TODO: Create Iprofile
+    following: any // TODO: Create IFollowing
 }
 
 export interface IProfileDispatchToProps {
     userHasAccount: Function;
+    profiles: Function;
+}
+
+export interface IShareStateToProps {
+    user: any // TODO: create IUser interface
+}
+
+export interface IShareDispatchToProps {
+
 }

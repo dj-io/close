@@ -15,11 +15,22 @@ interface ICaption {
     userName: string;
     img: string;
     mediaType: string;
+    post: Function;
     isSubmitting: boolean;
+    change: Function;
 }
 
 
-const Caption: React.FC<ICaption> = ({ avatar, userName, img, mediaType, isSubmitting }) => {
+const Caption: React.FC<ICaption> = ({
+    avatar,
+    userName,
+    img,
+    mediaType,
+    isSubmitting,
+    post,
+    id,
+    change,
+}) => {
     return (
         <Paper
             sx={{
@@ -51,6 +62,9 @@ const Caption: React.FC<ICaption> = ({ avatar, userName, img, mediaType, isSubmi
                                     maxRows={6}
                                     row={field}
                                     isSubmitting={isSubmitting}
+                                    func={post}
+                                    change={change}
+                                    id={id}
                                 />
                             ))
                         }

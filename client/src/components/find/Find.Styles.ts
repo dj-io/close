@@ -1,5 +1,6 @@
 import { Drawer } from "@mui/material";
 import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 
 export const FindDrawer = styled(Drawer)((props: any) => ({
     '&&': {
@@ -47,5 +48,16 @@ export const FindHeader = styled('div')((props: any) => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: '14px',
+    }
+}))
+
+export const FindLink = styled(Link)(() => ({
+    '&&': {
+        textDecoration: 'none',
+        color: 'inherit',
+
+        '&:hover': {
+            background: '#3C414240'
+        }
     }
 }))

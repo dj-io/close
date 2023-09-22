@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Profile from './Profile.tsx';
+import { profiles } from '../../redux/actions/UserActions.ts';
 import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 
 
@@ -11,7 +12,8 @@ import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.
  * @returns 
  */
 const mapStateToprops = (state: any): IProfileStateToProps => ({
-
+    user: state.UserState.user,
+    following: state.UserState.following,
 });
 
 /**
@@ -21,7 +23,7 @@ const mapStateToprops = (state: any): IProfileStateToProps => ({
  * @returns 
  */
 const mapDispatchToProps = (dispatch: any): IProfileDispatchToProps => ({
-
+    profiles: bindActionCreators(profiles, dispatch)
 });
 
 export const ProfileContainer = connect(

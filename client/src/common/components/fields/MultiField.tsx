@@ -13,9 +13,20 @@ interface IMultiField {
     maxRows: Number;
     rows: Number;
     isSubmitting: boolean;
+    func: Function;
+    change: Function;
+    value: string;
 }
 
-const MultiField: React.FC<IMultiField> = ({ row, maxRows, rows, isSubmitting }) => {
+const MultiField: React.FC<IMultiField> = ({
+    row,
+    maxRows,
+    rows,
+    func,
+    change,
+    isSubmitting,
+    value
+}) => {
     return (
         <Grid
             container
@@ -30,6 +41,8 @@ const MultiField: React.FC<IMultiField> = ({ row, maxRows, rows, isSubmitting })
                 disabled={isSubmitting}
                 variant="standard"
                 sx={{ width: '100%' }}
+                onChange={change}
+                value={value}
                 InputProps={{
                     maxRows,
                     rows,
@@ -37,7 +50,7 @@ const MultiField: React.FC<IMultiField> = ({ row, maxRows, rows, isSubmitting })
                         <InputAdornment position="start">
                             <IconButton
                                 aria-label="post a comment"
-                                onClick={() => { }}
+                                onClick={func}
                                 onMouseDown={() => { }}
                             >
                                 <PostAddIcon sx={{ color: '#238636' }} />

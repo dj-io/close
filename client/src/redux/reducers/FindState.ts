@@ -6,6 +6,7 @@ export interface UserStateConfig {
 
 const initialState: UserStateConfig = {
     isFindOpen: false,
+    foundUser: {}
 }
 
 export default function reduce(state: UserStateConfig = initialState, action: any) {
@@ -14,6 +15,13 @@ export default function reduce(state: UserStateConfig = initialState, action: an
             return {
                 ...state,
                 isFindOpen: action.payload,
+            }
+        }
+
+        case AppActions.FIND_USER: {
+            return {
+                ...state,
+                foundUser: action.payload
             }
         }
 

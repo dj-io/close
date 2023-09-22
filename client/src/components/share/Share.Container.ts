@@ -9,7 +9,7 @@ import Share from './Share.tsx';
  * @returns 
  */
 const mapStateToprops = (state) => ({
-    hasAccount: state.UserState.hasAccount,
+    user: state.UserState.user,
 });
 
 /**

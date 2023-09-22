@@ -1,16 +1,27 @@
 import * as React from 'react';
 import { Grid } from '@mui/material';
-import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import SelectMedia from './SelectMedia.tsx'
 import Caption from './Caption.tsx';
+import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
+import { share } from '../../common/api/user/Users.Api.ts';
+import { IShareStateToProps, IShareDispatchToProps } from '../../types/user.ts'
+import { userValues } from '../../common/constants/requests.ts';
+
+interface IPost {
+    picture: string;
+    caption: string;
+    likes: number;
+    comment: any //TODO: make IComment
+    shares: number;
+}
 interface IShareProps {
 
 }
 
 interface IShareState {
     open: boolean;
-    file: string;
     mediaType: string;
+    post: IPost
 }
 
 export type ShareProps = IShareStateToProps & IShareDispatchToProps & IShareProps
@@ -18,8 +29,11 @@ export type ShareProps = IShareStateToProps & IShareDispatchToProps & IShareProp
 class Share extends React.Component<ShareProps> {
     state: IShareState = {
         open: true,
-        file: '',
         mediaType: 'img',
+        post: {
+            picture: '',
+            caption: '',
+        },
     }
 
     setOpen = ({ open }) => this.setState({ open });
@@ -30,7 +44,30 @@ class Share extends React.Component<ShareProps> {
         if (!files.type.startsWith('image'))
             this.setState({ mediaType: 'video' });
 
-        this.setState({ file });
+        this.setState({ post: { picture: file } })
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            post: {
+                ...this.state.post,
+                caption: e.target.value
+            }
+        })
+    }
+
+    post = () => {
+        const { authorities, ...rest } = this.props.user
+        const data = {
+            ...rest,
+            post: [
+                ...this.props.user.post,
+                this.state.post
+            ]
+        };
+
+        share(data);
+        window.history.back();
     }
 
     render(): JSX.Element {
@@ -38,15 +75,24 @@ class Share extends React.Component<ShareProps> {
             <>
                 <ConfirmDialog
                     title="Share New Post"
-                    spacing={!this.state.file && 20}
+                    spacing={!this.state.post.picture && 20}
                     enableBack={true}
                     isOpen={this.state.open}
                     openDialog={() => this.setOpen(true)}
                     closeDialog={() => this.setOpen(false)}
                     back={() => this.setState({ file: '' })}
                 >
-                    {!this.state.file && <SelectMedia handleUpload={this.handleUpload} />}
-                    {this.state.file && <Caption img={this.state.file} mediaType={this.state.mediaType} />}
+                    {!this.state.post.picture &&
+                        <SelectMedia handleUpload={this.handleUpload} />
+                    }
+                    {this.state.post.picture &&
+                        <Caption
+                            change={this.handleChange}
+                            post={this.post}
+                            img={this.state.post.picture}
+                            mediaType={this.state.mediaType}
+                        />
+                    }
                 </ConfirmDialog>
             </>
         );

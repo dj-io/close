@@ -18,10 +18,11 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PostAddIcon from '@mui/icons-material/PostAdd';
-import { ExpandMore } from './PostCard.Styles.js';
+import { ExpandMore } from './PostCard.Styles.ts';
 import MultiField from '../fields/MultiField.tsx';
 import { commentFields } from '../../constants/formFields.ts';
-import { InputLabel } from '@mui/material';
+import { InputLabel, Tooltip } from '@mui/material';
+import { Pop } from '../popover/Pop.tsx';
 
 
 /**
@@ -30,14 +31,10 @@ import { InputLabel } from '@mui/material';
  * @prop {any} initialValues - sets form initial values
  */
 interface IPostCardProps {
-    postId: any;
-    avatar: string;
-    userName: string;
-    media: string;
-    likes: number;
-    caption: string;
-    commentTime: Date;
-    comments: Object // make IComment interface
+    page: string;
+    func: Function;
+    change: Function;
+    value: string;
     expand?: boolean;
 }
 
@@ -48,14 +45,12 @@ interface IPostCardProps {
  * @returns 
  */
 export const PostCard: React.FC<IPostcardProps> = ({
-    avatar,
-    userName,
-    media,
-    likes,
-    caption,
-    comments,
-    commentTime,
-    postId,
+    post,
+    user,
+    value,
+    page,
+    func,
+    change,
     expand,
 }) => {
 
@@ -68,30 +63,27 @@ export const PostCard: React.FC<IPostcardProps> = ({
     return (
         <Card sx={{
             maxWidth: 500,
-            width: '400px',
+            width: !expanded ? 375 : 500,
             marginTop: '32px',
             boxShadow: 'none'
         }}
         >
             <CardHeader
-                avatar={<Avatar alt="Apple" src={avatar} />}
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
-                title={userName}
+                avatar={<Avatar alt="Apple" src={user?.picture} />}
+                action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
+                title={user?.username}
                 subheader=""
             />
             <CardMedia
                 component="img"
                 height="auto"
-                image={media}
+                image={post.picture}
+                sx={{ border: '1px solid #3C414260', borderRadius: 1 }}
                 alt="Paella dish"
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    <span style={{ fontWeight: 'bold', color: '#238636' }}>{userName}</span> {caption}
+                    <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span> {post.caption}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -99,18 +91,20 @@ export const PostCard: React.FC<IPostcardProps> = ({
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
-                    <Link id='post-link' to={`/home/${postId}`}>
+                    <Link id='post-link' to={!expanded && `/${page}/${post.id}`}>
                         {/* <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
                         aria-expanded={expanded}
                         aria-label="show more"
                     > */}
-                        <ShortTextIcon />
+                        <Tooltip title="select for comments" placement="top">
+                            <ShortTextIcon />
+                        </Tooltip>
                         {/* </ExpandMore> */}
                     </Link>
                 </IconButton>
-                <IconButton aria-label="share">{likes} likes </IconButton>
+                <IconButton aria-label="share">{post.likes} likes </IconButton>
                 {/* <ExpandMore
                     expand={expanded}
                     onClick={handleExpandClick}
@@ -122,7 +116,21 @@ export const PostCard: React.FC<IPostcardProps> = ({
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    {comments?.map(comment => (
+                    {
+                        commentFields.map((field) => (
+                            <MultiField
+                                row={field}
+                                maxRows={4}
+                                isSubmitting={false}
+                                change={change}
+                                func={func}
+                                value={value}
+                            />
+                        ))
+                    }
+                </CardContent>
+                <CardContent style={{ borderTop: '1px solid #3C414270', maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
+                    {post.comment?.map(comment => (
                         <CardHeader
                             avatar={<Avatar alt="Apple" src={comment.picture} />}
                             action={
@@ -134,15 +142,6 @@ export const PostCard: React.FC<IPostcardProps> = ({
                             subheader={comment.comment}
                         />
                     ))}
-                    {
-                        commentFields.map((field) => (
-                            <MultiField
-                                row={field}
-                                maxRows={4}
-                                isSubmitting={false}
-                            />
-                        ))
-                    }
 
                 </CardContent>
             </Collapse>

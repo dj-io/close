@@ -1,16 +1,27 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import { Post } from './components/home/Post.tsx';
+import { Post } from './components/profile/Post.tsx';
 import { Signup, Signin, Nav, Profile, Home, Find, Share } from './components/index.ts';
 import './App.css';
+import { useEffect } from 'react';
+import { retreiveProfile } from './common/api/user/Users.Api.ts';
 
 
-function App({ hasAccount }) {
+const App = ({ hasAccount, profiles, user, foundUser }) => {
 
-  console.log("=== yuppp ===", hasAccount)
+  const getProfile = async () => {
+    const res = await retreiveProfile(1);
+    profiles(res.data)
+  }
+
+
+  useEffect(() => {
+    getProfile();
+  }, [])
+
   return (
     <div className="App">
       <Router >
-        <Nav />
+        <Nav user={user} />
         <Find />
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />

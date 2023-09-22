@@ -16,7 +16,13 @@ export const Submit: React.FC<ISubmit> = ({ label, func, disabledButton }) => {
             spacing={0}
             justifyContent="center"
         >
-            <SubmitButton disabled={disabledButton} onClick={func} variant="contained">{label}</SubmitButton>
+            <SubmitButton
+                disabled={disabledButton}
+                onClick={func}
+                variant="contained"
+            >
+                {label}
+            </SubmitButton>
         </Grid>
     );
 };

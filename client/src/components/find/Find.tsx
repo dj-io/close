@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { Grid, Typography } from '@mui/material';
+import { Grid, IconButton, Typography } from '@mui/material';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
-import { FindDrawer, FindHeader, Seperate } from './Find.Styles.ts';
+import { FindDrawer, FindHeader, FindLink, Seperate } from './Find.Styles.ts';
 import { Form } from '../../common/components/form/Form.tsx';
 import { FindFields } from '../../common/constants/formFields.ts';
+import { find } from '../../common/api/user/Users.Api.ts';
+import { Link } from 'react-router-dom';
+import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 
 interface IFindProps {
 
@@ -23,22 +26,24 @@ export type FindProps = IFindStateToProps & IFindDispatchToProps & IFindProps;
  */
 class Find extends React.Component<FindProps> {
     state: IFindState = {
-        direction: 'left'
+        direction: 'left',
+        find: '',
     }
-
-    users = [{
-        pic: 'https://i.pinimg.com/736x/31/44/7e/31447e25b7bc3429f83520350ed13c15.jpg',
-        userName: 'chillBro',
-        fullName: 'mace greplul',
-    }]
 
     initialValues = {
         find: ''
     }
 
+    handleChange = (e) => this.setState({ find: e.target.value });
+
+
+    search = async () => {
+        const res = await find(this.state.find);
+        this.props.returnFind(res.data);
+    }
+
     render(): JSX.Element {
         return (
-
             <Grid
                 container
                 spacing={0}
@@ -62,25 +67,43 @@ class Find extends React.Component<FindProps> {
                             {/* TODO: update form with start/end adornments use enter as submit*/}
                             <Form
                                 buttonLabel="Find"
-                                fields={FindFields}
-                                submit={() => this.props.getUsers()}
-                                initialValues={this.initialValues}
                                 disableValue='find'
+                                fields={FindFields}
+                                submit={this.search}
+                                change={this.handleChange}
+                                initialValues={this.initialValues}
                             />
                         </Grid>
                         <Seperate />
                     </FindHeader>
-                    <Grid sx={{ marginTop: '25px', marginRight: 32 }} container direction='column' alignItems='start'>
-                        {/* TODO: wrap in link to user profile using user id*/}
-                        <Typography sx={{ marginRight: 32, color: '#3C414270' }} variant='button'> Recent </Typography >
-                        {this.users.map((user) => (
-                            <CardHeader
-                                avatar={<Avatar alt="Apple" src={user.pic} />}
-                                title={user.userName}
-                                subheader={user.fullName}
-                            />
-                        ))}
-                    </Grid>
+                    {Object.keys(this.props.foundUser).length > 1 && (
+                        <Grid sx={{ marginTop: '25px', marginRight: 32, }} container direction='column' alignItems='start'>
+                            <Typography sx={{
+                                marginRight: 32,
+                                color: '#3C414270'
+                            }}
+                                variant='button'
+                            >
+                                {UserActionTypes.RECENT}
+                            </Typography >
+                            <FindLink to={`profile/${this.props.foundUser.id}`}>
+                                <CardHeader
+                                    sx={{ width: 300 }}
+                                    avatar={
+                                        <IconButton>
+                                            <Avatar
+                                                alt={this.props.foundUser.username}
+                                                src={this.props.foundUser.picture}
+                                            />
+                                        </IconButton>
+                                    }
+                                    title={this.props.foundUser.username}
+                                    subheader={this.props.foundUser.name}
+                                />
+                            </FindLink>
+
+                        </Grid>
+                    )}
                 </FindDrawer>
             </Grid >
         );
