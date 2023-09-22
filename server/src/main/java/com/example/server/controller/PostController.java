@@ -18,8 +18,8 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping(path = "search")
-    public Optional<Post> getPostsById(@RequestParam("userId") Long id) {
-        return postService.getPostsByUserId(id);
+    public Optional<Post> getPostsByCaption(@RequestParam("keyword") String keyword) {
+        return postService.getPostsByCaption(keyword);
     }
 
     @GetMapping("/{id}")

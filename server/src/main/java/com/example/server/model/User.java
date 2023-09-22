@@ -1,16 +1,12 @@
 package com.example.server.model;
 
 import com.example.server.utils.UserRole;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -41,10 +37,10 @@ public class User implements UserDetails {
     private String links;
 
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -59,12 +55,20 @@ public class User implements UserDetails {
     private Boolean enabled = false;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            targetEntity = Post.class,
+            cascade = CascadeType.ALL
+//            orphanRemoval = true
     )
-    @JoinColumn(name = "post_id")
-    private List<Post> userPosts = new ArrayList<>();
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Post> post;
 
+    @OneToMany(
+            targetEntity = Following.class,
+            cascade = CascadeType.ALL
+//            orphanRemoval = true
+    )
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private List<Following> followed;
 
     public User(String name,
                 String picture,
@@ -101,12 +105,10 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getEmail() { return email; }
 
     @Override
     public boolean isAccountNonExpired() {

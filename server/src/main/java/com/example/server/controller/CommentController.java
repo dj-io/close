@@ -17,11 +17,6 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping(path = "search")
-    public Optional<Comment> getCommentsById(@RequestParam("postId") Long id) {
-        return commentService.getCommentsByPostId(id);
-    }
-
     @GetMapping("/{id}")
     public Comment getCommentById(@PathVariable Long id) {
         return commentService.getCommentById(id);

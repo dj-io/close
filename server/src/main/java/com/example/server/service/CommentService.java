@@ -15,14 +15,8 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-    private Post post;
-
     public Iterable<Comment> getComments() {
         return commentRepository.findAll();
-    }
-
-    public Optional<Comment> getCommentsByPostId(Long id) {
-        return commentRepository.findByPostId(id);
     }
 
 
@@ -31,14 +25,7 @@ public class CommentService {
     }
 
     public Comment createComment(Comment comment) {
-
-        Comment newComment = new Comment(
-                        comment.getComment(),
-                        comment.getLikes(),
-                        post
-        );
-
-        return commentRepository.save(newComment);
+        return commentRepository.save(comment);
     }
 
     public Comment updateComment(Comment comment) {

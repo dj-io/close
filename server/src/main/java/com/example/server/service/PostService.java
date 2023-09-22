@@ -24,8 +24,8 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Optional<Post> getPostsByUserId(Long id) {
-        return postRepository.findByUserId(id);
+    public Optional<Post> getPostsByCaption(String keyword) {
+        return postRepository.findByCaption(keyword);
     }
 
     public Post getPostById(Long id) {
@@ -33,16 +33,7 @@ public class PostService {
     }
 
     public Post createPost(Post post) {
-
-        Post newPost = new Post(
-                 post.getPicture(),
-                 post.getCaption(),
-                 post.getLikes(),
-                 post.getShares(),
-                 user
-        );
-
-        return postRepository.save(newPost);
+        return postRepository.save(post);
     }
 
     public Post updatePost(Post post) {

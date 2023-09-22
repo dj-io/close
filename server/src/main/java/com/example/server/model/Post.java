@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @NoArgsConstructor
 @Entity
 public class Post {
@@ -31,20 +31,25 @@ public class Post {
     private Long likes = 0L;
     private Long shares = 0L;
 
-    @ManyToOne
-    @JoinColumn(nullable= false, name = "user_id")
+    private Long user_id;
 
-    private User user;
+    @OneToMany(
+            targetEntity = Comment.class,
+            cascade = CascadeType.ALL
+//            orphanRemoval = true
+    )
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private List<Comment> comment;
 
     public Post(String picture,
                 String caption,
                 Long likes,
                 Long shares,
-                User user) {
+                Long user_id) {
         this.picture = picture;
         this.caption = caption;
         this.likes = likes;
         this.shares = shares;
-        this.user = user;
+        this.user_id = user_id;
     }
 }

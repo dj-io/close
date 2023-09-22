@@ -5,13 +5,18 @@ import com.example.server.model.User;
 import com.example.server.repository.ConfirmationTokenRepository;
 import com.example.server.repository.UserRepository;
 import com.example.server.utils.EmailSender;
+import com.example.server.utils.UserRole;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,6 +31,7 @@ public class UserService implements UserDetailsService {
             "user with email %s not found";
 
     private final UserRepository userRepository;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 //    private final EmailSender emailSender;
@@ -40,7 +46,7 @@ public class UserService implements UserDetailsService {
 
     public String userSignup(User user) {
 
-        boolean userEmailExists = userRepository.findByEmail((user.getEmail())).isPresent();
+        boolean userEmailExists = userRepository.findByEmail(user.getEmail()).isPresent();
         boolean usernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
 
         if (usernameExists) {
@@ -80,39 +86,31 @@ public class UserService implements UserDetailsService {
         return token;
     }
 
-    public Optional<User> getProfile(String username) {
+    public User updateUser(User user) {
 
-        return userRepository.findByUsername(username);
-    }
+        Optional<User> currentUser = userRepository.findById(user.getId());
 
-    public User getProfileById(Long id) {
-
-        return userRepository.findById(id).get();
-    }
-
-    public User createProfile(User user) {
-        boolean usernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
-
-        if (usernameExists) {
-            throw new IllegalStateException("username already taken");
+        if (currentUser.isPresent()) {
+            User updatedUser = currentUser.get();
+            user.setPassword(updatedUser.getPassword());
         }
 
         return userRepository.save(user);
     }
 
-    public User updateProfile(User user) {
+    public Optional<User> getUser(String username) {
+        return userRepository.findByUsername(username);
+    }
 
-        boolean userEmailExists = userRepository.findByEmail((user.getEmail())).isPresent();
-        boolean usernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
+    public Iterable<User> getCloseUsers() {
+        return userRepository.findAll();
+    }
 
-        if (usernameExists) { throw new IllegalStateException("username already taken"); }
-        if (userEmailExists) { throw new IllegalStateException("email already taken"); }
-
-        return userRepository.save(user);
+    public User getUserById(Long id) {
+        return userRepository.findById(id).get();
     }
 
     public int enableUser(String email) {
-
         return userRepository.enableUser(email);
     }
 }

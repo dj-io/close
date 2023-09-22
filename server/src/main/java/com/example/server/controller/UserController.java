@@ -9,34 +9,31 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "api/v1/profiles/")
+@RequestMapping(path = "api/v1/users/")
 @AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
+    @GetMapping
+    public Iterable<User> getItems() {
+        return userService.getCloseUsers();
+    }
+
     @GetMapping(path = "search")
-    public Optional<User> getProfile(@RequestParam("username") String username) {
-        return userService.getProfile(username);
+    public Optional<User> getUser(@RequestParam("username") String username) {
+        return userService.getUser(username);
     }
 
     @GetMapping(path = "{id}")
-    public User getProfileById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
 
-        return userService.getProfileById(id);
-    }
-
-    @PostMapping
-    public User createProfile(@RequestBody User user) {
-
-        return userService.createProfile(user);
+        return userService.getUserById(id);
     }
 
     @PatchMapping
-    public User updateProfile(@RequestBody User user) {
-
-        return userService.updateProfile(user);
+    public User updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
     }
-
 
 }

@@ -1,2 +1,11 @@
-package com.example.server.repository;public interface FollowingRepository {
+package com.example.server.repository;
+
+
+import com.example.server.model.Following;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface FollowingRepository extends JpaRepository<Following, Long> {
+
 }

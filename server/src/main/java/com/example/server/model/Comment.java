@@ -24,16 +24,9 @@ public class Comment {
     private String comment;
     private Long likes;
 
-    @ManyToOne
-    @JoinColumn(nullable= false, name = "post_id")
-
-    private Post post;
-
     public Comment(String comment,
-                   Long likes,
-                   Post post) {
+                   Long likes) {
         this.comment = comment;
         this.likes = likes;
-        this.post = post;
     }
 }
