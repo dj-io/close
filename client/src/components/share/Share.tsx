@@ -80,7 +80,7 @@ class Share extends React.Component<ShareProps> {
                     isOpen={this.state.open}
                     openDialog={() => this.setOpen(true)}
                     closeDialog={() => this.setOpen(false)}
-                    back={() => this.setState({ file: '' })}
+                    back={() => this.setState({ post: {} })}
                 >
                     {!this.state.post.picture &&
                         <SelectMedia handleUpload={this.handleUpload} />

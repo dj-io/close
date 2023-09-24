@@ -46,3 +46,5 @@ export const shareFields = [{ id: '1', inputTitle: 'Drag photos and videos here'
 export const captionFields = [{ id: '1', label: 'Write a caption...', name: 'caption' }]
 
 export const commentFields = [{ id: '1', label: 'Write a comment...', name: 'comment' }]
+
+export const profileFields = { id: '1', name: 'picture', type: 'file' }

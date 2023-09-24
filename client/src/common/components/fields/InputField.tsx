@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { CustomInput } from '../../styles/Fields.Styles.ts';
-import { Button, Grid, InputLabel, FormHelperText } from '@mui/material';
+import { Button, Grid, InputLabel, FormHelperText, CardMedia } from '@mui/material';
 import { SubmitButton } from '../../styles/Buttons.Styles.ts';
 
 interface IInputField {
     row: Object;
     isSubmitting: boolean;
     handleChange: Function;
+    image: string;
 }
 
-const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange }) => {
+const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, image }) => {
     return (
         <Grid
             container
@@ -27,11 +28,30 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange }) 
                 type={row.type}
                 onChange={handleChange}
             />
-            <InputLabel htmlFor={row.name}>
-                <SubmitButton disabled={isSubmitting} variant="contained" component="span">
-                    {row.label}
-                </SubmitButton>
-            </InputLabel>
+            {/* render text button */}
+            {row.label && (
+                <InputLabel htmlFor={row.name}>
+                    <SubmitButton disabled={isSubmitting} variant="contained" component="span">
+                        {row.label}
+                    </SubmitButton>
+                </InputLabel>
+            )}
+            {/* render image */}
+            {image && (
+                <InputLabel htmlFor={row.name}>
+                    <CardMedia
+                        component="img"
+                        image={image}
+                        sx={{
+                            width: 204,
+                            height: 204,
+                            borderRadius: '50%',
+                            cursor: 'pointer'
+                        }}
+                        alt={row.name}
+                    />
+                </InputLabel>
+            )}
         </Grid>
     );
 }

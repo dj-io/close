@@ -1,17 +1,23 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import EasyEdit, { Types } from 'react-easy-edit';
 import Grid from '@mui/material/Grid';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
-import { Avatar, CardContent, CardHeader, IconButton, Typography } from '@mui/material';
+import SaveAsTwoToneIcon from '@mui/icons-material/SaveAsTwoTone';
+import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 import { Seperate } from '../find/Find.Styles.ts';
 import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
 import { profiles } from '../../redux/actions/UserActions.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
+import InputField from '../../common/components/fields/InputField.tsx'
+import { profileFields } from '../../common/constants/formFields.ts';
+import { BodyEditor, HeaderEditor } from './Profile.Styles.ts';
+import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
 
 interface IProfileProps {
 
@@ -19,6 +25,9 @@ interface IProfileProps {
 
 interface IProfileState {
     userLikes: number;
+    posts: number;
+    editing: boolean;
+    pictures: string; // TODO: make IFields
 }
 
 export type ProfileProps = IProfileStateToProps & IProfileDispatchToProps & IProfileProps;
@@ -26,13 +35,29 @@ export type ProfileProps = IProfileStateToProps & IProfileDispatchToProps & IPro
 class Profile extends React.Component<ProfileProps> {
     state: IProfileState = {
         userLikes: 0,
-        posts: 0
+        posts: 0,
+        editing: false,
+        pictures: '',
     }
 
     posts = this.props.user?.post?.forEach(post => this.state.posts += 1);
     likes = this.props.user?.post?.forEach(post => this.state.userLikes += post.likes);
     following = this.props.user.followed.map((id) => id.followedId)
         .find((id) => id === this.props.user.id);
+
+    handleUpload = (files) => {
+        let binaryData = [];
+        binaryData.push(files);
+        const file = window.URL.createObjectURL(new Blob(binaryData, { type: "application/zip" }))
+
+        this.setState({ pictures: file })
+        console.log("==== fileeee", this.state.pictures)
+    }
+
+
+    // save = (edit: string) => {
+    //     const { authorities, ...rest } = this.props.user
+    // }
 
     follow = async () => {
         const { authorities, ...rest } = this.props.user
@@ -60,18 +85,45 @@ class Profile extends React.Component<ProfileProps> {
                 justifyContent="center"
                 sx={{ marginLeft: '4%' }}
             >
-                <Grid item sx={8}>
+                <Grid item sx={8} >
                     <CardHeader
                         avatar={
-                            <Avatar
-                                alt={username}
-                                src={picture}
-                                sx={{ width: 204, height: 204 }}
-                            />
+                            <HeaderEditor>
+                                <EasyEdit
+                                    allowEdit={false}
+                                    type={Types.FILE}
+                                    value={picture || 'Click to Edit'}
+                                    onSave={() => console.log("saved")}
+                                    onCancel={() => this.setState({ editing: false })}
+                                    editMode={this.state.editing}
+                                    saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                    hideCancelButton
+                                    displayComponent={
+                                        <Avatar
+                                            alt={username}
+                                            src={picture}
+                                            sx={{ width: 204, height: 204 }}
+                                        />}
+                                    editComponent={
+                                        <MyDropzone
+                                            handleUpload={this.handleUpload}
+                                            children={
+                                                <InputField
+                                                    row={profileFields}
+                                                    image={picture}
+                                                    handleChange={this.handleUpload}
+                                                />
+                                            }
+                                        />
+                                    }
+                                />
+                            </HeaderEditor>
                         }
                         action={
                             <IconButton aria-label="settings">
-                                <SettingsTwoToneIcon />
+                                <Tooltip title="Edit Profile" placement="right">
+                                    <SettingsTwoToneIcon onClick={() => this.setState({ editing: !this.state.editing })} />
+                                </Tooltip>
                             </IconButton>
                         }
                         title={
@@ -82,14 +134,37 @@ class Profile extends React.Component<ProfileProps> {
                                 }}
                                 variant='h4'
                             >
-                                {username}
+                                <HeaderEditor>
+                                    <EasyEdit
+                                        allowEdit={false}
+                                        type={Types.TEXT}
+                                        value={username || 'Click to Edit'}
+                                        onSave={() => console.log("saved")}
+                                        onCancel={() => this.setState({ editing: false })}
+                                        editMode={this.state.editing}
+                                        saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                        hideCancelButton
+                                    />
+                                </HeaderEditor>
                             </Typography>
                         }
                         subheader={
                             <Typography variant='button'>
                                 {`${this.state.posts} posts ${this.state.userLikes} likes`} <br />
                                 <Typography variant="body2" color="text.secondary">
-                                    {biography}
+                                    <BodyEditor>
+                                        <EasyEdit
+                                            allowEdit={false}
+                                            type={Types.TEXT}
+                                            value={biography || 'Click to Edit'}
+                                            onSave={() => console.log("saved")}
+                                            onCancel={() => this.setState({ editing: false })}
+                                            onChange
+                                            editMode={this.state.editing}
+                                            saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                            hideCancelButton
+                                        />
+                                    </BodyEditor>
                                     <Submit label="Follow" func={this.follow} disabledButton={this.following} />
                                 </Typography>
                             </Typography>

@@ -20,7 +20,6 @@ const SelectMedia: React.FC<ISelectMedia> = ({ handleUpload }) => {
             justifyContent="center"
             sx={{ width: 'auto' }}
         >
-
             <MyDropzone
                 handleUpload={handleUpload}
                 children={
@@ -33,14 +32,6 @@ const SelectMedia: React.FC<ISelectMedia> = ({ handleUpload }) => {
                     ))
                 }
             />
-            {/* {
-                shareFields.map((field) =>
-                    <InputField
-                        handleChange={handleUpload}
-                        row={field}
-                        isSubmitting={false}
-                    />
-                )} */}
         </Grid>
     );
 }

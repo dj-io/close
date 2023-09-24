@@ -72,7 +72,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 avatar={<Avatar alt="Apple" src={user?.picture} />}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
                 title={user?.username}
-                subheader=""
+                subheader={user?.biography}
             />
             <CardMedia
                 component="img"
@@ -92,27 +92,12 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 </IconButton>
                 <IconButton aria-label="share">
                     <Link id='post-link' to={!expanded && `/${page}/${post.id}`}>
-                        {/* <ExpandMore
-                        expand={expanded}
-                        onClick={handleExpandClick}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                    > */}
                         <Tooltip title="select for comments" placement="top">
                             <ShortTextIcon />
                         </Tooltip>
-                        {/* </ExpandMore> */}
                     </Link>
                 </IconButton>
                 <IconButton aria-label="share">{post.likes} likes </IconButton>
-                {/* <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </ExpandMore> */}
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
