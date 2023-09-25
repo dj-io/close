@@ -24,6 +24,10 @@ export const HeaderEditor = styled('div')((props: any) => ({
         width: '210px',
         cursor: 'pointer',
 
+        '::placeholder': {
+            color: '#3C414260',
+        },
+
         ':focus-visible': {
             outline: 'none',
         },

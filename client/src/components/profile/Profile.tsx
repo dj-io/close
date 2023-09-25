@@ -28,6 +28,7 @@ interface IProfileState {
     posts: number;
     editing: boolean;
     pictures: string; // TODO: make IFields
+    fields: any
 }
 
 export type ProfileProps = IProfileStateToProps & IProfileDispatchToProps & IProfileProps;
@@ -37,7 +38,11 @@ class Profile extends React.Component<ProfileProps> {
         userLikes: 0,
         posts: 0,
         editing: false,
-        pictures: '',
+        fields: {
+            picture: this.props.user.picture,
+            username: this.props.user.username,
+            biography: this.props.user.biography
+        }
     }
 
     posts = this.props.user?.post?.forEach(post => this.state.posts += 1);
@@ -45,19 +50,32 @@ class Profile extends React.Component<ProfileProps> {
     following = this.props.user.followed.map((id) => id.followedId)
         .find((id) => id === this.props.user.id);
 
+    saveName = username => this.setState({ fields: { ...this.state.fields, username } })
+    saveBio = biography => this.setState({ fields: { ...this.state.fields, biography } });
+    savePic = picture => this.setState({ fields: { ...this.state.fields, picture } });
+
     handleUpload = (files) => {
         let binaryData = [];
         binaryData.push(files);
         const file = window.URL.createObjectURL(new Blob(binaryData, { type: "application/zip" }))
 
-        this.setState({ pictures: file })
-        console.log("==== fileeee", this.state.pictures)
+        this.savePic(file);
     }
 
 
-    // save = (edit: string) => {
-    //     const { authorities, ...rest } = this.props.user
-    // }
+    handleEditing = async () => {
+        const { authorities, ...rest } = this.props.user;
+
+        const data = {
+            ...rest,
+            ...this.state.fields,
+        };
+
+        this.setState({ editing: !this.state.editing })
+
+        if (this.state.editing) share(data);
+    }
+
 
     follow = async () => {
         const { authorities, ...rest } = this.props.user
@@ -93,15 +111,15 @@ class Profile extends React.Component<ProfileProps> {
                                     allowEdit={false}
                                     type={Types.FILE}
                                     value={picture || 'Click to Edit'}
-                                    onSave={() => console.log("saved")}
-                                    onCancel={() => this.setState({ editing: false })}
+                                    onSave={this.handleUpload}
                                     editMode={this.state.editing}
                                     saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                    attributes={{ name: "picture" }}
                                     hideCancelButton
                                     displayComponent={
                                         <Avatar
                                             alt={username}
-                                            src={picture}
+                                            src={this.state.fields.picture}
                                             sx={{ width: 204, height: 204 }}
                                         />}
                                     editComponent={
@@ -110,8 +128,7 @@ class Profile extends React.Component<ProfileProps> {
                                             children={
                                                 <InputField
                                                     row={profileFields}
-                                                    image={picture}
-                                                    handleChange={this.handleUpload}
+                                                    image={this.state.fields.picture}
                                                 />
                                             }
                                         />
@@ -122,7 +139,7 @@ class Profile extends React.Component<ProfileProps> {
                         action={
                             <IconButton aria-label="settings">
                                 <Tooltip title="Edit Profile" placement="right">
-                                    <SettingsTwoToneIcon onClick={() => this.setState({ editing: !this.state.editing })} />
+                                    <SettingsTwoToneIcon onClick={this.handleEditing} />
                                 </Tooltip>
                             </IconButton>
                         }
@@ -138,11 +155,11 @@ class Profile extends React.Component<ProfileProps> {
                                     <EasyEdit
                                         allowEdit={false}
                                         type={Types.TEXT}
-                                        value={username || 'Click to Edit'}
-                                        onSave={() => console.log("saved")}
-                                        onCancel={() => this.setState({ editing: false })}
+                                        placeholder={username || 'Click to Edit'}
+                                        onSave={this.saveName}
                                         editMode={this.state.editing}
                                         saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                        attributes={{ name: "username" }}
                                         hideCancelButton
                                     />
                                 </HeaderEditor>
@@ -156,12 +173,11 @@ class Profile extends React.Component<ProfileProps> {
                                         <EasyEdit
                                             allowEdit={false}
                                             type={Types.TEXT}
-                                            value={biography || 'Click to Edit'}
-                                            onSave={() => console.log("saved")}
-                                            onCancel={() => this.setState({ editing: false })}
-                                            onChange
+                                            placeholder={biography || 'Click to Edit'}
+                                            onSave={this.saveBio}
                                             editMode={this.state.editing}
                                             saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                            attributes={{ name: "biography" }}
                                             hideCancelButton
                                         />
                                     </BodyEditor>
@@ -173,14 +189,14 @@ class Profile extends React.Component<ProfileProps> {
                 </Grid>
                 <Grid item xs={8}>
                     <Seperate />
-                    <ImageList sx={{ width: 750, height: 450, marginTop: '32px' }} cols={3} rowHeight={164}>
+                    <ImageList sx={{ width: 750, height: 450, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={374}>
                         {post &&
                             post.map((posts) => (
                                 <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                     <ImageListItem key={posts.picture}>
                                         <img
-                                            src={`${posts.picture}?w=164&h=164&fit=crop&auto=format`}
-                                            srcSet={`${posts.picture}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                            src={`${posts.picture}?w=464&h=1000&fit=crop&auto=format`}
+                                            srcSet={`${posts.picture}?w=464&h=1000&fit=crop&auto=format&dpr=2 2x`}
                                             alt={posts.caption}
                                             loading="lazy"
                                         />
