@@ -20,7 +20,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { InputLabel, Tooltip } from '@mui/material';
 import Fade from '@mui/material/Fade';
-import { ExpandMore } from './PostCard.Styles.ts';
+import { ExpandMore, PostLink } from './PostCard.Styles.ts';
 import MultiField from '../fields/MultiField.tsx';
 import { commentFields } from '../../constants/formFields.ts';
 import { Pop } from '../popover/Pop.tsx';
@@ -70,9 +70,9 @@ export const PostCard: React.FC<IPostcardProps> = ({
         }}
         >
             <CardHeader
-                avatar={<Avatar alt="Apple" src={user?.picture} />}
+                avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={user?.picture} /> </Link>}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
-                title={user?.username}
+                title={<PostLink to={`/${user?.username}`}> {user?.username} </PostLink>}
                 subheader={user?.biography}
             />
             <CardMedia
@@ -118,7 +118,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 <CardContent style={{ borderTop: '1px solid #3C414270', maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
                     {post.comment?.map(comment => (
                         <CardHeader
-                            avatar={<Avatar alt="Apple" src={comment.picture} />}
+                            avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={comment.picture} /> </Link>}
                             action={
                                 <IconButton disabled={true} aria-label="settings">
                                     <FavoriteIcon />
@@ -127,7 +127,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                             title={
                                 <Typography variant="body1" color="text.primary">
                                     <span style={{ fontWeight: 'bold', color: '#238636' }}>
-                                        {comment.username}
+                                        <PostLink to={`/${comment?.username}`}> {comment.username} </PostLink>
                                     </span>
                                     <span> {comment.comment} </span>
                                 </Typography>

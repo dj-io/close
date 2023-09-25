@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -15,3 +16,10 @@ export const ExpandMore = styled((props: ExpandMoreProps) => {
         duration: theme.transitions.duration.shortest,
     }),
 }));
+
+export const PostLink = styled(Link)(() => ({
+    '&&': {
+        textDecoration: 'none',
+        color: 'inherit',
+    }
+}))

@@ -86,7 +86,7 @@ class Find extends React.Component<FindProps> {
                             >
                                 {UserActionTypes.RECENT}
                             </Typography >
-                            <FindLink to={`profile/${this.props.foundUser.id}`}>
+                            <FindLink to={`/${this.props.foundUser.username}`}>
                                 <CardHeader
                                     sx={{ width: 300 }}
                                     avatar={

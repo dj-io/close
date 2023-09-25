@@ -4,6 +4,7 @@ import { Signup, Signin, Nav, Profile, Home, Find, Share } from './components/in
 import './App.css';
 import { useEffect } from 'react';
 import { retreiveProfile } from './common/api/user/Users.Api.ts';
+import Friends from './components/find/Friends.tsx';
 
 
 const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
@@ -30,6 +31,7 @@ const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
           <Route path='/share' element={<Share />} />
           <Route path='/profile/:profileId' element={<Profile />} />
           <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} />} />
+          <Route exact path='/:name' element={<Friends currentUser={user} />} />
         </Routes>
       </Router>
     </div>
