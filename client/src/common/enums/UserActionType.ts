@@ -8,4 +8,5 @@ export enum UserActionTypes {
     PASSWORD_LENGTH = 'Password cannot be more than 11 characters',
     IS_VALID_EMAIL = 'Must be a valid email',
     RECENT = 'Recent',
+    CHAR_MAX = 32,
 }

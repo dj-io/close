@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import { BootstrapDialog } from './Dialog.Styles.ts';
+import { BootstrapDialog, Children } from './Dialog.Styles.ts';
 import CardMedia from '@mui/material/CardMedia';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -86,9 +86,9 @@ export const ConfirmDialog: React.FC<IDialog> = ({
                 >
                     <CloseIcon />
                 </IconButton>
-                <DialogContent dividers>
+                <Children dividers>
                     {children}
-                </DialogContent>
+                </Children>
                 <DialogActions>
                     {/* <Button autoFocus onClick={closeDialog}>
                         {confirmLabel}

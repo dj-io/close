@@ -20,10 +20,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { InputLabel, Tooltip } from '@mui/material';
 import Fade from '@mui/material/Fade';
-import { ExpandMore, PostLink } from './PostCard.Styles.ts';
+import { Content, ExpandMore, PostLink } from './PostCard.Styles.ts';
 import MultiField from '../fields/MultiField.tsx';
 import { commentFields } from '../../constants/formFields.ts';
 import { Pop } from '../popover/Pop.tsx';
+import { excerpt } from '../../utils/global.ts';
+import { UserActionTypes } from '../../enums/UserActionType.ts';
 
 
 /**
@@ -56,10 +58,15 @@ export const PostCard: React.FC<IPostcardProps> = ({
 }) => {
 
     const [expanded, setExpanded] = React.useState(expand);
+    const [more, setMore] = React.useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const handleSeeMore = () => {
+        setMore(!more)
+    }
 
     return (
         <Card sx={{
@@ -73,7 +80,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={user?.picture} /> </Link>}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
                 title={<PostLink to={`/${user?.username}`}> {user?.username} </PostLink>}
-                subheader={user?.biography}
+                subheader={excerpt(user?.biography, UserActionTypes.CHAR_MAX)}
             />
             <CardMedia
                 component="img"
@@ -84,7 +91,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span> {post.caption}
+                    <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span> {excerpt(post.caption, UserActionTypes.CHAR_MAX)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -115,7 +122,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                         ))
                     }
                 </CardContent>
-                <CardContent style={{ borderTop: '1px solid #3C414270', maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
+                <Content>
                     {post.comment?.map(comment => (
                         <CardHeader
                             avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={comment.picture} /> </Link>}
@@ -132,11 +139,19 @@ export const PostCard: React.FC<IPostcardProps> = ({
                                     <span> {comment.comment} </span>
                                 </Typography>
                             }
-                            subheader={<Typography sx={{ fontWeight: 'bold' }} variant="subtitle2" color="text.secondary">{`${comment.likes} likes`}</Typography>}
+                            subheader={
+                                <Typography
+                                    sx={{ fontWeight: 'bold' }}
+                                    variant="subtitle2"
+                                    color="text.secondary"
+                                >
+                                    {`${comment.likes} likes`}
+                                </Typography>
+                            }
                         />
                     ))}
 
-                </CardContent>
+                </Content>
             </Collapse>
         </Card >
     );

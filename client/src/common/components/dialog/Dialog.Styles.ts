@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
+import { DialogContent } from '@mui/material';
 
 export const BootstrapDialog = styled(Dialog)(({ theme, spacing }) => ({
     '& .MuiDialogContent-root': {
@@ -9,3 +10,13 @@ export const BootstrapDialog = styled(Dialog)(({ theme, spacing }) => ({
         padding: theme.spacing(1),
     },
 }));
+
+export const Children = styled(DialogContent)(() => ({
+    '&&': {
+        msOverflowStyle: 'none',  /* IE and Edge */
+        scrollbarWidth: 'none',
+        '::-webkit-scrollbar': {
+            display: 'none',
+        },
+    }
+}))

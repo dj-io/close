@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
+import { CardContent } from '@mui/material';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -21,5 +22,21 @@ export const PostLink = styled(Link)(() => ({
     '&&': {
         textDecoration: 'none',
         color: 'inherit',
+    }
+}))
+
+export const Content = styled(CardContent)(() => ({
+    '&&': {
+        borderTop: '1px solid #3C414270',
+        maxHeight: 300,
+        overflowY: 'auto',
+        overflowX: 'hidden',
+        msOverflowStyle: 'none',  /* IE and Edge */
+        scrollbarWidth: 'none',
+        '::-webkit-scrollbar': {
+            display: 'none',
+        },
+
+
     }
 }))
