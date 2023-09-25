@@ -14,6 +14,7 @@ import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.
 const mapStateToprops = (state: any): IProfileStateToProps => ({
     user: state.UserState.user,
     following: state.UserState.following,
+    foundUser: state.FindState.foundUser,
 });
 
 /**

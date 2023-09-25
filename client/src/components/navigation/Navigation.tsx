@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
+import Fade from '@mui/material/Fade';
 import { StyledTip, IconLink, NavWrapper, CustomAvatar } from './Navigation.Styles.ts';
 import { Find } from '../index.ts';
 
@@ -65,7 +66,7 @@ class Navigation extends React.Component<NavProps> {
                 alignItems="center"
                 justifyContent="start"
             >
-                <StyledTip title="Home" placement="right">
+                <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Home" placement="right">
                     <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
                         <HomeTwoToneIcon
                             onClick={() => this.closeFind('home', !this.state.home)}
@@ -73,7 +74,7 @@ class Navigation extends React.Component<NavProps> {
                         />
                     </Link>
                 </StyledTip>
-                <StyledTip title="Find" placement="right">
+                <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Find" placement="right">
                     <IconLink
                         style={{
                             color: this.props.isFindOpen &&
@@ -86,7 +87,7 @@ class Navigation extends React.Component<NavProps> {
                         fontSize="large"
                     />
                 </StyledTip>
-                <StyledTip title="Share" placement="right">
+                <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Share" placement="right">
                     <Link style={{ color: this.state.share ? '#228B22' : '#3C4142' }}
                         to='/share'
                         id='share'
@@ -97,7 +98,7 @@ class Navigation extends React.Component<NavProps> {
                         />
                     </Link>
                 </StyledTip>
-                <StyledTip title="Profile" placement="right">
+                <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Profile" placement="right">
                     <Link to={`/profile/${this.props.user.id}`} id='profile' >
                         <CustomAvatar
                             onClick={() => this.closeFind('profile', !this.state.profile)}

@@ -8,7 +8,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import SaveAsTwoToneIcon from '@mui/icons-material/SaveAsTwoTone';
+import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
+import CloudSyncTwoToneIcon from '@mui/icons-material/CloudSyncTwoTone';
 import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
+import Fade from '@mui/material/Fade';
 import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 import { Seperate } from '../find/Find.Styles.ts';
 import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
@@ -18,6 +21,7 @@ import InputField from '../../common/components/fields/InputField.tsx'
 import { profileFields } from '../../common/constants/formFields.ts';
 import { BodyEditor, HeaderEditor } from './Profile.Styles.ts';
 import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
+import { Toll } from '@mui/icons-material';
 
 interface IProfileProps {
 
@@ -83,7 +87,7 @@ class Profile extends React.Component<ProfileProps> {
             ...rest,
             followed: [
                 ...this.props.user.followed,
-                { followedId: this.props.user.id }
+                { followedId: this.props.foundUser.id }
             ]
         };
 
@@ -101,7 +105,7 @@ class Profile extends React.Component<ProfileProps> {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{ marginLeft: '4%' }}
+                sx={{ marginLeft: '3%' }}
             >
                 <Grid item sx={8} >
                     <CardHeader
@@ -110,10 +114,10 @@ class Profile extends React.Component<ProfileProps> {
                                 <EasyEdit
                                     allowEdit={false}
                                     type={Types.FILE}
-                                    value={picture || 'Click to Edit'}
+                                    value={picture || 'Upload a picture'}
                                     onSave={this.handleUpload}
                                     editMode={this.state.editing}
-                                    saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                    saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
                                     attributes={{ name: "picture" }}
                                     hideCancelButton
                                     displayComponent={
@@ -138,8 +142,11 @@ class Profile extends React.Component<ProfileProps> {
                         }
                         action={
                             <IconButton aria-label="settings">
-                                <Tooltip title="Edit Profile" placement="right">
-                                    <SettingsTwoToneIcon onClick={this.handleEditing} />
+                                <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title={this.state.editing ? "Save Edit" : "Edit Profile"} placement="right">
+                                    {this.state.editing ?
+                                        <SaveAsTwoToneIcon onClick={this.handleEditing} /> :
+                                        <SettingsTwoToneIcon onClick={this.handleEditing} />
+                                    }
                                 </Tooltip>
                             </IconButton>
                         }
@@ -149,16 +156,16 @@ class Profile extends React.Component<ProfileProps> {
                                     fontWeight: 'bold',
                                     color: '#3C414270'
                                 }}
-                                variant='h4'
+                                variant='h3'
                             >
                                 <HeaderEditor>
                                     <EasyEdit
                                         allowEdit={false}
                                         type={Types.TEXT}
-                                        placeholder={username || 'Click to Edit'}
+                                        placeholder={username || 'Choose a username'}
                                         onSave={this.saveName}
                                         editMode={this.state.editing}
-                                        saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                        saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
                                         attributes={{ name: "username" }}
                                         hideCancelButton
                                     />
@@ -168,15 +175,15 @@ class Profile extends React.Component<ProfileProps> {
                         subheader={
                             <Typography variant='button'>
                                 {`${this.state.posts} posts ${this.state.userLikes} likes`} <br />
-                                <Typography variant="body2" color="text.secondary">
+                                <Typography variant="body1" color="text.secondary">
                                     <BodyEditor>
                                         <EasyEdit
                                             allowEdit={false}
                                             type={Types.TEXT}
-                                            placeholder={biography || 'Click to Edit'}
+                                            placeholder={biography || 'Add a Bio'}
                                             onSave={this.saveBio}
                                             editMode={this.state.editing}
-                                            saveButtonLabel={<SaveAsTwoToneIcon fontSize="small" />}
+                                            saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
                                             attributes={{ name: "biography" }}
                                             hideCancelButton
                                         />
@@ -189,14 +196,14 @@ class Profile extends React.Component<ProfileProps> {
                 </Grid>
                 <Grid item xs={8}>
                     <Seperate />
-                    <ImageList sx={{ width: 750, height: 450, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={374}>
+                    <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
                         {post &&
                             post.map((posts) => (
                                 <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                     <ImageListItem key={posts.picture}>
                                         <img
-                                            src={`${posts.picture}?w=464&h=1000&fit=crop&auto=format`}
-                                            srcSet={`${posts.picture}?w=464&h=1000&fit=crop&auto=format&dpr=2 2x`}
+                                            src={`${posts.picture}?w=500&h=500&fit=crop&auto=format`}
+                                            srcSet={`${posts.picture}?w=500&h=5000&fit=crop&auto=format&dpr=2 2x`}
                                             alt={posts.caption}
                                             loading="lazy"
                                         />

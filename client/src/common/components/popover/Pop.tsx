@@ -3,6 +3,7 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { IconButton, Tooltip } from '@mui/material';
+import Fade from '@mui/material/Fade';
 
 interface IPop {
     label: String | React.ReactElement;
@@ -28,7 +29,7 @@ export const Pop: React.FC<IPop> = ({ label, children, tip, func }) => {
     return (
         <div>
             <IconButton aria-describedby={id} variant="text" onClick={handleClick}>
-                <Tooltip title={tip} placement="right">{label}</Tooltip>
+                <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title={tip} placement="right">{label}</Tooltip>
             </IconButton>
             <Popover
                 id={id}

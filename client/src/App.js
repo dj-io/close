@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 import { retreiveProfile } from './common/api/user/Users.Api.ts';
 
 
-const App = ({ hasAccount, profiles, user, foundUser }) => {
+const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
 
   const getProfile = async () => {
-    const res = await retreiveProfile(1);
-    profiles(res.data)
+    const res = await retreiveProfile(2);
+    profiles(res.data);
   }
 
 
@@ -26,10 +26,10 @@ const App = ({ hasAccount, profiles, user, foundUser }) => {
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
           <Route path='/home' element={<Home />} />
-          <Route key='home-post' exact path='/home/:post' element={<Post />} />
+          <Route key='home-post' exact path='/home/:post' element={<Post currentUser={user} />} />
           <Route path='/share' element={<Share />} />
           <Route path='/profile/:profileId' element={<Profile />} />
-          <Route key='profile-post' exact path='/user/:post' element={<Post />} />
+          <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} />} />
         </Routes>
       </Router>
     </div>

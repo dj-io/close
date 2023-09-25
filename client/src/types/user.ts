@@ -17,6 +17,7 @@ export interface ISigninDispatchToProps {
 export interface IProfileStateToProps {
     hasAccount: boolean,
     user: any // TODO: Create Iprofile
+    foundUser: any // TODO: create IFoundUser
     following: any // TODO: Create IFollowing
 }
 

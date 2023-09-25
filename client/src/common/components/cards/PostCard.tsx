@@ -18,10 +18,11 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PostAddIcon from '@mui/icons-material/PostAdd';
+import { InputLabel, Tooltip } from '@mui/material';
+import Fade from '@mui/material/Fade';
 import { ExpandMore } from './PostCard.Styles.ts';
 import MultiField from '../fields/MultiField.tsx';
 import { commentFields } from '../../constants/formFields.ts';
-import { InputLabel, Tooltip } from '@mui/material';
 import { Pop } from '../popover/Pop.tsx';
 
 
@@ -87,12 +88,12 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton disabled={true} aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
                 <IconButton aria-label="share">
                     <Link id='post-link' to={!expanded && `/${page}/${post.id}`}>
-                        <Tooltip title="select for comments" placement="top">
+                        <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="select for comments" placement="bottom">
                             <ShortTextIcon />
                         </Tooltip>
                     </Link>
@@ -119,12 +120,19 @@ export const PostCard: React.FC<IPostcardProps> = ({
                         <CardHeader
                             avatar={<Avatar alt="Apple" src={comment.picture} />}
                             action={
-                                <IconButton aria-label="settings">
+                                <IconButton disabled={true} aria-label="settings">
                                     <FavoriteIcon />
                                 </IconButton>
                             }
-                            title={comment.userName}
-                            subheader={comment.comment}
+                            title={
+                                <Typography variant="body1" color="text.primary">
+                                    <span style={{ fontWeight: 'bold', color: '#238636' }}>
+                                        {comment.username}
+                                    </span>
+                                    <span> {comment.comment} </span>
+                                </Typography>
+                            }
+                            subheader={<Typography sx={{ fontWeight: 'bold' }} variant="subtitle2" color="text.secondary">{`${comment.likes} likes`}</Typography>}
                         />
                     ))}
 

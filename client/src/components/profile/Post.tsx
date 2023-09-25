@@ -12,53 +12,58 @@ interface IPost {
 }
 
 
-export const Post: React.FC<IPost> = () => {
+export const Post: React.FC<IPost> = ({ currentUser }) => {
 
     const [open, setOpen] = useState(true);
     const [post, setPost] = useState([]);
     const [user, setUser] = useState([]);
-    const [text, setText] = useState({
+    const [newComments, setNewComments] = useState({
         comment: '',
+        picture: currentUser.picture,
+        user_id: currentUser.id,
+        username: currentUser.username,
         likes: 0
     });
-    const [newComments, setNewComments] = useState({
+    const [text, setText] = useState({
         comment: '',
         likes: 0
     });
 
     const handleChange = (e) => {
-        setText({
-            ...text,
+        setNewComments({
+            ...newComments,
             comment: e.target.value
         })
     }
 
     const postId = useParams().post;
 
+    // returning selected post
     const returnPost = async () => {
         const res = await retreivePost(postId)
         setPost(res.data)
     }
 
+    // returning user associated with post
     const returnUser = async () => {
         const res = await retreiveProfile(post?.user_id)
         setUser(res.data)
     }
 
-    const addComment = async (comment) => {
+    // comment added from viewer of post (user logged in)
+    const addComment = async () => {
         const data = {
             ...post,
             comment: [
                 ...post.comment,
-                text
+                newComments
             ]
         };
 
         const res = await newComment(data);
-        setNewComments(res.data);
-        setText({ comment: '' })
+        setText(res.data);
+        setNewComments({ comment: '' })
     }
-
 
     useEffect(() => {
         returnPost();
@@ -67,7 +72,7 @@ export const Post: React.FC<IPost> = () => {
     }, [
         postId,
         post.user_id,
-        newComments
+        text
     ]);
 
     return (
@@ -85,7 +90,7 @@ export const Post: React.FC<IPost> = () => {
                 change={handleChange}
                 post={post}
                 user={user}
-                value={text.comment}
+                value={newComments.comment}
                 expand={true}
             />
         </ConfirmDialog>
