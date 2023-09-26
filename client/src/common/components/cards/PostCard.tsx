@@ -60,6 +60,10 @@ export const PostCard: React.FC<IPostcardProps> = ({
     const [expanded, setExpanded] = React.useState(expand);
     const [more, setMore] = React.useState(false);
 
+    let numOfComments = 0;
+
+    const comments = post?.comment?.forEach(comment => numOfComments += 1);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -90,22 +94,30 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 alt="Paella dish"
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span> {excerpt(post.caption, UserActionTypes.CHAR_MAX)}
-                </Typography>
+                <PostLink to={`/${user?.username}`}>
+                    <Typography variant="body2" color="text.secondary">
+                        <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span> {excerpt(post.caption, UserActionTypes.CHAR_MAX)}
+                    </Typography>
+                </PostLink>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton disabled={true} aria-label="add to favorites">
                     <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
-                    <Link id='post-link' to={!expanded && `/${page}/${post.id}`}>
-                        <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="select for comments" placement="bottom">
+                <Typography sx={{ marginTop: '5px', marginRight: '5px', color: '#238636' }} variant="subtitle1" color="text.secondary">
+                    <PostLink id='post-link' to={!expanded && `/${page}/${post.id}`}>
+                        <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title={`view all ${numOfComments} comments`} placement="bottom">
                             <ShortTextIcon />
                         </Tooltip>
-                    </Link>
-                </IconButton>
-                <IconButton aria-label="share">{post.likes} likes </IconButton>
+                    </PostLink>
+                </Typography>
+                <Typography
+                    sx={{ fontWeight: 'bold' }}
+                    variant="subtitle2"
+                    color="text.secondary"
+                >
+                    {post.likes} likes
+                </Typography>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
