@@ -94,11 +94,9 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 alt="Paella dish"
             />
             <CardContent>
-                <PostLink to={`/${user?.username}`}>
-                    <Typography variant="body2" color="text.secondary">
-                        <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span> {excerpt(post.caption, UserActionTypes.CHAR_MAX)}
-                    </Typography>
-                </PostLink>
+                <Typography variant="body2" color="text.secondary">
+                    <PostLink to={`/${user?.username}`}> <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span></PostLink> {excerpt(post.caption, UserActionTypes.CHAR_MAX)}
+                </Typography>
             </CardContent>
             <CardActions disableSpacing>
                 <IconButton disabled={true} aria-label="add to favorites">

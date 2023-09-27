@@ -16,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public Iterable<User> getItems() {
+    public Iterable<User> getCloseUsers() {
         return userService.getCloseUsers();
     }
 

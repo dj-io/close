@@ -5,6 +5,7 @@ import './App.css';
 import { useEffect } from 'react';
 import { retreiveProfile } from './common/api/user/Users.Api.ts';
 import Friends from './components/find/Friends.tsx';
+import { Protected } from './common/api/auth/Protected.tsx';
 
 
 const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
@@ -26,12 +27,14 @@ const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
         <Find />
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
-          <Route path='/home' element={<Home />} />
-          <Route key='home-post' exact path='/home/:post' element={<Post currentUser={user} />} />
-          <Route path='/share' element={<Share />} />
-          <Route path='/profile/:profileId' element={<Profile />} />
-          <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} />} />
-          <Route exact path='/:name' element={<Friends currentUser={user} />} />
+          <Route element={<Protected hasAccount={hasAccount} />}>
+            <Route path='/home' element={<Home />} />
+            <Route key='home-post' exact path='/home/:post' element={<Post currentUser={user} />} />
+            <Route path='/share' element={<Share />} />
+            <Route path='/profile/:profileId' element={<Profile />} />
+            <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} />} />
+            <Route exact path='/:name' element={<Friends currentUser={user} />} />
+          </Route>
         </Routes>
       </Router>
     </div>
