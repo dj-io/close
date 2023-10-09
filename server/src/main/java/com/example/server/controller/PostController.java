@@ -22,7 +22,7 @@ public class PostController {
         return postService.getPostsByCaption(keyword);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Post getPostById(@PathVariable Long id) {
         return postService.getPostById(id);
     }
@@ -37,7 +37,7 @@ public class PostController {
         return postService.updatePost(post);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public HttpStatus deletePosts(@PathVariable Long id) {
         return postService.deletePost(id);
     }

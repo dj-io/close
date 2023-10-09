@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/following/")
+@RequestMapping("api/v1/following/")
 public class FollowingController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class FollowingController {
         return followingService.follow(id);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public HttpStatus unFollow(@PathVariable Long id) {
         return followingService.unFollow(id);
     }

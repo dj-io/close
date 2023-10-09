@@ -17,7 +17,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Comment getCommentById(@PathVariable Long id) {
         return commentService.getCommentById(id);
     }
@@ -32,7 +32,7 @@ public class CommentController {
         return commentService.updateComment(comment);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public HttpStatus deleteComments(@PathVariable Long id) {
         return commentService.deleteComment(id);
     }

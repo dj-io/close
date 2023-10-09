@@ -130,5 +130,27 @@ public class User implements UserDetails {
         return enabled;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", picture='" + picture + '\'' +
+                ", username='" + username + '\'' +
+                ", pronouns='" + pronouns + '\'' +
+                ", biography='" + biography + '\'' +
+                ", links='" + links + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userRole=" + userRole +
+                ", posts=" + posts +
+                ", followers=" + followers +
+                ", following=" + following +
+                ", closed=" + closed +
+                ", locked=" + locked +
+                ", enabled=" + enabled +
+                ", post=" + post +
+                ", followed=" + followed +
+                '}';
+    }
 }

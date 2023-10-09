@@ -9,6 +9,8 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -38,15 +40,24 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public AuthenticationManager authManager(UserService userService) {
+        var authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userService);
+        authProvider.setPasswordEncoder(bCryptPasswordEncoder);
+        return new ProviderManager(authProvider);
+    }
+
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(auth -> auth
-                        .antMatchers("/api/v*/registration/**")
+                        .antMatchers("/api/v*/registration/**", "/api/v*/auth/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
                 )
+                .userDetailsService(userService)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .build();
@@ -67,15 +78,5 @@ public class WebSecurityConfig {
     @Bean
     JwtDecoder jwtDecoder() throws JOSEException {
         return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
-    }
-
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(bCryptPasswordEncoder);
-        provider.setUserDetailsService(userService);
-
-        return provider;
     }
 }

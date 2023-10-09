@@ -28,7 +28,7 @@ import static com.example.server.utils.EmailBuilder.buildEmail;
 public class UserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MESSAGE =
-            "user with email %s not found";
+            "user with username %s not found";
 
     private final UserRepository userRepository;
 
@@ -37,11 +37,11 @@ public class UserService implements UserDetailsService {
 //    private final EmailSender emailSender;
 
     @Override
-    public UserDetails loadUserByUsername(String email)
+    public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
+        return userRepository.findByUsername(username)
                 .orElseThrow(() ->
-                        new UsernameNotFoundException(String.format(USER_NOT_FOUND_MESSAGE, email)));
+                        new UsernameNotFoundException(String.format(USER_NOT_FOUND_MESSAGE, username)));
     }
 
     public String userSignup(User user) {
