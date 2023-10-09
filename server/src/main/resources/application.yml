@@ -1,13 +1,22 @@
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
+
 server:
   error:
     include-message: always
     include-binding-errors: always
 
 spring:
+  h2:
+    console:
+      enabled: true
   datasource:
-    password:
+    username: sadu
+    password: jujuotb
     url: jdbc:postgresql://localhost:5432/close_db
-    username:
+    generate-unique-name: false
+    name: close
   jpa:
     hibernate:
       ddl-auto: create-drop

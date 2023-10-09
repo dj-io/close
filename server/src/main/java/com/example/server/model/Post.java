@@ -5,8 +5,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -28,6 +31,14 @@ public class Post {
     private String picture;
     private String caption;
 
+    @Column(name = "created", nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime created;
+
+    @Column(name = "updated")
+    @UpdateTimestamp
+    private LocalDateTime updated;
+
     private Long likes = 0L;
     private Long shares = 0L;
 
@@ -45,11 +56,15 @@ public class Post {
                 String caption,
                 Long likes,
                 Long shares,
+                LocalDateTime created,
+                LocalDateTime updated,
                 Long user_id) {
         this.picture = picture;
         this.caption = caption;
         this.likes = likes;
         this.shares = shares;
+        this.created = created;
+        this.updated = updated;
         this.user_id = user_id;
     }
 }
