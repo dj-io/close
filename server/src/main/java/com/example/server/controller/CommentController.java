@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
 @RestController
 @RequestMapping(path = "api/v1/comments/")
 @AllArgsConstructor
