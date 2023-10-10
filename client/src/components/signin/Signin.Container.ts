@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { userHasAccount } from '../../redux/actions/UserActions.ts';
 import Signin from './Signin.tsx';
 import { ISigninDispatchToProps, ISigninStateToProps } from '../../types/user.ts';
+import { login } from '../../redux/actions/AuthActions.ts';
 
 
 /**
@@ -23,6 +24,7 @@ const mapStateToprops = (state: any): ISigninStateToProps => ({
  */
 const mapDispatchToProps = (dispatch: any): ISigninDispatchToProps => ({
     userHasAccount: bindActionCreators(userHasAccount, dispatch),
+    login: bindActionCreators(login, dispatch)
 });
 
 export const SigninContainer = connect(

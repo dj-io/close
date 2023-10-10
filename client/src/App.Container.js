@@ -14,6 +14,7 @@ const mapStateToprops = (state) => ({
     hasAccount: state.UserState.hasAccount,
     user: state.UserState.user,
     foundUser: state.FindState.foundUser,
+    token: state.AuthState.token,
 });
 
 /**

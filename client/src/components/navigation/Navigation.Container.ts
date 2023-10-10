@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Navigation from './Navigation.tsx';
 import { openFind } from '../../redux/actions/AppActions.ts';
-import { INavDispatchToProps, INavStateToProps } from '../../types/user.ts';
+import { INavDispatchToProps, INavStateToProps } from '../../types/route.ts';
+import { logout } from '../../redux/actions/AuthActions.ts';
 
 
 /**
@@ -13,6 +14,7 @@ import { INavDispatchToProps, INavStateToProps } from '../../types/user.ts';
  */
 const mapStateToprops = (state: any): INavStateToProps => ({
     isFindOpen: state.FindState.isFindOpen,
+    token: state.AuthState.token,
 });
 
 /**
@@ -23,6 +25,7 @@ const mapStateToprops = (state: any): INavStateToProps => ({
  */
 const mapDispatchToProps = (dispatch: any): INavDispatchToProps => ({
     openFind: bindActionCreators(openFind, dispatch),
+    logout: bindActionCreators(logout, dispatch)
 });
 
 export const NavContainer = connect(

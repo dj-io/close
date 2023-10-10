@@ -45,7 +45,7 @@ export const Pop: React.FC<IPop> = ({ label, children, tip, func }) => {
                     horizontal: 'center',
                 }}
             >
-                <Typography onClick={func} sx={{ p: 2 }}>{children}</Typography>
+                <Typography sx={{ p: 2 }}>{children}</Typography>
             </Popover>
         </div>
     );

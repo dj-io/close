@@ -57,7 +57,7 @@ class Share extends React.Component<ShareProps> {
     }
 
     post = () => {
-        const { authorities, ...rest } = this.props.user
+        const { authorities, updated, created, ...rest } = this.props.user
         const data = {
             ...rest,
             post: [

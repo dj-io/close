@@ -12,6 +12,7 @@ export interface ISigninStateToProps {
 
 export interface ISigninDispatchToProps {
     userHasAccount: Function;
+    login: Function;
 }
 
 export interface IProfileStateToProps {

@@ -11,6 +11,15 @@ export const StyledTip = styled(Tooltip)(() => ({
     }
 }));
 
+export const MoreWrapper = styled("div")(() => ({
+    '&&': {
+        textDecoration: 'none',
+        color: '#3C4142',
+        margin: '100px 24px 0px 0px',
+        position: 'relative',
+    }
+}));
+
 export const NavLink = styled(Link)((props: any) => ({
     '&&': {
         color: props.$page ? '#228B22' : '#3C4142',

@@ -60,7 +60,9 @@ export const PostCard: React.FC<IPostcardProps> = ({
     const [expanded, setExpanded] = React.useState(expand);
     const [more, setMore] = React.useState(false);
 
+
     let numOfComments = 0;
+    const postCreated = new Date(post?.created).toDateString();
 
     const comments = post?.comment?.forEach(comment => numOfComments += 1);
 
@@ -83,7 +85,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
             <CardHeader
                 avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={user?.picture} /> </Link>}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
-                title={<PostLink to={`/${user?.username}`}> {user?.username} </PostLink>}
+                title={<PostLink to={`/${user?.username}`}> {user?.username} ∙ {postCreated} </PostLink>}
                 subheader={excerpt(user?.biography, UserActionTypes.CHAR_MAX)}
             />
             <CardMedia

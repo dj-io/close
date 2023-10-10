@@ -9,6 +9,8 @@ import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { Typography } from '@mui/material';
 import { FormValues } from '../../common/types.ts';
 import { signinSchema } from '../../common/utils/validation.ts';
+import { auth } from '../../common/api/auth/Authenticate.Api.ts';
+import withRouter from '../../common/hooks/WithRouter.tsx';
 
 interface ISigninProps {
 
@@ -41,6 +43,17 @@ class Signin extends React.Component<SigninProps> {
         });
     };
 
+    handleSignin = async () => {
+        const { user } = this.state;
+        const { navigate } = this.props;
+
+        const res = await auth(user);
+        this.props.login(res.data);
+
+        if (res.status === 200) navigate('/')
+        localStorage.setItem('token', JSON.stringify(res.data))
+    }
+
     render(): JSX.Element {
         return (
             <Grid
@@ -59,6 +72,7 @@ class Signin extends React.Component<SigninProps> {
                         initialValues={this.initialValues}
                         disableValue='username'
                         change={this.handleChange}
+                        submit={this.handleSignin}
                     />
                     <Typography
                         sx={{
@@ -79,4 +93,4 @@ class Signin extends React.Component<SigninProps> {
     }
 }
 
-export default Signin;
+export default withRouter(Signin);

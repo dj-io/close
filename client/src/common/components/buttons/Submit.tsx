@@ -18,7 +18,7 @@ export const Submit: React.FC<ISubmit> = ({ label, func, disabledButton }) => {
         >
             <SubmitButton
                 disabled={disabledButton}
-                onClick={func}
+                onClick={() => func()}
                 variant="contained"
             >
                 {label}

@@ -8,7 +8,7 @@ import Friends from './components/find/Friends.tsx';
 import { Protected } from './common/api/auth/Protected.tsx';
 
 
-const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
+const App = ({ hasAccount, profiles, user, token, returnFind, foundUser }) => {
 
   const getProfile = async () => {
     const res = await retreiveProfile(2);
@@ -18,17 +18,17 @@ const App = ({ hasAccount, profiles, user, returnFind, foundUser }) => {
 
   useEffect(() => {
     getProfile();
-  }, [])
+  }, [token])
 
   return (
     <div className="App">
       <Router >
-        <Nav user={user} />
-        <Find />
+        {token && <Nav user={user} />}
+        {token && <Find />}
         <Routes>
-          <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
+          <Route exact path='/login' element={hasAccount ? <Signin /> : <Signup />} />
           <Route element={<Protected hasAccount={hasAccount} />}>
-            <Route path='/home' element={<Home />} />
+            <Route exact path='/' element={<Home />} />
             <Route key='home-post' exact path='/home/:post' element={<Post currentUser={user} />} />
             <Route path='/share' element={<Share />} />
             <Route path='/profile/:profileId' element={<Profile />} />

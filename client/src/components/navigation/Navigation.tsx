@@ -4,11 +4,17 @@ import Avatar from '@mui/material/Avatar';
 import { IconButton, Typography, Tooltip } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PersonSearchTwoToneIcon from '@mui/icons-material/PersonSearchTwoTone';
 import AddAPhotoTwoToneIcon from '@mui/icons-material/AddAPhotoTwoTone';
+import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
+import SettingsSuggestTwoToneIcon from '@mui/icons-material/SettingsSuggestTwoTone';
 import Fade from '@mui/material/Fade';
-import { StyledTip, IconLink, NavWrapper, CustomAvatar } from './Navigation.Styles.ts';
+import { StyledTip, IconLink, NavWrapper, CustomAvatar, MoreWrapper } from './Navigation.Styles.ts';
 import { Find } from '../index.ts';
+import { Pop } from '../../common/components/popover/Pop.tsx';
+import { Confirm } from '../../common/components/buttons/Confirm.tsx';
+import withRouter from '../../common/hooks/WithRouter.tsx';
 
 
 
@@ -57,6 +63,13 @@ class Navigation extends React.Component<NavProps> {
         if (this.props.isFindOpen) this.props.openFind(false)
     }
 
+    onLogout = () => {
+        this.props.logout();
+        localStorage.removeItem('token')
+        this.props.navigate('/login');
+        if (this.props.isFindOpen) this.props.openFind(false)
+    }
+
     render(): JSX.Element {
         return (
             <NavWrapper
@@ -67,7 +80,7 @@ class Navigation extends React.Component<NavProps> {
                 justifyContent="start"
             >
                 <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Home" placement="right">
-                    <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
+                    <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/' id='home' >
                         <HomeTwoToneIcon
                             onClick={() => this.closeFind('home', !this.state.home)}
                             fontSize="large"
@@ -108,9 +121,31 @@ class Navigation extends React.Component<NavProps> {
                         />
                     </Link>
                 </StyledTip>
+                {
+                    this.props.token && (
+                        <MoreWrapper>
+                            <Pop
+                                tip="More"
+                                label={<SettingsSuggestTwoToneIcon fontSize="large" />}
+                                children={
+                                    <Tooltip
+                                        TransitionComponent={Fade}
+                                        TransitionProps={{ timeout: 600 }}
+                                        title="Logout"
+                                        placement="right"
+                                    >
+                                        <IconButton onClick={this.onLogout}>
+                                            <LogoutTwoToneIcon />
+                                        </IconButton>
+                                    </Tooltip>
+                                }
+                            />
+                        </MoreWrapper>
+                    )
+                }
             </NavWrapper>
         );
     }
 }
 
-export default Navigation;
+export default withRouter(Navigation);
