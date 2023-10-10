@@ -4,6 +4,7 @@ import { PostCard } from '../../common/components/cards/PostCard.tsx';
 import { Seperate } from './Home.Styles.ts';
 import { returnUsers } from '../../common/api/user/Users.Api.ts';
 import { IHomeStateToProps, IHomeDispatchToProps } from '../../types/app.ts';
+import { Nav, Find } from '../index.ts';
 
 
 interface IHomeProps {
@@ -44,7 +45,7 @@ class Home extends React.Component<HomeProps> {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{ minHeight: '45vh', }}
+                sx={{ minHeight: '45vh' }}
             >
                 {this.props.following.length > 0 &&
                     this.props.following.map((user) => (

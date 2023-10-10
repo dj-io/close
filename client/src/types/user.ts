@@ -13,6 +13,7 @@ export interface ISigninStateToProps {
 export interface ISigninDispatchToProps {
     userHasAccount: Function;
     login: Function;
+    profiles: Function;
 }
 
 export interface IProfileStateToProps {

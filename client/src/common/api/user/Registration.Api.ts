@@ -9,9 +9,4 @@ export interface IRegisterPayload {
     name: string;
 }
 
-export const register = async (payload: IRegisterPayload) => {
-    const res = await utils.post(`${REACT_APP_REGISTRATION_ENDPOINT}`, payload);
-    console.log("=== resss ===", res);
-
-    return res;
-};
+export const register = async (payload: IRegisterPayload) => await utils.post(`${REACT_APP_REGISTRATION_ENDPOINT}`, payload);

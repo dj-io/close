@@ -51,7 +51,7 @@ class Signup extends React.Component<SignupProps> {
     };
 
     handleRegistration = () => {
-        this.register(this.state.user);
+        register(this.state.user);
         this.setState({ user: {} })
     }
 

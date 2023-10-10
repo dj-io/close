@@ -6,7 +6,7 @@ export interface AuthStateConfig {
 
 const initialState: AuthStateConfig = {
     authenticatedUser: null,
-    token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')!) : null,
+    token: null,
     returnUrl: '/'
 }
 

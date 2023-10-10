@@ -8,5 +8,5 @@ export const login = (userLogin: any) => ({
 
 export const logout = () => ({
     type: AuthActions.LOGOUT,
-    payload: '',
+    payload: null,
 })

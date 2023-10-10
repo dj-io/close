@@ -15,6 +15,7 @@ import { Find } from '../index.ts';
 import { Pop } from '../../common/components/popover/Pop.tsx';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import withRouter from '../../common/hooks/WithRouter.tsx';
+import { find } from '../../common/api/user/Users.Api.js';
 
 
 
@@ -38,17 +39,13 @@ export type NavProps = INavStateToProps & INavDispatchToProps & INavProps;
 
 class Navigation extends React.Component<NavProps> {
     state: INavigationState = {
-        profileIcon: 'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?cs=srgb&dl=pexels-mohamed-abdelghaffar-771742.jpg&fm=jpg',
+        profileIcon: this.props.user.picture,
         pages: {
             home: false,
             find: false,
             share: false,
             profile: false,
         },
-        profile: [{
-            userId: 1,
-        }],
-
     }
 
 
@@ -65,8 +62,7 @@ class Navigation extends React.Component<NavProps> {
 
     onLogout = () => {
         this.props.logout();
-        localStorage.removeItem('token')
-        this.props.navigate('/login');
+        this.props.navigate('/');
         if (this.props.isFindOpen) this.props.openFind(false)
     }
 
@@ -80,7 +76,7 @@ class Navigation extends React.Component<NavProps> {
                 justifyContent="start"
             >
                 <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Home" placement="right">
-                    <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/' id='home' >
+                    <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
                         <HomeTwoToneIcon
                             onClick={() => this.closeFind('home', !this.state.home)}
                             fontSize="large"

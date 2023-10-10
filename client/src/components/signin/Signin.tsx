@@ -11,6 +11,7 @@ import { FormValues } from '../../common/types.ts';
 import { signinSchema } from '../../common/utils/validation.ts';
 import { auth } from '../../common/api/auth/Authenticate.Api.ts';
 import withRouter from '../../common/hooks/WithRouter.tsx';
+import { find } from '../../common/api/user/Users.Api.ts';
 
 interface ISigninProps {
 
@@ -50,8 +51,12 @@ class Signin extends React.Component<SigninProps> {
         const res = await auth(user);
         this.props.login(res.data);
 
-        if (res.status === 200) navigate('/')
-        localStorage.setItem('token', JSON.stringify(res.data))
+        if (res.status === 200) {
+            const loggedIn = await find(user.username)
+            this.props.profiles(loggedIn.data)
+            navigate('/home')
+        }
+
     }
 
     render(): JSX.Element {

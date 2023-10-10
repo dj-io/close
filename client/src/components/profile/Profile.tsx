@@ -91,7 +91,9 @@ class Profile extends React.Component<ProfileProps> {
             ]
         };
 
-        share(data);
+        const updatedProfile = share(data);
+
+        this.props.profiles(updatedProfile.data);
     }
 
 

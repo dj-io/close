@@ -22,13 +22,11 @@ interface IFriends {
 
 }
 
-const Friends: React.FC<IFriends> = ({ currentUser }) => {
+const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
 
     const [friend, setFriend] = useState([]);
 
     const name = useParams().name;
-
-
 
     let userPosts = 0;
     let userLikes = 0;
@@ -52,7 +50,9 @@ const Friends: React.FC<IFriends> = ({ currentUser }) => {
             ]
         };
 
-        share(data);
+        const followed = await share(data);
+        profiles(followed.data);
+
     }
 
     useEffect(() => {
@@ -111,7 +111,7 @@ const Friends: React.FC<IFriends> = ({ currentUser }) => {
                 <Seperate />
                 <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
                     {post &&
-                        post.map((posts) => (
+                        post?.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                 <ImageListItem key={posts.picture}>
                                     <img

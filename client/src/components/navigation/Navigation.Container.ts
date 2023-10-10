@@ -15,6 +15,7 @@ import { logout } from '../../redux/actions/AuthActions.ts';
 const mapStateToprops = (state: any): INavStateToProps => ({
     isFindOpen: state.FindState.isFindOpen,
     token: state.AuthState.token,
+    user: state.UserState.user,
 });
 
 /**

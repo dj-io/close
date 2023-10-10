@@ -85,7 +85,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
             <CardHeader
                 avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={user?.picture} /> </Link>}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
-                title={<PostLink to={`/${user?.username}`}> {user?.username} ∙ {postCreated} </PostLink>}
+                title={<PostLink to={`/${user?.username}`}> {user?.username} ∙ {`${postCreated}`} </PostLink>}
                 subheader={excerpt(user?.biography, UserActionTypes.CHAR_MAX)}
             />
             <CardMedia
