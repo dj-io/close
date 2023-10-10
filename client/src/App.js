@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { Post } from './components/profile/Post.tsx';
 import { Signup, Signin, Nav, Profile, Home, Find, Share } from './components/index.ts';
 import Friends from './components/find/Friends.tsx';

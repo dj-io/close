@@ -39,7 +39,6 @@ export type NavProps = INavStateToProps & INavDispatchToProps & INavProps;
 
 class Navigation extends React.Component<NavProps> {
     state: INavigationState = {
-        profileIcon: this.props.user.picture,
         pages: {
             home: false,
             find: false,
@@ -113,7 +112,7 @@ class Navigation extends React.Component<NavProps> {
                             onClick={() => this.closeFind('profile', !this.state.profile)}
                             page={this.state.profile}
                             alt="Apple"
-                            src={this.state.profileIcon}
+                            src={this.props.user.picture}
                         />
                     </Link>
                 </StyledTip>
