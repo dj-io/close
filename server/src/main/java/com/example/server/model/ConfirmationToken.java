@@ -1,10 +1,8 @@
 package com.example.server.model;
 
-import com.example.server.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

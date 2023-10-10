@@ -57,7 +57,6 @@ public class User implements UserDetails {
     @OneToMany(
             targetEntity = Post.class,
             cascade = CascadeType.ALL
-//            orphanRemoval = true
     )
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Post> post;
@@ -65,7 +64,6 @@ public class User implements UserDetails {
     @OneToMany(
             targetEntity = Following.class,
             cascade = CascadeType.ALL
-//            orphanRemoval = true
     )
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private List<Following> followed;

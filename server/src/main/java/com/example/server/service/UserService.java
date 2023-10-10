@@ -2,26 +2,17 @@ package com.example.server.service;
 
 import com.example.server.model.ConfirmationToken;
 import com.example.server.model.User;
-import com.example.server.repository.ConfirmationTokenRepository;
 import com.example.server.repository.UserRepository;
-import com.example.server.utils.EmailSender;
-import com.example.server.utils.UserRole;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
-
-import static com.example.server.utils.EmailBuilder.buildEmail;
 
 @Service
 @AllArgsConstructor

@@ -3,8 +3,6 @@ package com.example.server.service;
 import com.example.server.model.Post;
 import com.example.server.model.User;
 import com.example.server.repository.PostRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

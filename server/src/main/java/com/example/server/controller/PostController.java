@@ -1,7 +1,6 @@
 package com.example.server.controller;
 
 import com.example.server.model.Post;
-import com.example.server.model.User;
 import com.example.server.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
