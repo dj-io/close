@@ -56,7 +56,7 @@ class Share extends React.Component<ShareProps> {
         })
     }
 
-    post = () => {
+    post = async () => {
         const { authorities, updated, created, ...rest } = this.props.user
         const data = {
             ...rest,
@@ -66,7 +66,8 @@ class Share extends React.Component<ShareProps> {
             ]
         };
 
-        share(data);
+        const newPost = await share(data);
+        this.props.profiles(newPost.data)
         window.history.back();
     }
 

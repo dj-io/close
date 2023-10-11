@@ -77,7 +77,11 @@ class Profile extends React.Component<ProfileProps> {
 
         this.setState({ editing: !this.state.editing })
 
-        if (this.state.editing) share(data);
+        if (this.state.editing) {
+            const edited = await share(data);
+            this.props.profiles(edited.data);
+        }
+
     }
 
 
@@ -190,7 +194,7 @@ class Profile extends React.Component<ProfileProps> {
                                             hideCancelButton
                                         />
                                     </BodyEditor>
-                                    <Submit label="Follow" func={this.follow} disabledButton={this.following} />
+                                    <Submit label="Follow" func={this.follow} disabledButton={!this.following} />
                                 </Typography>
                             </Typography>
                         }

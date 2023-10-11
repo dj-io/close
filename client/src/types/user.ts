@@ -33,5 +33,6 @@ export interface IShareStateToProps {
 }
 
 export interface IShareDispatchToProps {
+    profiles: Function;
 
 }
