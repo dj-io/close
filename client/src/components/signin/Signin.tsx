@@ -61,38 +61,73 @@ class Signin extends React.Component<SigninProps> {
 
     render(): JSX.Element {
         return (
-            <Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-                sx={{ minHeight: '75vh' }}
-            >
-                <StyledCard sx={{ minWidth: 275 }}>
-                    <Form
-                        buttonLabel="Sign in"
-                        fields={signInfields}
-                        validationSchema={signinSchema}
-                        initialValues={this.initialValues}
-                        disableValue='username'
-                        change={this.handleChange}
-                        submit={this.handleSignin}
-                    />
-                    <Typography
-                        sx={{
-                            marginTop: '10px',
-                            color: '#3C414270'
-                        }}
+            <>
+
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ minHeight: '75vh' }}
+                >
+                    <Grid
+                        container
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
                     >
-                        {UserActionTypes.NO_ACCOUNT}
-                    </Typography>
-                    <Confirm
-                        label="Signup"
-                        func={() => this.props.userHasAccount(false)}
-                    />
-                </StyledCard>
-            </Grid>
+                        <Typography
+                            color="#228B22"
+                            sx={{
+                                fontSize: '250px',
+                                fontWeight: 'bold',
+                                position: 'fixed',
+                                marginLeft: 24
+                            }} >
+                            Close
+                        </Typography>
+                    </Grid>
+                    <Grid
+                        container
+                        justifyContent="flex-start"
+                        alignItems="center"
+                    >
+                        <Typography
+                            color="text.secondary"
+                            sx={{
+                                fontSize: '125px',
+                                fontWeight: 'bold',
+                                position: 'fixed',
+                                p: 7
+                            }} >
+                            Share The Weird Stuff
+                        </Typography>
+                    </Grid>
+                    <StyledCard sx={{ minWidth: 275, zIndex: 1000 }}>
+                        <Form
+                            buttonLabel="Sign in"
+                            fields={signInfields}
+                            validationSchema={signinSchema}
+                            initialValues={this.initialValues}
+                            disableValue='username'
+                            change={this.handleChange}
+                            submit={this.handleSignin}
+                        />
+                        <Typography
+                            sx={{
+                                marginTop: '10px',
+                                color: '#3C414270'
+                            }}
+                        >
+                            {UserActionTypes.NO_ACCOUNT}
+                        </Typography>
+                        <Confirm
+                            label="Signup"
+                            func={() => this.props.userHasAccount(false)}
+                        />
+                    </StyledCard>
+                </Grid>
+            </>
 
         );
     }
