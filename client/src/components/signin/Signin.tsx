@@ -18,14 +18,16 @@ interface ISigninProps {
 }
 
 interface ISigninState {
-
+    user: any;
+    badCredentials: boolean;
 }
 
 export type SigninProps = ISigninStateToProps & ISigninDispatchToProps & ISigninProps
 
 class Signin extends React.Component<SigninProps> {
     state: ISigninState = {
-        user: {}
+        user: {},
+        badCredentials: false,
     }
 
     initialValues: FormValues = {
@@ -49,9 +51,10 @@ class Signin extends React.Component<SigninProps> {
         const { navigate } = this.props;
 
         const res = await auth(user);
-        this.props.login(res.data);
+        if (!res) this.setState({ badCredentials: true });
 
-        if (res.status === 200) {
+        if (res?.status === 200) {
+            this.props.login(res.data)
             const loggedIn = await find(user.username)
             this.props.profiles(loggedIn.data)
             navigate('/home')
@@ -74,15 +77,15 @@ class Signin extends React.Component<SigninProps> {
                     <Grid
                         container
                         justifyContent="flex-start"
-                        alignItems="flex-start"
+                        alignItems="flex-end"
                     >
                         <Typography
                             color="#228B22"
                             sx={{
-                                fontSize: '250px',
+                                fontSize: '220px',
                                 fontWeight: 'bold',
                                 position: 'fixed',
-                                marginLeft: 24
+                                marginLeft: 20
                             }} >
                             Close
                         </Typography>
@@ -95,7 +98,7 @@ class Signin extends React.Component<SigninProps> {
                         <Typography
                             color="text.secondary"
                             sx={{
-                                fontSize: '125px',
+                                fontSize: '100px',
                                 fontWeight: 'bold',
                                 position: 'fixed',
                                 p: 7
@@ -113,6 +116,13 @@ class Signin extends React.Component<SigninProps> {
                             change={this.handleChange}
                             submit={this.handleSignin}
                         />
+                        {
+                            this.state.badCredentials && (
+                                <Typography variant='caption' sx={{ marginTop: '10px', color: 'red' }}>
+                                    {UserActionTypes.BAD_CREDENTIALS}
+                                </Typography>
+                            )
+                        }
                         <Typography
                             sx={{
                                 marginTop: '10px',

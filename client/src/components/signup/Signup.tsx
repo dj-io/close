@@ -73,7 +73,7 @@ class Signup extends React.Component<SignupProps> {
                     <Typography
                         color="#228B22"
                         sx={{
-                            fontSize: '250px',
+                            fontSize: '220px',
                             fontWeight: 'bold',
                             position: 'absolute',
                             marginLeft: 24,
@@ -89,7 +89,7 @@ class Signup extends React.Component<SignupProps> {
                     <Typography
                         color="text.secondary"
                         sx={{
-                            fontSize: '125px',
+                            fontSize: '100px',
                             fontWeight: 'bold',
                             position: 'absolute',
                             p: 7

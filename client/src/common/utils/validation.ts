@@ -13,6 +13,7 @@ export const signupSchema = yup.object({
     username: yup.string().required(UserActionTypes.USER_NAME),
     password: yup.string()
         .max(11, UserActionTypes.PASSWORD_LENGTH)
+        .matches(/(?=.*[0-9])/, UserActionTypes.PASSWORD_MUST_CONTAIN)
         .required(UserActionTypes.PASSWORD),
 });
 

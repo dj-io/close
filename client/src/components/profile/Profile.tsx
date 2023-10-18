@@ -205,7 +205,7 @@ class Profile extends React.Component<ProfileProps> {
                 </Grid>
                 <Grid item xs={8}>
                     <Seperate />
-                    {post ?
+                    {post?.length ?
                         <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
                             {post.map((posts) => (
                                 <Link id='profile-post-link' to={`/user/${posts.id}`}>
