@@ -21,6 +21,7 @@ interface IFormProps {
     change: Function;
     validationSchema: Object;
     disableValue: string;
+    loading?: boolean;
 }
 
 /**
@@ -68,6 +69,7 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                                 formikProps.isSubmitting ||
                                 !formikProps.values[props.disableValue]
                             }
+                            loading={props.loading}
                         />
                     }
                 </form>

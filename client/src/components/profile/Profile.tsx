@@ -10,6 +10,7 @@ import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import SaveAsTwoToneIcon from '@mui/icons-material/SaveAsTwoTone';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 import CloudSyncTwoToneIcon from '@mui/icons-material/CloudSyncTwoTone';
+import NoPhotographyTwoToneIcon from '@mui/icons-material/NoPhotographyTwoTone';
 import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
@@ -22,6 +23,8 @@ import { profileFields } from '../../common/constants/formFields.ts';
 import { BodyEditor, HeaderEditor } from './Profile.Styles.ts';
 import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
 import { Toll } from '@mui/icons-material';
+import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
+import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 
 interface IProfileProps {
 
@@ -51,7 +54,7 @@ class Profile extends React.Component<ProfileProps> {
 
     posts = this.props.user?.post?.forEach(post => this.state.posts += 1);
     likes = this.props.user?.post?.forEach(post => this.state.userLikes += post.likes);
-    following = this.props.user.followed.map((id) => id.followedId)
+    following = this.props?.user?.followed?.map((id) => id.followedId)
         .find((id) => id === this.props.user.id);
 
     saveName = username => this.setState({ fields: { ...this.state.fields, username } })
@@ -202,9 +205,9 @@ class Profile extends React.Component<ProfileProps> {
                 </Grid>
                 <Grid item xs={8}>
                     <Seperate />
-                    <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
-                        {post &&
-                            post.map((posts) => (
+                    {post ?
+                        <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
+                            {post.map((posts) => (
                                 <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                     <ImageListItem key={posts.picture}>
                                         <img
@@ -216,7 +219,17 @@ class Profile extends React.Component<ProfileProps> {
                                     </ImageListItem>
                                 </Link>
                             ))}
-                    </ImageList>
+                        </ImageList> :
+                        (
+                            <NoActivity
+                                icon={<NoPhotographyTwoToneIcon fontSize="large" />}
+                                title={UserActionTypes.SHARE_PHOTOS}
+                                description={UserActionTypes.SHARE_MESSAGE}
+                                link={UserActionTypes.SHARE_LINK}
+                                path={UserActionTypes.SHARE_PATH}
+                            />
+                        )
+                    }
                 </Grid>
             </Grid >
         )

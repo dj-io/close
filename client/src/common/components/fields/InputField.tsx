@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { CustomInput } from '../../styles/Fields.Styles.ts';
 import { Button, Grid, InputLabel, FormHelperText, CardMedia } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 import { SubmitButton } from '../../styles/Buttons.Styles.ts';
 
 interface IInputField {
@@ -32,7 +33,7 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, im
             {row.label && (
                 <InputLabel htmlFor={row.name}>
                     <SubmitButton disabled={isSubmitting} variant="contained" component="span">
-                        {row.label}
+                        {isSubmitting ? <CircularProgress color="success" /> : row.label}
                     </SubmitButton>
                 </InputLabel>
             )}

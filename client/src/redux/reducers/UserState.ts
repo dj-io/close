@@ -7,7 +7,7 @@ export interface UserStateConfig {
 
 const initialState: UserStateConfig = {
     hasAccount: true,
-    user: null,
+    user: {},
     following: {}
 }
 

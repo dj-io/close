@@ -61,3 +61,14 @@ export const FindLink = styled(Link)(() => ({
         }
     }
 }))
+
+export const SuggestedLink = styled(Link)(() => ({
+    '&&': {
+        textDecoration: 'none',
+        color: 'inherit',
+
+        '&:hover': {
+            background: 'none'
+        }
+    }
+}))

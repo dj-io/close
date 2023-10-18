@@ -111,7 +111,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                 <Seperate />
                 <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
                     {post &&
-                        post?.map((posts) => (
+                        post.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                 <ImageListItem key={posts.picture}>
                                     <img

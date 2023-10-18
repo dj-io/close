@@ -9,4 +9,11 @@ export enum UserActionTypes {
     IS_VALID_EMAIL = 'Must be a valid email',
     RECENT = 'Recent',
     CHAR_MAX = 32,
+    FIND_FRIENDS = 'Find Friends',
+    FOLLOW_MESSAGE = 'When you follow friends, you\'ll see the photos and videos they post here',
+    FOLLOW_FRIENDS = 'Follow your first Friend',
+    SHARE_PHOTOS = 'Share Photos',
+    SHARE_MESSAGE = 'When you share photos, they will appear on your profile',
+    SHARE_LINK = 'Share your first photo',
+    SHARE_PATH = '/share',
 }

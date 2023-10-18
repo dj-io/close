@@ -15,6 +15,8 @@ import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
 const mapStateToprops = (state: any): IFindStateToProps => ({
     isFindOpen: state.FindState.isFindOpen,
     foundUser: state.FindState.foundUser,
+    following: state.UserState.following,
+    user: state.UserState.user,
 });
 
 /**

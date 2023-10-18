@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import Home from './Home.tsx';
 import { IHomeDispatchToProps, IHomeStateToProps } from '../../types/app.js';
 import { feed } from '../../redux/actions/UserActions.ts';
+import { openFind } from '../../redux/actions/AppActions.ts';
 
 
 /**
@@ -14,6 +15,7 @@ import { feed } from '../../redux/actions/UserActions.ts';
 const mapStateToprops = (state: any): IHomeStateToProps => ({
     user: state.UserState.user,
     following: state.UserState.following,
+    isFindOpen: state.FindState.isFindOpen,
 });
 
 /**
@@ -24,6 +26,7 @@ const mapStateToprops = (state: any): IHomeStateToProps => ({
  */
 const mapDispatchToProps = (dispatch: any): IHomeDispatchToProps => ({
     feed: bindActionCreators(feed, dispatch),
+    openFind: bindActionCreators(openFind, dispatch)
 });
 
 export const HomeContainer = connect(
