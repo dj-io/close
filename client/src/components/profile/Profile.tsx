@@ -151,7 +151,12 @@ class Profile extends React.Component<ProfileProps> {
                         }
                         action={
                             <IconButton aria-label="settings">
-                                <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title={this.state.editing ? "Save Edit" : "Edit Profile"} placement="right">
+                                <Tooltip
+                                    TransitionComponent={Fade}
+                                    TransitionProps={{ timeout: 600 }}
+                                    title={this.state.editing ? "Save Edit" : "Edit Profile"}
+                                    placement="right"
+                                >
                                     {this.state.editing ?
                                         <SaveAsTwoToneIcon onClick={this.handleEditing} /> :
                                         <SettingsTwoToneIcon onClick={this.handleEditing} />

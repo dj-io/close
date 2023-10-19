@@ -26,5 +26,13 @@ export const IconWrapper = styled('div')(() => ({
         }
 
     }
+}));
+
+export const ConfirmStatusWrapper = styled('div')(() => ({
+    '&&': {
+        width: 400,
+        height: 150,
+        marginTop: '12px',
+    }
 }))
 

@@ -16,6 +16,19 @@ export interface ISigninDispatchToProps {
     profiles: Function;
 }
 
+export interface ISignOutStateToProps {
+    user: any;
+    isExpired: boolean;
+    token: boolean;
+}
+
+export interface ISignOutDispatchToProps {
+    login: Function;
+    logout: Function;
+    profiles: Function;
+    expiredToken: Function;
+}
+
 export interface IProfileStateToProps {
     hasAccount: boolean,
     user: any // TODO: Create Iprofile

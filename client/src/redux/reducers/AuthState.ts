@@ -7,6 +7,7 @@ export interface AuthStateConfig {
 const initialState: AuthStateConfig = {
     authenticatedUser: null,
     token: null,
+    isExpired: false,
     returnUrl: '/'
 }
 
@@ -23,6 +24,13 @@ export default function reduce(state: AuthStateConfig = initialState, action: an
             return {
                 ...state,
                 token: action.payload
+            }
+        }
+
+        case AuthActions.EXPIRED_TOKEN: {
+            return {
+                ...state,
+                isExpired: action.payload
             }
         }
 

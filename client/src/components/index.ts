@@ -1,5 +1,6 @@
 import { SigninContainer } from './signin/Signin.Container.ts';
 import { SignupContainer } from './signup/Signup.Container.ts';
+import { SignOutContainer } from './signout/SignOut.Container.ts';
 import { ProfileContainer } from './profile/Profile.Container.ts';
 import { NavContainer } from './navigation/Navigation.Container.ts';
 import { HomeContainer } from './home/Home.Container.ts';
@@ -13,3 +14,4 @@ export const Profile = ProfileContainer;
 export const Nav = NavContainer;
 export const Find = FindContainer;
 export const Share = ShareContainer;
+export const SignOut = SignOutContainer;

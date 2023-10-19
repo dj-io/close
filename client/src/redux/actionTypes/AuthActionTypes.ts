@@ -1,4 +1,5 @@
 export enum AuthActions {
     AUTHENTICATE_USER = 'AUTHENTICATE_USER',
     LOGOUT = 'LOGOUT',
+    EXPIRED_TOKEN = 'EXPIRED_TOKEN',
 }

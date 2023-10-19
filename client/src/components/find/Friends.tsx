@@ -12,11 +12,14 @@ import TuneTwoToneIcon from '@mui/icons-material/TuneTwoTone';
 import SaveAsTwoToneIcon from '@mui/icons-material/SaveAsTwoTone';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 import CloudSyncTwoToneIcon from '@mui/icons-material/CloudSyncTwoTone';
+import NoPhotographyTwoToneIcon from '@mui/icons-material/NoPhotographyTwoTone';
 import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { Seperate } from './Find.Styles.ts';
 import { find, retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
+import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
+import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 
 interface IFriends {
 
@@ -109,9 +112,9 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
             </Grid>
             <Grid item xs={8}>
                 <Seperate />
-                <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
-                    {post &&
-                        post.map((posts) => (
+                {post?.length ?
+                    <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
+                        {post?.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                 <ImageListItem key={posts.picture}>
                                     <img
@@ -123,7 +126,15 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                                 </ImageListItem>
                             </Link>
                         ))}
-                </ImageList>
+                    </ImageList> :
+                    (
+                        <NoActivity
+                            icon={<NoPhotographyTwoToneIcon fontSize="large" />}
+                            title={UserActionTypes.NO_POSTS}
+                            description={UserActionTypes.NO_POSTS_MESSAGE}
+                        />
+                    )
+                }
             </Grid>
         </Grid >
     );

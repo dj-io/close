@@ -4,6 +4,7 @@ import Find from './Find.tsx';
 import { returnFind } from '../../redux/actions/AppActions.ts';
 import { openFind } from '../../redux/actions/AppActions.ts';
 import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
+import { feed, profiles } from '../../redux/actions/UserActions.ts';
 
 
 /**
@@ -28,6 +29,8 @@ const mapStateToprops = (state: any): IFindStateToProps => ({
 const mapDispatchToProps = (dispatch: any): IFindDispatchToProps => ({
     openFind: bindActionCreators(openFind, dispatch),
     returnFind: bindActionCreators(returnFind, dispatch),
+    profiles: bindActionCreators(profiles, dispatch),
+    feed: bindActionCreators(feed, dispatch),
 });
 
 export const FindContainer = connect(

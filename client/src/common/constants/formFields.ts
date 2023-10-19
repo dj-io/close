@@ -39,6 +39,13 @@ export const signUpfields = [
     },
 ]
 
+export const signOutFields = [{
+    id: '4',
+    name: 'password',
+    label: 'Password',
+    type: 'password',
+}]
+
 export const FindFields = [{ id: '1', name: 'find', label: 'Find', type: 'text', }]
 
 export const shareFields = [{ id: '1', inputTitle: 'Drag photos and videos here', name: 'share-photos', label: 'Select from computer', type: 'file' }]

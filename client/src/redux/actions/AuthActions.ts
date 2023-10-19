@@ -10,3 +10,8 @@ export const logout = () => ({
     type: AuthActions.LOGOUT,
     payload: null,
 })
+
+export const expiredToken = (isExpired: boolean) => ({
+    type: AuthActions.EXPIRED_TOKEN,
+    payload: isExpired
+})

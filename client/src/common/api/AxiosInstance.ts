@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { store } from '../../index.js'
+import { store } from '../../index.js';
+import { expiredToken } from '../../redux/actions/AuthActions.ts';
 
 
 const utils = axios.create({
@@ -27,7 +28,9 @@ utils.interceptors.response.use(
         console.log(' got response ')
         return response;
     }, (err) => {
-        console.log(`ERR: ${err.response}`)
+        console.log(`ERR: ${err}`)
+        const error = `${err}`;
+        if (error.endsWith('401')) store.dispatch(expiredToken(true)) // TODO: Implement precise auth token exp. logic for tokenExp exec.
         // if (err.response.status === 404) throw err.response; // SET UP 404 NOT FOUND PAGE 
         return Promise.reject(err)
     })

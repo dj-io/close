@@ -131,6 +131,8 @@ class Find extends React.Component<FindProps> {
                             <Suggested
                                 currentUser={this.props.user}
                                 following={this.props.following}
+                                profiles={this.props.profiles}
+                                feed={this.props.feed}
                             />
                         )}
                 </FindDrawer>

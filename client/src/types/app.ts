@@ -20,4 +20,5 @@ export interface IFindStateToProps {
 export interface IFindDispatchToProps {
     openFind: Function;
     returnFind: Function;
+    profiles: Function;
 }
