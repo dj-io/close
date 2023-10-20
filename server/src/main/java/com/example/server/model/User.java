@@ -16,7 +16,14 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "profile_image_id_unique",
+                        columnNames = "profileImageId"
+                )
+        }
+)
 public class User implements UserDetails {
 
     @Id
@@ -42,6 +49,11 @@ public class User implements UserDetails {
 
     @Column
     private String password;
+
+    @Column(
+            unique = true
+    )
+    private String profileImageId;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
@@ -88,6 +100,20 @@ public class User implements UserDetails {
         this.userRole = userRole;
     }
 
+    public User(String name,
+                String picture,
+                String username,
+                String pronouns,
+                String biography,
+                String links,
+                String email,
+                String password,
+                String profileImageId,
+                UserRole userRole) {
+        this(name, picture, username, pronouns, biography, links, email, password, userRole);
+        this.profileImageId = profileImageId;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority =
@@ -107,6 +133,14 @@ public class User implements UserDetails {
     }
 
     public String getEmail() { return email; }
+
+    public String getProfileImageId() {
+        return profileImageId;
+    }
+
+    public void setProfileImageId(String profileImageId) {
+        this.profileImageId = profileImageId;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -140,6 +174,7 @@ public class User implements UserDetails {
                 ", links='" + links + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", profileImageId='" + profileImageId + '\'' +
                 ", userRole=" + userRole +
                 ", posts=" + posts +
                 ", followers=" + followers +

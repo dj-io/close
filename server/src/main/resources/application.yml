@@ -7,6 +7,12 @@ server:
     include-message: always
     include-binding-errors: always
 
+aws:
+  region: us-east-1
+  s3:
+    buckets:
+      user: close-web-v1
+
 spring:
   h2:
     console:
@@ -25,6 +31,14 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  main:
+    web-application-type: servlet
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  codec:
+    max-in-memory-size: 10MB
 
   mail:
     host: localhost

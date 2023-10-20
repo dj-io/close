@@ -15,9 +15,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     Optional<User> findByUsername(String username);
     Optional<User> findById(Long id);
+    boolean existsCustomerById(Long id);
 
     @Transactional
     @Modifying
     @Query("UPDATE User a " + "SET a.enabled = TRUE WHERE a.email = ?1")
     int enableUser(String email);
+
+    @Transactional
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE User a " + "SET a.profileImageId = ?1 WHERE a.id = ?2")
+    int updateProfileImageId(String profileImageId, Long id);
 }

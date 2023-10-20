@@ -1,15 +1,21 @@
 package com.example.server.service;
 
+import com.example.server.exception.ResourceNotFoundException;
 import com.example.server.model.ConfirmationToken;
 import com.example.server.model.User;
 import com.example.server.repository.UserRepository;
+import com.example.server.s3.S3Buckets;
+import com.example.server.s3.S3Service;
+import org.apache.commons.lang3.StringUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +31,8 @@ public class UserService implements UserDetailsService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+    private final S3Service s3Service;
+    private final S3Buckets s3Buckets;
 //    private final EmailSender emailSender;
 
     @Override
@@ -33,6 +41,14 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(String.format(USER_NOT_FOUND_MESSAGE, username)));
+    }
+
+    private void checkIfCustomerExistsOrThrow(Long id) {
+        if (!userRepository.existsCustomerById(id)) {
+            throw new ResourceNotFoundException(
+                    "customer with id [%s] not found".formatted(id)
+            );
+        }
     }
 
     public String userSignup(User user) {
@@ -103,5 +119,48 @@ public class UserService implements UserDetailsService {
 
     public int enableUser(String email) {
         return userRepository.enableUser(email);
+    }
+
+    public int updateProfileImageId(String profileImageId, Long id) {
+        return userRepository.updateProfileImageId(profileImageId, id);
+    }
+
+    public void uploadUserProfileImage(Long id, MultipartFile file) {
+
+        checkIfCustomerExistsOrThrow(id);
+        String profileImageId = UUID.randomUUID().toString();
+        try {
+            s3Service.putObject(
+                    s3Buckets.getUser(),
+                    "profile-images/%s/%s".formatted(id, profileImageId),
+                    file.getBytes()
+            );
+        } catch (IOException e) {
+            throw new RuntimeException("failed to upload profile image", e);
+        }
+
+        updateProfileImageId(profileImageId, id);
+    }
+
+    public byte[] getCustomerProfileImage(Long id) {
+        var user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "customer with id [%s] not found".formatted(id)
+                ));
+
+        // TODO: check if profileImageId is empty or null
+
+        if (StringUtils.isBlank(user.getProfileImageId())) {
+            throw new ResourceNotFoundException(
+                    "customer with id [%s] profile image not found".formatted(id));
+        }
+
+
+        byte[] profileImage = s3Service.getObject(
+                s3Buckets.getUser(),
+                "profile-images/%s/%s".formatted(id, user.getProfileImageId())
+        );
+
+        return profileImage;
     }
 }
