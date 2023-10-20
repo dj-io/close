@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
     }
 
     private void checkIfCustomerExistsOrThrow(Long id) {
-        if (!userRepository.existsCustomerById(id)) {
+        if (!userRepository.existsUserById(id)) {
             throw new ResourceNotFoundException(
                     "customer with id [%s] not found".formatted(id)
             );
@@ -142,13 +142,11 @@ public class UserService implements UserDetailsService {
         updateProfileImageId(profileImageId, id);
     }
 
-    public byte[] getCustomerProfileImage(Long id) {
+    public byte[] getUserProfileImage(Long id) {
         var user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "customer with id [%s] not found".formatted(id)
                 ));
-
-        // TODO: check if profileImageId is empty or null
 
         if (StringUtils.isBlank(user.getProfileImageId())) {
             throw new ResourceNotFoundException(

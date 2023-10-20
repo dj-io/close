@@ -4,7 +4,9 @@ import com.example.server.model.Post;
 import com.example.server.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -38,6 +40,25 @@ public class PostController {
     @DeleteMapping("{id}")
     public HttpStatus deletePosts(@PathVariable Long id) {
         return postService.deletePost(id);
+    }
+
+    @PostMapping(
+            value = "{id}/post-image",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
+    public void uploadUserProfileImage(
+            @PathVariable("id") Long id,
+            @RequestParam("file") MultipartFile file) {
+        postService.uploadUserPostImage(id, file);
+    }
+
+    @GetMapping(
+            value = "{id}/post-image",
+            produces = MediaType.IMAGE_JPEG_VALUE
+    )
+    public byte[] getCustomerProfileImage(
+            @PathVariable("id") Long id) {
+        return postService.getUserPostImage(id);
     }
 
 }

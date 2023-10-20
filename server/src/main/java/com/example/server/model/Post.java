@@ -17,6 +17,14 @@ import java.util.List;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "post_image_id_unique",
+                        columnNames = "postImageId"
+                )
+        }
+)
 public class Post {
 
     @Id
@@ -28,7 +36,10 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_sequence")
     private Long id;
 
-    private String picture;
+    @Column(
+            unique = true
+    )
+    private String postImageId;
     private String caption;
 
     @Column(name = "created", nullable = false, updatable = false)
@@ -52,14 +63,14 @@ public class Post {
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private List<Comment> comment;
 
-    public Post(String picture,
+    public Post(String postImageId,
                 String caption,
                 Long likes,
                 Long shares,
                 LocalDateTime created,
                 LocalDateTime updated,
                 Long user_id) {
-        this.picture = picture;
+        this.postImageId = postImageId;
         this.caption = caption;
         this.likes = likes;
         this.shares = shares;

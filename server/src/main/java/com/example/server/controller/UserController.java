@@ -53,7 +53,7 @@ public class UserController {
     )
     public byte[] getCustomerProfileImage(
             @PathVariable("id") Long id) {
-        return userService.getCustomerProfileImage(id);
+        return userService.getUserProfileImage(id);
     }
 
 }
