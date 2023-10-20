@@ -21,4 +21,9 @@ export const profiles = (profile) => ({
 export const feed = (users) => ({
     type: UserActions.RENDER_FEED,
     payload: users,
-})
+});
+
+export const profilePictures = (formData) => ({
+    type: UserActions.PROFILE_PICTURE,
+    payload: formData
+});

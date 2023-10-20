@@ -39,6 +39,7 @@ export interface IProfileStateToProps {
 export interface IProfileDispatchToProps {
     userHasAccount: Function;
     profiles: Function;
+    profilePictures: Function;
 }
 
 export interface IShareStateToProps {

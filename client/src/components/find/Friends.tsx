@@ -16,7 +16,7 @@ import NoPhotographyTwoToneIcon from '@mui/icons-material/NoPhotographyTwoTone';
 import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { Seperate } from './Find.Styles.ts';
-import { find, retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
+import { find, profilePicUrl, retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
@@ -62,7 +62,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
         returnFriend();
     }, [name, following])
 
-    const { picture, username, biography, post } = friend;
+    const { id, username, biography, post } = friend;
     return (
         <Grid
             container
@@ -77,7 +77,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                     avatar={
                         <Avatar
                             alt={username}
-                            src={picture}
+                            src={profilePicUrl(id)}
                             sx={{ width: 204, height: 204 }}
                         />
                     }

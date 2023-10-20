@@ -26,6 +26,7 @@ import { commentFields } from '../../constants/formFields.ts';
 import { Pop } from '../popover/Pop.tsx';
 import { excerpt } from '../../utils/global.ts';
 import { UserActionTypes } from '../../enums/UserActionType.ts';
+import { profilePicUrl } from '../../api/user/Users.Api.ts';
 
 
 /**
@@ -83,7 +84,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
         }}
         >
             <CardHeader
-                avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={user?.picture} /> </Link>}
+                avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={profilePicUrl(user?.id)} /> </Link>}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
                 title={<PostLink to={`/${user?.username}`}> {user?.username} ∙ {`${postCreated}`} </PostLink>}
                 subheader={excerpt(user?.biography, UserActionTypes.CHAR_MAX)}
@@ -137,7 +138,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 <Content>
                     {post.comment?.map(comment => (
                         <CardHeader
-                            avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={comment.picture} /> </Link>}
+                            avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={profilePicUrl(comment.user_id)} /> </Link>}
                             action={
                                 <IconButton disabled={true} aria-label="settings">
                                     <FavoriteIcon />

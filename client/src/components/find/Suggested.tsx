@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { returnUsers, share } from '../../common/api/user/Users.Api.ts';
+import { profilePicUrl, returnUsers, share } from '../../common/api/user/Users.Api.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { FindLink, SuggestedLink } from './Find.Styles.ts';
 import { Avatar, CardHeader, Grid, IconButton, Typography } from '@mui/material';
@@ -79,7 +79,7 @@ export const Suggested: React.FC<ISuggestedProps> = ({ currentUser, following, p
                                 <IconButton>
                                     <Avatar
                                         alt={user.username}
-                                        src={user.picture}
+                                        src={profilePicUrl(user.id)}
                                     />
                                 </IconButton>
                             </SuggestedLink>

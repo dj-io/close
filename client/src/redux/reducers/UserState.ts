@@ -8,7 +8,8 @@ export interface UserStateConfig {
 const initialState: UserStateConfig = {
     hasAccount: true,
     user: {},
-    following: {}
+    following: {},
+    file: '',
 }
 
 export default function reduce(state: UserStateConfig = initialState, action: any) {
@@ -31,6 +32,13 @@ export default function reduce(state: UserStateConfig = initialState, action: an
             return {
                 ...state,
                 following: action.payload
+            }
+        }
+
+        case `${UserActions.PROFILE_PICTURE}`: {
+            return {
+                ...state,
+                file: action.payload
             }
         }
 

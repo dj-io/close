@@ -6,7 +6,7 @@ import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
 import { FindDrawer, FindHeader, FindLink, Seperate } from './Find.Styles.ts';
 import { Form } from '../../common/components/form/Form.tsx';
 import { FindFields } from '../../common/constants/formFields.ts';
-import { find } from '../../common/api/user/Users.Api.ts';
+import { find, profilePicUrl } from '../../common/api/user/Users.Api.ts';
 import { Link } from 'react-router-dom';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { Suggested } from './Suggested.tsx';
@@ -104,7 +104,7 @@ class Find extends React.Component<FindProps> {
                                             <IconButton>
                                                 <Avatar
                                                     alt={this.props.foundUser.username}
-                                                    src={this.props.foundUser.picture}
+                                                    src={profilePicUrl(this.props.foundUser.id)}
                                                 />
                                             </IconButton>
                                         }

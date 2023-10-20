@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import ShortTextIcon from '@mui/icons-material/ShortText';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import { PostCard } from '../../common/components/cards/PostCard.tsx';
-import { retreiveProfile } from '../../common/api/user/Users.Api.ts';
+import { profilePicUrl, retreiveProfile } from '../../common/api/user/Users.Api.ts';
 import { retreivePost, newComment } from '../../common/api/user/Post.Api.ts';
 
 interface IPost {
@@ -19,7 +19,7 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
     const [user, setUser] = useState([]);
     const [newComments, setNewComments] = useState({
         comment: '',
-        picture: currentUser.picture,
+        picture: profilePicUrl(currentUser.id),
         user_id: currentUser.id,
         username: currentUser.username,
         likes: 0

@@ -15,7 +15,7 @@ import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from
 import Fade from '@mui/material/Fade';
 import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 import { Seperate } from '../find/Find.Styles.ts';
-import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
+import { profilePicUrl, retreiveProfile, share, uploadProfilePic } from '../../common/api/user/Users.Api.ts';
 import { profiles } from '../../redux/actions/UserActions.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import InputField from '../../common/components/fields/InputField.tsx'
@@ -45,8 +45,8 @@ class Profile extends React.Component<ProfileProps> {
         userLikes: 0,
         posts: 0,
         editing: false,
+        profilePic: profilePicUrl(this.props.user.id),
         fields: {
-            picture: this.props.user.picture,
             username: this.props.user.username,
             biography: this.props.user.biography
         }
@@ -61,14 +61,14 @@ class Profile extends React.Component<ProfileProps> {
     saveBio = biography => this.setState({ fields: { ...this.state.fields, biography } });
     savePic = picture => this.setState({ fields: { ...this.state.fields, picture } });
 
-    handleUpload = (files) => {
-        let binaryData = [];
-        binaryData.push(files);
-        const file = window.URL.createObjectURL(new Blob(binaryData, { type: "application/zip" }))
+    handleUpload = async (file) => {
+        const { id } = this.props.user;
 
-        this.savePic(file);
+        const formData = new FormData();
+        formData.append("file", file);
+
+        await uploadProfilePic(id, formData);
     }
-
 
     handleEditing = async () => {
         const { authorities, ...rest } = this.props.user;
@@ -105,7 +105,7 @@ class Profile extends React.Component<ProfileProps> {
 
 
     render(): JSX.Element {
-        const { picture, username, biography, post } = this.props.user;
+        const { username, biography, post } = this.props.user;
 
         return (
             <Grid
@@ -123,16 +123,17 @@ class Profile extends React.Component<ProfileProps> {
                                 <EasyEdit
                                     allowEdit={false}
                                     type={Types.FILE}
-                                    value={picture || 'Upload a picture'}
+                                    value={this.state.profilePic || 'Upload a picture'}
                                     onSave={this.handleUpload}
                                     editMode={this.state.editing}
                                     saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
                                     attributes={{ name: "picture" }}
                                     hideCancelButton
+                                    hideSaveButton
                                     displayComponent={
                                         <Avatar
                                             alt={username}
-                                            src={this.state.fields.picture}
+                                            src={this.state.profilePic}
                                             sx={{ width: 204, height: 204 }}
                                         />}
                                     editComponent={
@@ -141,7 +142,7 @@ class Profile extends React.Component<ProfileProps> {
                                             children={
                                                 <InputField
                                                     row={profileFields}
-                                                    image={this.state.fields.picture}
+                                                    image={this.state.profilePic}
                                                 />
                                             }
                                         />

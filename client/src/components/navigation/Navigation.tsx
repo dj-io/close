@@ -15,7 +15,7 @@ import { Find } from '../index.ts';
 import { Pop } from '../../common/components/popover/Pop.tsx';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import withRouter from '../../common/hooks/WithRouter.tsx';
-import { find } from '../../common/api/user/Users.Api.js';
+import { find, profilePicUrl } from '../../common/api/user/Users.Api.ts';
 
 
 
@@ -112,7 +112,7 @@ class Navigation extends React.Component<NavProps> {
                             onClick={() => this.closeFind('profile', !this.state.profile)}
                             page={this.state.profile}
                             alt="Apple"
-                            src={this.props.user.picture}
+                            src={profilePicUrl(this.props.user.id)}
                         />
                     </Link>
                 </StyledTip>
