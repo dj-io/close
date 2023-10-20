@@ -20,6 +20,7 @@ import { find, profilePicUrl, retreiveProfile, share } from '../../common/api/us
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
+import { postImageUrl } from '../../common/api/user/Post.Api.ts';
 
 interface IFriends {
 
@@ -116,10 +117,10 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                     <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
                         {post?.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts.id}`}>
-                                <ImageListItem key={posts.picture}>
+                                <ImageListItem key={postImageUrl(posts.id)}>
                                     <img
-                                        src={`${posts.picture}?w=500&h=500&fit=crop&auto=format`}
-                                        srcSet={`${posts.picture}?w=500&h=5000&fit=crop&auto=format&dpr=2 2x`}
+                                        src={`${postImageUrl(posts.id)}`}
+                                        srcSet={`${postImageUrl(posts.id)}`}
                                         alt={posts.caption}
                                         loading="lazy"
                                     />

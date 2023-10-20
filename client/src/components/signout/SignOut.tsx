@@ -55,10 +55,10 @@ class SignOut extends React.Component<SignOutProps> {
         if (!res) this.setState({ badCredentials: true });
 
         if (res?.status === 200) {
-            this.props.login(res.data)
+            this.props.login(res.data);
+            this.props.expiredToken(false);
             const loggedIn = await find(user.username)
             this.props.profiles(loggedIn.data)
-            this.props.expiredToken(false)
         }
 
     }

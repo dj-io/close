@@ -27,6 +27,7 @@ import { Pop } from '../popover/Pop.tsx';
 import { excerpt } from '../../utils/global.ts';
 import { UserActionTypes } from '../../enums/UserActionType.ts';
 import { profilePicUrl } from '../../api/user/Users.Api.ts';
+import { postImageUrl } from '../../api/user/Post.Api.ts';
 
 
 /**
@@ -92,7 +93,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
             <CardMedia
                 component="img"
                 height="auto"
-                image={post.picture}
+                image={postImageUrl(post.id)}
                 sx={{ border: '1px solid #3C414260', borderRadius: 1 }}
                 alt="Paella dish"
             />

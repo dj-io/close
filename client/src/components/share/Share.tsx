@@ -6,6 +6,7 @@ import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import { share } from '../../common/api/user/Users.Api.ts';
 import { IShareStateToProps, IShareDispatchToProps } from '../../types/user.ts'
 import { userValues } from '../../common/constants/requests.ts';
+import { uploadPostImage } from '../../common/api/user/Post.Api.ts';
 
 interface IPost {
     picture: string;
@@ -30,21 +31,31 @@ class Share extends React.Component<ShareProps> {
     state: IShareState = {
         open: true,
         mediaType: 'img',
+        files: '',
+        picture: '',
         post: {
-            picture: '',
             caption: '',
         },
     }
 
     setOpen = ({ open }) => this.setState({ open });
 
-    handleUpload = (files) => {
+    handlePreview = (files) => {
+        // SET PREVIEW IMAGE IN COMPONENT 
         const file = URL.createObjectURL(files);
 
         if (!files.type.startsWith('image'))
             this.setState({ mediaType: 'video' });
 
-        this.setState({ post: { picture: file } })
+        this.setState({ picture: file });
+        this.setState({ files });
+    }
+
+    uploadImage = async (id) => {
+        const formData = new FormData();
+        formData.append("file", this.state.files);
+
+        await uploadPostImage(id, formData);
     }
 
     handleChange = (e) => {
@@ -67,7 +78,16 @@ class Share extends React.Component<ShareProps> {
         };
 
         const newPost = await share(data);
-        this.props.profiles(newPost.data)
+        const newPostId = newPost.data.post.filter(
+            posts =>
+                !this.props.user.post.some(
+                    oldPosts =>
+                        posts.id === oldPosts.id
+                )
+        );
+
+        this.uploadImage(newPostId[0].id)
+        this.props.profiles(newPost.data);
         window.history.back();
     }
 
@@ -76,21 +96,21 @@ class Share extends React.Component<ShareProps> {
             <>
                 <ConfirmDialog
                     title="Share New Post"
-                    spacing={!this.state.post.picture && 20}
+                    spacing={!this.state.picture && 20}
                     enableBack={true}
                     isOpen={this.state.open}
                     openDialog={() => this.setOpen(true)}
                     closeDialog={() => this.setOpen(false)}
                     back={() => this.setState({ post: {} })}
                 >
-                    {!this.state.post.picture &&
-                        <SelectMedia handleUpload={this.handleUpload} />
+                    {!this.state.picture &&
+                        <SelectMedia handleUpload={this.handlePreview} />
                     }
-                    {this.state.post.picture &&
+                    {this.state.picture &&
                         <Caption
                             change={this.handleChange}
                             post={this.post}
-                            img={this.state.post.picture}
+                            img={this.state.picture}
                             mediaType={this.state.mediaType}
                         />
                     }
