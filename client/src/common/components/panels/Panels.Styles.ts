@@ -18,7 +18,7 @@ export const NoActivityWrapper = styled('div')(() => ({
         height: 500,
         marginTop: '100px',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: 400,
             maxHeight: '100vh',
             height: 300,

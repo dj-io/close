@@ -33,7 +33,7 @@ export const Media = styled(CardMedia)(() => ({
         borderRadius: '50%',
         cursor: 'pointer',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: 140,
             height: 140,
         }

@@ -15,7 +15,7 @@ export const FindDrawer = styled(Drawer)((props: any) => ({
         borderRadius: '5px',
         boxShadow: '3px 0 4px rgba(0, 0, 0,.15)',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             height: props.isFindOpen ? 559 : '0px',
             left: '0 !important',
             width: '100vw',
@@ -34,7 +34,7 @@ export const FindDrawer = styled(Drawer)((props: any) => ({
             bottom: 0,
             boxShadow: '4px 0 24px rgba(0, 0, 0,.15)',
 
-            '@media (max-width: 540px)': {
+            '@media (max-width: 790px)': {
                 width: '100%',
                 bottom: 'initial',
                 position: 'fixed'
@@ -66,7 +66,7 @@ export const FindHeader = styled('div')((props: any) => ({
         alignItems: 'center',
         padding: '14px',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             marginLeft: 10
         }
 
@@ -99,7 +99,7 @@ export const FriendsAvatar = styled(Avatar)(() => ({
     '&&': {
         width: 204,
         height: 204,
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: 140,
             height: 140,
         },

@@ -19,7 +19,7 @@ export const BackGroundHeader = styled(Typography)(() => ({
         position: 'absolute',
         marginLeft: 24,
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             display: 'flex',
             fontSize: '140px',
         }
@@ -33,7 +33,7 @@ export const BackGroundText = styled(Typography)(() => ({
         position: 'absolute',
         p: 7,
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             display: 'flex',
             fontSize: '38px',
         }

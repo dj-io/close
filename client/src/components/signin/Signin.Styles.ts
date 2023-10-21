@@ -20,7 +20,7 @@ export const BackGroundHeader = styled(Typography)(() => ({
         position: 'fixed',
         marginLeft: 20,
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             display: 'flex',
             fontSize: '120px',
         }
@@ -34,7 +34,7 @@ export const BackGroundText = styled(Typography)(() => ({
         position: 'fixed',
         p: 7,
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             display: 'flex',
             fontSize: '38px',
         }

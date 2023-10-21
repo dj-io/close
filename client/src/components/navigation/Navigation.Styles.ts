@@ -17,7 +17,7 @@ export const MoreWrapper = styled("div")(() => ({
         color: '#3C4142',
         margin: '100px 24px 0px 0px',
         position: 'relative',
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             margin: '25px 24px 0px 14px',
         }
     }
@@ -45,7 +45,7 @@ export const NavWrapper = styled(Grid)(() => ({
         borderRight: '1px solid #3C414250',
         position: 'fixed',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             display: 'flex',
             flexDirection: 'column',
             gap: 20,

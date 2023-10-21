@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from 'react';
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
-    const isMobile = width < 540;
+    const isMobile = width < 790;
     return {
         width,
         height,

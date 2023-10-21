@@ -24,7 +24,7 @@ export default function withWindowDimensions(WrappedComponent) {
                     {...this.props}
                     windowWidth={this.state.width}
                     windowHeight={this.state.height}
-                    isMobile={this.state.width < 540}
+                    isMobile={this.state.width < 790}
                 />
             );
         }

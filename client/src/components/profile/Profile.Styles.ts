@@ -11,7 +11,7 @@ export const CustomImageList = styled(ImageList)(() => ({
         overflowY: 'inherit',
 
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: 355,
             maxHeight: '100vh',
             height: 582,
@@ -30,7 +30,7 @@ export const CustomImageList = styled(ImageList)(() => ({
 export const CustomCardHeader = styled(CardHeader)(() => ({
     '&&': {
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: 355,
             overflowX: 'auto',
             overflowY: 'hidden',
@@ -48,7 +48,7 @@ export const HeaderText = styled(Typography)(() => ({
         fontWeight: 'bold',
         color: '#3C414270',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             fontSize: '2.125rem',
         },
     }
@@ -87,7 +87,7 @@ export const HeaderEditor = styled('div')((props: any) => ({
             outline: 'none',
         },
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: '130px',
             fontSize: '1.825rem',
         },
@@ -117,7 +117,7 @@ export const HeaderEditor = styled('div')((props: any) => ({
             width: 204,
             height: 204,
 
-            '@media (max-width: 540px)': {
+            '@media (max-width: 790px)': {
                 width: 140,
                 height: 140,
             }
@@ -149,7 +149,7 @@ export const BodyEditor = styled('div')(() => ({
             outline: 'none',
         },
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             width: '130px',
         },
     },

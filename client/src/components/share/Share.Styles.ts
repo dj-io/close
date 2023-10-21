@@ -18,7 +18,7 @@ export const CaptionWrapper = styled(Paper)(() => ({
         flexGrow: 1,
         boxShadow: 'none',
 
-        '@media (max-width: 540px)': {
+        '@media (max-width: 790px)': {
             padding: 0,
         }
     }
