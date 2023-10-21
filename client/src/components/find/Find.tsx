@@ -20,7 +20,6 @@ interface IFindState {
     direction: string;
     find: string;
     found: boolean;
-    loading: boolean;
 }
 
 export type FindProps = IFindStateToProps & IFindDispatchToProps & IFindProps;
@@ -33,7 +32,6 @@ class Find extends React.Component<FindProps> {
     state: IFindState = {
         find: '',
         found: true,
-        loading: null
     }
 
     initialValues = {
@@ -43,15 +41,14 @@ class Find extends React.Component<FindProps> {
     handleChange = (e) => this.setState({ find: e.target.value });
 
     search = async () => {
-        this.setState({ loading: true })
         const res = await find(this.state.find);
 
         if (res.data) {
             this.props.returnFind(res.data);
-            this.setState({ found: true, loading: false })
+            this.setState({ found: true })
         }
 
-        if (!res.data) this.setState({ found: false, loading: false })
+        if (!res.data) this.setState({ found: false })
 
     }
 
@@ -86,7 +83,6 @@ class Find extends React.Component<FindProps> {
                                 submit={this.search}
                                 change={this.handleChange}
                                 initialValues={this.initialValues}
-                                loading={this.state.loading}
                             />
                         </Grid>
                         <Seperate />

@@ -4,16 +4,19 @@ export interface ISignupStateToProps {
 
 export interface ISignupDispatchToProps {
     userHasAccount: Function;
+    userCredentials: Function;
 }
 
 export interface ISigninStateToProps {
-    hasAccount: boolean
+    hasAccount: boolean;
+    userCredentials: any;
 }
 
 export interface ISigninDispatchToProps {
     userHasAccount: Function;
     login: Function;
     profiles: Function;
+    userCredentials: Function;
 }
 
 export interface ISignOutStateToProps {

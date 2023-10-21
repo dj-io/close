@@ -31,8 +31,8 @@ class Signin extends React.Component<SigninProps> {
     }
 
     initialValues: FormValues = {
-        username: '',
-        password: ''
+        username: this.props.authenticatedUser.username || '',
+        password: this.props.authenticatedUser.password || ''
     }
 
     handleChange = (e) => {
@@ -48,15 +48,17 @@ class Signin extends React.Component<SigninProps> {
 
     handleSignin = async () => {
         const { user } = this.state;
-        const { navigate } = this.props;
+        const { navigate, authenticatedUser } = this.props;
+        const userLogin = Object.keys(user)?.length ? user : authenticatedUser;
 
-        const res = await auth(user);
+        const res = await auth(userLogin);
         if (!res) this.setState({ badCredentials: true });
 
         if (res?.status === 200) {
             this.props.login(res.data)
-            const loggedIn = await find(user.username)
+            const loggedIn = await find(userLogin.username)
             this.props.profiles(loggedIn.data)
+            this.props.userCredentials({})
             navigate('/home')
         }
 

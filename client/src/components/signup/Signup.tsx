@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Card, Typography, Grid } from '@mui/material';
+import ScheduleSendTwoToneIcon from '@mui/icons-material/ScheduleSendTwoTone';
 import { Form } from '../../common/components/form/Form.tsx';
 import { BackGroundHeader, BackGroundText, StyledCard } from './Signup.Styles.ts';
 import { signUpfields } from '../../common/constants/formFields.ts';
@@ -9,6 +10,8 @@ import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { register } from '../../common/api/user/Registration.Api.ts';
 import { FormValues } from '../../common/types.js';
 import { signupSchema } from '../../common/utils/validation.ts';
+import { ConfirmStatus } from '../../common/components/panels/ConfirmStatus.tsx';
+import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 
 
 
@@ -17,7 +20,9 @@ interface ISignupProps {
 }
 
 interface ISignupState {
-
+    user: any;
+    accountCreated: boolean;
+    open: boolean;
 }
 
 export type SignupProps = ISignupStateToProps & ISignupDispatchToProps & ISignupProps
@@ -28,7 +33,9 @@ export type SignupProps = ISignupStateToProps & ISignupDispatchToProps & ISignup
  */
 class Signup extends React.Component<SignupProps> {
     state: ISignupState = {
-        user: {}
+        user: {},
+        accountCreated: false,
+        open: false,
     }
 
     initialValues: FormValues = {
@@ -37,6 +44,8 @@ class Signup extends React.Component<SignupProps> {
         username: '',
         password: ''
     }
+
+    setOpen = open => this.setState({ open })
 
     handleChange = (e) => {
         const { name } = e.target;
@@ -47,13 +56,22 @@ class Signup extends React.Component<SignupProps> {
                 [name]: e.target.value
             }
         });
-        console.log("=== user", this.state)
     };
 
-    handleRegistration = () => {
-        register(this.state.user);
-        this.setState({ user: {} })
-    }
+    handleRegistration = async () => {
+        const registered = await register(this.state.user);
+
+        if (registered.data) {
+            this.props.userCredentials({
+                username: this.state.user.username,
+                password: this.state.user.password
+            });
+
+            this.setState({ accountCreated: true })
+            this.setState({ user: {} })
+        };
+
+    };
 
     render(): JSX.Element {
         return (
@@ -93,6 +111,26 @@ class Signup extends React.Component<SignupProps> {
                         submit={this.handleRegistration}
                         disableValue='username'
                     />
+                    {
+                        <ConfirmDialog
+                            isOpen={this.state.accountCreated}
+                            openDialog={() => this.setOpen(true)}
+                            closeDialog={() => {
+                                this.setOpen(false);
+                                this.props.userHasAccount(true)
+                            }}
+                            title={this.state.user.email}
+                            spacing={2}
+                        >
+                            <ConfirmStatus
+                                icon={<ScheduleSendTwoToneIcon fontSize="large" />}
+                                title={UserActionTypes.CONFIRM_EMAIL}
+                                description={`${UserActionTypes.ACTIVATE_NOW} ${this.state.user.email || 'your email'}`}
+                                link={UserActionTypes.EMAIL_CONFIRMED}
+                                func={() => this.props.userHasAccount(true)}
+                            />
+                        </ConfirmDialog>
+                    }
                     <Typography
                         sx={{
                             marginTop: '10px',
@@ -106,7 +144,7 @@ class Signup extends React.Component<SignupProps> {
                         func={() => this.props.userHasAccount(true)}
                     />
                 </StyledCard>
-            </Grid>
+            </Grid >
 
         );
     }

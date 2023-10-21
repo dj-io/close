@@ -21,7 +21,6 @@ interface IFormProps {
     change: Function;
     validationSchema: Object;
     disableValue: string;
-    loading?: boolean;
 }
 
 /**
@@ -31,10 +30,6 @@ interface IFormProps {
  * @returns 
  */
 export const Form: React.FC<IFormProps> = (props: IFormProps) => {
-
-    // const handleOnSubmit = () => {
-
-    // }
 
     return (
         <Formik
@@ -55,6 +50,7 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                         <TextField
                             handleChange={props.change}
                             row={field}
+                            initialValues={props.initialValues}
                             isSubmitting={formikProps.isSubmitting}
                             errors={formikProps.errors}
                             touched={formikProps.touched}
@@ -62,14 +58,13 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                     )}
                     {props.buttonLabel &&
                         <Submit
-                            func={props.submit}
                             label={props.buttonLabel}
                             disabledButton={
                                 !formikProps.isValid ||
                                 formikProps.isSubmitting ||
                                 !formikProps.values[props.disableValue]
                             }
-                            loading={props.loading}
+                            loading={formikProps.isSubmitting}
                         />
                     }
                 </form>

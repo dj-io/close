@@ -5,7 +5,7 @@ export interface AuthStateConfig {
 }
 
 const initialState: AuthStateConfig = {
-    authenticatedUser: null,
+    authenticatedUser: {},
     token: null,
     isExpired: false,
     returnUrl: '/'
@@ -13,10 +13,17 @@ const initialState: AuthStateConfig = {
 
 export default function reduce(state: AuthStateConfig = initialState, action: any) {
     switch (action.type) {
-        case AuthActions.AUTHENTICATE_USER: {
+        case AuthActions.AUTHENTICATE_TOKEN: {
             return {
                 ...state,
                 token: action.payload,
+            }
+        }
+
+        case AuthActions.AUTHENTICATED_USER: {
+            return {
+                ...state,
+                authenticatedUser: action.payload
             }
         }
 

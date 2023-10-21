@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { profiles, userHasAccount } from '../../redux/actions/UserActions.ts';
 import Signin from './Signin.tsx';
 import { ISigninDispatchToProps, ISigninStateToProps } from '../../types/user.ts';
-import { login } from '../../redux/actions/AuthActions.ts';
+import { login, userCredentials } from '../../redux/actions/AuthActions.ts';
 
 
 /**
@@ -14,6 +14,7 @@ import { login } from '../../redux/actions/AuthActions.ts';
  */
 const mapStateToprops = (state: any): ISigninStateToProps => ({
     hasAccount: state.UserState.hasAccount,
+    authenticatedUser: state.AuthState.authenticatedUser,
 });
 
 /**
@@ -25,7 +26,8 @@ const mapStateToprops = (state: any): ISigninStateToProps => ({
 const mapDispatchToProps = (dispatch: any): ISigninDispatchToProps => ({
     userHasAccount: bindActionCreators(userHasAccount, dispatch),
     login: bindActionCreators(login, dispatch),
-    profiles: bindActionCreators(profiles, dispatch)
+    profiles: bindActionCreators(profiles, dispatch),
+    userCredentials: bindActionCreators(userCredentials, dispatch)
 });
 
 export const SigninContainer = connect(

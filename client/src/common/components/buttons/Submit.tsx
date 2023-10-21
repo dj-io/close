@@ -6,7 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 interface ISubmit {
     label: string;
-    func: Function;
+    func?: Function;
     disabledButton: boolean;
     width: number;
     loading: boolean;
@@ -21,7 +21,8 @@ export const Submit: React.FC<ISubmit> = ({ label, func, disabledButton, width, 
         >
             <SubmitButton
                 disabled={disabledButton}
-                onClick={() => func()}
+                onClick={() => func?.()}
+                type="submit"
                 variant="contained"
                 width={width}
             >

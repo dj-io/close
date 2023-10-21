@@ -10,6 +10,7 @@ interface ITextFieldProps {
     row: any;
     handleChange: Function;
     isSubmitting: boolean;
+    initialValues: any;
     errors: any;
     touched: boolean;
 }
@@ -24,6 +25,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
     row,
     handleChange,
     isSubmitting,
+    initialValues,
     errors,
     touched
 }) => {
@@ -37,6 +39,7 @@ export const TextField: React.FC<ITextFieldProps> = ({
                 type={row.type}
                 name={row.name}
                 id={row.id}
+                defaultValue={initialValues[row.name]}
                 label={row.label}
                 variant="outlined"
                 disabled={isSubmitting}
