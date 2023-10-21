@@ -8,7 +8,7 @@ import MultiField from '../../common/components/fields/MultiField.tsx';
 import { red } from '@mui/material/colors';
 import { captionFields } from '../../common/constants/formFields.ts';
 import { ButtonBase, Grid, Paper, Typography } from '@mui/material';
-import { Media } from './Share.Styles.ts';
+import { CaptionWrapper, Media } from './Share.Styles.ts';
 
 interface ICaption {
     avatar: string;
@@ -32,22 +32,14 @@ const Caption: React.FC<ICaption> = ({
     change,
 }) => {
     return (
-        <Paper
-            sx={{
-                p: 2,
-                margin: 'auto',
-                maxWidth: 500,
-                flexGrow: 1,
-                boxShadow: 'none',
-            }}
-        >
+        <CaptionWrapper>
             <Grid container spacing={12}>
                 <Grid item >
                     <Media
                         component={mediaType || 'img'}
                         height="194"
                         src={img}
-                        alt="Paella dish"
+                        alt="Image Not Found"
                         autoPlay
                         loop
                         controls
@@ -71,7 +63,7 @@ const Caption: React.FC<ICaption> = ({
                     </Grid>
                 </Grid>
             </Grid>
-        </Paper>
+        </CaptionWrapper>
     );
 }
 

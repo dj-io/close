@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Card, Typography, Grid } from '@mui/material';
 import { Form } from '../../common/components/form/Form.tsx';
-import { StyledCard } from './Signup.Styles.ts';
+import { BackGroundHeader, BackGroundText, StyledCard } from './Signup.Styles.ts';
 import { signUpfields } from '../../common/constants/formFields.ts';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import { ISignupDispatchToProps, ISignupStateToProps } from '../../types/user.ts';
@@ -70,32 +70,18 @@ class Signup extends React.Component<SignupProps> {
                     justifyContent="flex-start"
                     alignItems="flex-start"
                 >
-                    <Typography
-                        color="#228B22"
-                        sx={{
-                            fontSize: '220px',
-                            fontWeight: 'bold',
-                            position: 'absolute',
-                            marginLeft: 24,
-                        }} >
+                    <BackGroundHeader color="#228B22" >
                         Close
-                    </Typography>
+                    </BackGroundHeader>
                 </Grid>
                 <Grid
                     container
                     justifyContent="flex-start"
                     alignItems="center"
                 >
-                    <Typography
-                        color="text.secondary"
-                        sx={{
-                            fontSize: '100px',
-                            fontWeight: 'bold',
-                            position: 'absolute',
-                            p: 7
-                        }} >
+                    <BackGroundText color="text.secondary">
                         Share The Weird Stuff
-                    </Typography>
+                    </BackGroundText>
                 </Grid>
                 <StyledCard sx={{ minWidth: 275, zIndex: 1000 }}>
                     <Form

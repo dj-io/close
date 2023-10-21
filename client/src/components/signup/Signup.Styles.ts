@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Card } from '@mui/material';
+import { Card, Typography } from '@mui/material';
 
 export const StyledCard = styled(Card)({
     '&&': {
@@ -9,4 +9,34 @@ export const StyledCard = styled(Card)({
         alignItems: 'center',
         width: '325px',
     }
-})
+});
+
+
+export const BackGroundHeader = styled(Typography)(() => ({
+    '&&': {
+        fontSize: '220px',
+        fontWeight: 'bold',
+        position: 'absolute',
+        marginLeft: 24,
+
+        '@media (max-width: 540px)': {
+            display: 'flex',
+            fontSize: '140px',
+        }
+    }
+}));
+
+export const BackGroundText = styled(Typography)(() => ({
+    '&&': {
+        fontSize: '100px',
+        fontWeight: 'bold',
+        position: 'absolute',
+        p: 7,
+
+        '@media (max-width: 540px)': {
+            display: 'flex',
+            fontSize: '38px',
+        }
+
+    }
+}))

@@ -20,12 +20,13 @@ import { profiles } from '../../redux/actions/UserActions.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import InputField from '../../common/components/fields/InputField.tsx'
 import { profileFields } from '../../common/constants/formFields.ts';
-import { BodyEditor, HeaderEditor } from './Profile.Styles.ts';
+import { BodyEditor, CustomCardHeader, CustomImageList, HeaderEditor, HeaderText, ProfileWrapper } from './Profile.Styles.ts';
 import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
 import { Toll } from '@mui/icons-material';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { postImageUrl } from '../../common/api/user/Post.Api.ts';
+import withWindowDimensions from '../../common/hooks/WithWindowDimensions.tsx';
 
 interface IProfileProps {
 
@@ -69,6 +70,7 @@ class Profile extends React.Component<ProfileProps> {
         formData.append("file", file);
 
         await uploadProfilePic(id, formData);
+        this.setState({ editing: !this.state.editing })
     }
 
     handleEditing = async () => {
@@ -111,21 +113,21 @@ class Profile extends React.Component<ProfileProps> {
         return (
             <Grid
                 container
-                spacing={3}
+                spacing={this.props.isMobile ? 0 : 3}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{ marginLeft: '3%' }}
+                sx={{ minHeight: '45vh', marginLeft: this.props.isMobile ? null : '5%' }}
             >
                 <Grid item sx={8} >
-                    <CardHeader
+                    <CustomCardHeader
                         avatar={
                             <HeaderEditor>
                                 <EasyEdit
                                     allowEdit={false}
                                     type={Types.FILE}
                                     value={this.state.profilePic || 'Upload a picture'}
-                                    onSave={this.handleUpload}
+                                    onSave={this.savePic}
                                     editMode={this.state.editing}
                                     saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
                                     attributes={{ name: "picture" }}
@@ -135,7 +137,6 @@ class Profile extends React.Component<ProfileProps> {
                                         <Avatar
                                             alt={username}
                                             src={this.state.profilePic}
-                                            sx={{ width: 204, height: 204 }}
                                         />}
                                     editComponent={
                                         <MyDropzone
@@ -167,13 +168,7 @@ class Profile extends React.Component<ProfileProps> {
                             </IconButton>
                         }
                         title={
-                            <Typography
-                                sx={{
-                                    fontWeight: 'bold',
-                                    color: '#3C414270'
-                                }}
-                                variant='h3'
-                            >
+                            <HeaderText variant='h3' >
                                 <HeaderEditor>
                                     <EasyEdit
                                         allowEdit={false}
@@ -186,7 +181,7 @@ class Profile extends React.Component<ProfileProps> {
                                         hideCancelButton
                                     />
                                 </HeaderEditor>
-                            </Typography>
+                            </HeaderText>
                         }
                         subheader={
                             <Typography variant='button'>
@@ -204,16 +199,16 @@ class Profile extends React.Component<ProfileProps> {
                                             hideCancelButton
                                         />
                                     </BodyEditor>
-                                    <Submit label="Follow" func={this.follow} disabledButton={!this.following} />
+                                    <Submit width={this.props.isMobile ? '100%' : null} label="Follow" func={this.follow} disabledButton={!this.following} />
                                 </Typography>
                             </Typography>
                         }
                     />
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={2}>
                     <Seperate />
                     {post?.length ?
-                        <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
+                        <CustomImageList cols={3} rowHeight={this.props.isMobile ? 295 : 395}>
                             {post.map((posts) => (
                                 <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                     <ImageListItem key={postImageUrl(posts.id)}>
@@ -226,7 +221,7 @@ class Profile extends React.Component<ProfileProps> {
                                     </ImageListItem>
                                 </Link>
                             ))}
-                        </ImageList> :
+                        </CustomImageList> :
                         (
                             <NoActivity
                                 icon={<NoPhotographyTwoToneIcon fontSize="large" />}
@@ -243,4 +238,4 @@ class Profile extends React.Component<ProfileProps> {
     }
 }
 
-export default Profile;
+export default withWindowDimensions(Profile);

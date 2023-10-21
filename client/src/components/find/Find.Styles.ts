@@ -1,4 +1,4 @@
-import { Drawer } from "@mui/material";
+import { Avatar, Drawer } from "@mui/material";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
@@ -15,6 +15,15 @@ export const FindDrawer = styled(Drawer)((props: any) => ({
         borderRadius: '5px',
         boxShadow: '3px 0 4px rgba(0, 0, 0,.15)',
 
+        '@media (max-width: 540px)': {
+            height: props.isFindOpen ? 559 : '0px',
+            left: '0 !important',
+            width: '100vw',
+            bottom: '100px !important',
+            position: 'fixed',
+            boxShadow: '12px 0 4px rgba(0, 0, 0,.15)',
+        },
+
         ' & .MuiDrawer-paper': {
             position: 'absolute',
             height: props.height,
@@ -24,7 +33,15 @@ export const FindDrawer = styled(Drawer)((props: any) => ({
             overflowY: 'auto',
             bottom: 0,
             boxShadow: '4px 0 24px rgba(0, 0, 0,.15)',
+
+            '@media (max-width: 540px)': {
+                width: '100%',
+                bottom: 'initial',
+                position: 'fixed'
+
+            }
         }
+
     }
 }));
 
@@ -48,8 +65,13 @@ export const FindHeader = styled('div')((props: any) => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: '14px',
+
+        '@media (max-width: 540px)': {
+            marginLeft: 10
+        }
+
     }
-}))
+}));
 
 export const FindLink = styled(Link)(() => ({
     '&&': {
@@ -60,7 +82,7 @@ export const FindLink = styled(Link)(() => ({
             background: '#3C414240'
         }
     }
-}))
+}));
 
 export const SuggestedLink = styled(Link)(() => ({
     '&&': {
@@ -70,5 +92,16 @@ export const SuggestedLink = styled(Link)(() => ({
         '&:hover': {
             background: 'none'
         }
+    }
+}));
+
+export const FriendsAvatar = styled(Avatar)(() => ({
+    '&&': {
+        width: 204,
+        height: 204,
+        '@media (max-width: 540px)': {
+            width: 140,
+            height: 140,
+        },
     }
 }))

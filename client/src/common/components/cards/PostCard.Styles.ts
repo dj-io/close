@@ -1,7 +1,7 @@
 import { styled } from '@mui/material/styles';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
-import { CardContent } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -38,5 +38,19 @@ export const Content = styled(CardContent)(() => ({
         },
 
 
+    }
+}));
+
+export const CardWrapper = styled(Card)((props: any) => ({
+    '&&': {
+        maxWidth: 500,
+        width: !props.expanded ? 375 : 500,
+        marginTop: '32px',
+        boxShadow: 'none',
+
+        '@media (max-width: 540px)': {
+            maxWidth: 335,
+            marginTop: '0'
+        }
     }
 }))

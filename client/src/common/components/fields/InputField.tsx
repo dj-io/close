@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CustomInput } from '../../styles/Fields.Styles.ts';
+import { CustomInput, Media } from '../../styles/Fields.Styles.ts';
 import { Button, Grid, InputLabel, FormHelperText, CardMedia } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { SubmitButton } from '../../styles/Buttons.Styles.ts';
@@ -40,15 +40,9 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, im
             {/* render image */}
             {image && (
                 <InputLabel htmlFor={row.name}>
-                    <CardMedia
+                    <Media
                         component="img"
                         image={image}
-                        sx={{
-                            width: 204,
-                            height: 204,
-                            borderRadius: '50%',
-                            cursor: 'pointer'
-                        }}
                         alt={row.name}
                     />
                 </InputLabel>

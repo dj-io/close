@@ -1,15 +1,70 @@
+import { Card, CardHeader, ImageList, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import EasyEdit from 'react-easy-edit';
+
+
+export const CustomImageList = styled(ImageList)(() => ({
+    '&&': {
+        width: 600,
+        height: 500,
+        marginTop: '32px',
+        overflowY: 'inherit',
+
+
+        '@media (max-width: 540px)': {
+            width: 355,
+            maxHeight: '100vh',
+            height: 582,
+            marginTop: '20px',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            msOverflowStyle: 'none',  /* IE and Edge */
+            scrollbarHeight: 'none',
+            '::-webkit-scrollbar': {
+                display: 'none',
+            },
+        }
+    }
+}))
+
+export const CustomCardHeader = styled(CardHeader)(() => ({
+    '&&': {
+
+        '@media (max-width: 540px)': {
+            width: 355,
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            msOverflowStyle: 'none',  /* IE and Edge */
+            scrollbarHeight: 'none',
+            '::-webkit-scrollbar': {
+                display: 'none',
+            },
+        }
+    }
+}));
+
+export const HeaderText = styled(Typography)(() => ({
+    '&&': {
+        fontWeight: 'bold',
+        color: '#3C414270',
+
+        '@media (max-width: 540px)': {
+            fontSize: '2.125rem',
+        },
+    }
+}))
+
+// REACT-EASY-EDIT STYLES
 
 export const HeaderEditor = styled('div')((props: any) => ({
     '.easy-edit-inline-wrapper': {
         display: 'flex',
         flexDirection: 'row',
-        gap: '5px'
+        gap: '5px',
     },
 
     '.easy-edit-component-wrapper > img': {
-        cursor: 'pointer'
+        cursor: 'pointer',
     },
 
     '.easy-edit-component-wrapper input[type=text]': {
@@ -31,6 +86,12 @@ export const HeaderEditor = styled('div')((props: any) => ({
         ':focus-visible': {
             outline: 'none',
         },
+
+        '@media (max-width: 540px)': {
+            width: '130px',
+            fontSize: '1.825rem',
+        },
+
     },
 
     '.easy-edit-button-wrapper': {
@@ -50,7 +111,17 @@ export const HeaderEditor = styled('div')((props: any) => ({
     },
 
     '.easy-edit-not-allowed': {
-        cursor: 'default'
+        cursor: 'default',
+
+        '& .MuiAvatar-root': {
+            width: 204,
+            height: 204,
+
+            '@media (max-width: 540px)': {
+                width: 140,
+                height: 140,
+            }
+        },
     }
 }));
 
@@ -76,6 +147,10 @@ export const BodyEditor = styled('div')(() => ({
 
         ':focus-visible': {
             outline: 'none',
+        },
+
+        '@media (max-width: 540px)': {
+            width: '130px',
         },
     },
 

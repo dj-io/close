@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { IconWrapper, NoActivityLink, NoActivityWrapper } from './Panels.Styles.ts';
+import { IconWrapper, NoActivityLink, NoActivityWrapper, Subject } from './Panels.Styles.ts';
 import { Grid, Typography } from '@mui/material';
 import { Confirm } from '../buttons/Confirm.tsx';
 
@@ -31,11 +31,11 @@ export const NoActivity: React.FC<INoActivityProps> = ({
         <NoActivityWrapper>
             <Grid
                 container
-                spacing={3}
+                spacing={0}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{ marginLeft: '3%' }}
+                sx={{ minHeight: '45vh' }}
             >
                 <Grid item sx={12} >
                     <IconWrapper>
@@ -49,13 +49,12 @@ export const NoActivity: React.FC<INoActivityProps> = ({
                 >
                     {title}
                 </Typography>
-                <Typography
-
+                <Subject
                     variant="subtitle1"
                     color="text.secondary"
                 >
                     {description}
-                </Typography>
+                </Subject>
                 {path && <NoActivityLink to={path} id={link} > {link} </NoActivityLink>}
                 {func && <Confirm label={link} func={func} />}
             </Grid>

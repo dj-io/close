@@ -17,6 +17,9 @@ export const MoreWrapper = styled("div")(() => ({
         color: '#3C4142',
         margin: '100px 24px 0px 0px',
         position: 'relative',
+        '@media (max-width: 540px)': {
+            margin: '25px 24px 0px 14px',
+        }
     }
 }));
 
@@ -41,6 +44,20 @@ export const NavWrapper = styled(Grid)(() => ({
         maxWidth: '140px',
         borderRight: '1px solid #3C414250',
         position: 'fixed',
+
+        '@media (max-width: 540px)': {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 20,
+            width: '100vw',
+            maxHeight: '90px',
+            maxWidth: '100vw',
+            borderRight: 'none',
+            position: 'fixed',
+            bottom: '0 !important',
+            background: 'white',
+            zIndex: 1000
+        }
     }
 }))
 

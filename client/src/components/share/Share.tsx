@@ -3,7 +3,7 @@ import { Grid } from '@mui/material';
 import SelectMedia from './SelectMedia.tsx'
 import Caption from './Caption.tsx';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
-import { share } from '../../common/api/user/Users.Api.ts';
+import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
 import { IShareStateToProps, IShareDispatchToProps } from '../../types/user.ts'
 import { userValues } from '../../common/constants/requests.ts';
 import { uploadPostImage } from '../../common/api/user/Post.Api.ts';
@@ -56,6 +56,8 @@ class Share extends React.Component<ShareProps> {
         formData.append("file", this.state.files);
 
         await uploadPostImage(id, formData);
+
+        return retreiveProfile(this.props.user.id)
     }
 
     handleChange = (e) => {
@@ -86,8 +88,8 @@ class Share extends React.Component<ShareProps> {
                 )
         );
 
-        this.uploadImage(newPostId[0].id)
-        this.props.profiles(newPost.data);
+        const imageUploaded = await this.uploadImage(newPostId[0].id);
+        this.props.profiles(imageUploaded.data);
         window.history.back();
     }
 
@@ -101,7 +103,7 @@ class Share extends React.Component<ShareProps> {
                     isOpen={this.state.open}
                     openDialog={() => this.setOpen(true)}
                     closeDialog={() => this.setOpen(false)}
-                    back={() => this.setState({ post: {} })}
+                    back={() => this.setState({ picture: '' })}
                 >
                     {!this.state.picture &&
                         <SelectMedia handleUpload={this.handlePreview} />

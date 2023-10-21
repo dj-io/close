@@ -1,6 +1,7 @@
 import { styled } from "@mui/system";
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
+import { CardMedia } from "@mui/material";
 
 
 export const StyledField = styled(TextField)({
@@ -23,4 +24,19 @@ export const CustomInput = styled(Input)({
     '&&': {
 
     }
-})
+});
+
+export const Media = styled(CardMedia)(() => ({
+    '&&': {
+        width: 204,
+        height: 204,
+        borderRadius: '50%',
+        cursor: 'pointer',
+
+        '@media (max-width: 540px)': {
+            width: 140,
+            height: 140,
+        }
+
+    }
+}))

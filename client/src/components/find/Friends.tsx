@@ -15,12 +15,14 @@ import CloudSyncTwoToneIcon from '@mui/icons-material/CloudSyncTwoTone';
 import NoPhotographyTwoToneIcon from '@mui/icons-material/NoPhotographyTwoTone';
 import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import Fade from '@mui/material/Fade';
-import { Seperate } from './Find.Styles.ts';
+import { FriendsAvatar, Seperate } from './Find.Styles.ts';
 import { find, profilePicUrl, retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { postImageUrl } from '../../common/api/user/Post.Api.ts';
+import { CustomCardHeader, CustomImageList } from '../profile/Profile.Styles.ts';
+import useWindowDimensions from '../../common/hooks/GetWindowDimensions.tsx';
 
 interface IFriends {
 
@@ -29,6 +31,7 @@ interface IFriends {
 const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
 
     const [friend, setFriend] = useState([]);
+    const { isMobile } = useWindowDimensions();
 
     const name = useParams().name;
 
@@ -67,19 +70,18 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
     return (
         <Grid
             container
-            spacing={3}
+            spacing={isMobile ? 0 : 3}
             direction="column"
             alignItems="center"
             justifyContent="center"
-            sx={{ marginLeft: '3%' }}
+            sx={{ minHeight: '45vh', marginLeft: isMobile ? null : '5%' }}
         >
             <Grid item sx={8} >
-                <CardHeader
+                <CustomCardHeader
                     avatar={
-                        <Avatar
+                        <FriendsAvatar
                             alt={username}
                             src={profilePicUrl(id)}
-                            sx={{ width: 204, height: 204 }}
                         />
                     }
                     action={
@@ -105,7 +107,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                             {`${userPosts} posts ${userLikes} likes`} <br />
                             <Typography variant="body1" color="text.secondary">
                                 {biography}
-                                <Submit label="Follow" func={follow} disabledButton={following} />
+                                <Submit width={isMobile ? '100%' : null} label="Follow" func={follow} disabledButton={following} />
                             </Typography>
                         </Typography>
                     }
@@ -114,7 +116,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
             <Grid item xs={8}>
                 <Seperate />
                 {post?.length ?
-                    <ImageList sx={{ width: 1000, height: 500, marginTop: '32px', overflowY: 'inherit', }} cols={3} rowHeight={395}>
+                    <CustomImageList cols={3} rowHeight={isMobile ? 295 : 365}>
                         {post?.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts.id}`}>
                                 <ImageListItem key={postImageUrl(posts.id)}>
@@ -127,7 +129,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                                 </ImageListItem>
                             </Link>
                         ))}
-                    </ImageList> :
+                    </CustomImageList> :
                     (
                         <NoActivity
                             icon={<NoPhotographyTwoToneIcon fontSize="large" />}

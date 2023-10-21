@@ -19,5 +19,5 @@ export enum UserActionTypes {
     SHARE_LINK = 'Share your first photo',
     SHARE_PATH = '/share',
     NO_POSTS = 'No Posts Yet',
-    NO_POSTS_MESSAGE = 'When a friend posts, their photos and videos will appear on their profile',
+    NO_POSTS_MESSAGE = 'When a friend posts, their photos and videos will appear here',
 }

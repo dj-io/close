@@ -5,6 +5,9 @@ import { DialogContent } from '@mui/material';
 export const BootstrapDialog = styled(Dialog)(({ theme, spacing }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(spacing),
+        '@media (max-width: 540px)': {
+            padding: theme.spacing(2),
+        }
     },
     '& .MuiDialogActions-root': {
         padding: theme.spacing(1),

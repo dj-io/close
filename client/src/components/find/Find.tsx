@@ -10,6 +10,7 @@ import { find, profilePicUrl } from '../../common/api/user/Users.Api.ts';
 import { Link } from 'react-router-dom';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { Suggested } from './Suggested.tsx';
+import withWindowDimensions from '../../common/hooks/WithWindowDimensions.tsx';
 
 interface IFindProps {
 
@@ -30,7 +31,6 @@ export type FindProps = IFindStateToProps & IFindDispatchToProps & IFindProps;
  */
 class Find extends React.Component<FindProps> {
     state: IFindState = {
-        direction: 'left',
         find: '',
         found: true,
         loading: null
@@ -41,7 +41,6 @@ class Find extends React.Component<FindProps> {
     }
 
     handleChange = (e) => this.setState({ find: e.target.value });
-
 
     search = async () => {
         this.setState({ loading: true })
@@ -70,13 +69,14 @@ class Find extends React.Component<FindProps> {
                     height='100vh'
                     width={this.props.isFindOpen ? 360 : 10}
                     elevation={1}
+                    isFindOpen={this.props.isFindOpen}
                     variant='persistent'
-                    anchor={this.state.direction}
+                    anchor={this.props.isMobile ? 'bottom' : 'left'}
                     open={this.props.isFindOpen}
                     onClose={!this.props.isFindOpen}
                 >
                     <FindHeader>
-                        <Grid sx={{ marginBottom: '25px', }} container direction='column' alignItems='start'>
+                        <Grid sx={{ marginBottom: '25px', }} container direction='column' alignItems='center'>
                             <Typography sx={{ marginRight: 32, color: '#3C414270', fontWeight: 'bold' }} variant='h4'>Find </Typography >
                             {/* TODO: update form with start/end adornments use enter as submit*/}
                             <Form
@@ -94,7 +94,7 @@ class Find extends React.Component<FindProps> {
                     <Grid sx={{ marginTop: '25px', marginRight: 32, }} container direction='column' alignItems='start'>
                         {Object.keys(this.props.foundUser).length > 1 && (
                             <>
-                                <Typography sx={{ marginRight: 32, color: '#3C414270' }} variant='button'>
+                                <Typography sx={{ marginRight: 32, p: 2, color: '#3C414270' }} variant='button'>
                                     {UserActionTypes.RECENT}
                                 </Typography >
                                 <FindLink to={`/${this.props.foundUser.username}`}>
@@ -141,4 +141,4 @@ class Find extends React.Component<FindProps> {
     }
 }
 
-export default Find;
+export default withWindowDimensions(Find);

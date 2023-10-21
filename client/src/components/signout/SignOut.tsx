@@ -78,7 +78,7 @@ class SignOut extends React.Component<SignOutProps> {
                 >
                     <ConfirmStatus
                         icon={<RestartAltTwoToneIcon fontSize="large" />}
-                        title="Your token has expired"
+                        title="Your session has expired"
                         description="Enter password below to stay logged in"
                         link="I am Logging out"
                         func={() => this.props.logout()}

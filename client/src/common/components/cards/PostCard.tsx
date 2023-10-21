@@ -20,7 +20,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import { InputLabel, Tooltip } from '@mui/material';
 import Fade from '@mui/material/Fade';
-import { Content, ExpandMore, PostLink } from './PostCard.Styles.ts';
+import { CardWrapper, Content, ExpandMore, PostLink } from './PostCard.Styles.ts';
 import MultiField from '../fields/MultiField.tsx';
 import { commentFields } from '../../constants/formFields.ts';
 import { Pop } from '../popover/Pop.tsx';
@@ -77,13 +77,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
     }
 
     return (
-        <Card sx={{
-            maxWidth: 500,
-            width: !expanded ? 375 : 500,
-            marginTop: '32px',
-            boxShadow: 'none'
-        }}
-        >
+        <CardWrapper expanded={expanded} >
             <CardHeader
                 avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={profilePicUrl(user?.id)} /> </Link>}
                 action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
@@ -95,7 +89,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 height="auto"
                 image={postImageUrl(post.id)}
                 sx={{ border: '1px solid #3C414260', borderRadius: 1 }}
-                alt="Paella dish"
+                alt={post.caption}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -167,6 +161,6 @@ export const PostCard: React.FC<IPostcardProps> = ({
 
                 </Content>
             </Collapse>
-        </Card >
+        </CardWrapper >
     );
 }

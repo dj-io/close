@@ -6,6 +6,7 @@ import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import { PostCard } from '../../common/components/cards/PostCard.tsx';
 import { profilePicUrl, retreiveProfile } from '../../common/api/user/Users.Api.ts';
 import { retreivePost, newComment } from '../../common/api/user/Post.Api.ts';
+import { Grid } from '@mui/material';
 
 interface IPost {
 
