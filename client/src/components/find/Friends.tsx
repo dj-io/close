@@ -21,7 +21,7 @@ import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { postImageUrl } from '../../common/api/user/Post.Api.ts';
-import { CustomCardHeader, CustomImageList } from '../profile/Profile.Styles.ts';
+import { CustomCardHeader, CustomImageList, HeaderText } from '../profile/Profile.Styles.ts';
 import useWindowDimensions from '../../common/hooks/GetWindowDimensions.tsx';
 
 interface IFriends {
@@ -92,15 +92,9 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                         </IconButton>
                     }
                     title={
-                        <Typography
-                            sx={{
-                                fontWeight: 'bold',
-                                color: '#3C414270'
-                            }}
-                            variant='h3'
-                        >
+                        <HeaderText variant='h3'>
                             {username}
-                        </Typography>
+                        </HeaderText>
                     }
                     subheader={
                         <Typography variant='button'>
