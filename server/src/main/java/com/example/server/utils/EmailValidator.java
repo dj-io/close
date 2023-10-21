@@ -22,8 +22,6 @@ public class EmailValidator implements Predicate<String> {
             isMatch = true;
         }
 
-        System.out.println(">>>>>>>" + email + ": "+ match);
-
         return isMatch;
     }
 }
