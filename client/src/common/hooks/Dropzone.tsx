@@ -18,7 +18,7 @@ export const MyDropzone: React.FC<IDropzone> = ({ handleUpload, children }) => {
             <input {...getInputProps()} />
             {
                 // isDragActive ?
-                //     <p>Drop the files here ...</p> :
+                //     <p>Drop your photo here</p> :
                 children
             }
         </div>

@@ -31,6 +31,7 @@ interface IFriends {
 const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
 
     const [friend, setFriend] = useState([]);
+    const [loading, setLoading] = useState(false);
     const { isMobile } = useWindowDimensions();
 
     const name = useParams().name;
@@ -48,6 +49,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
     }
 
     const follow = async () => {
+        setLoading(true)
         const { authorities, ...rest } = currentUser;
         const data = {
             ...rest,
@@ -59,6 +61,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
 
         const followed = await share(data);
         profiles(followed.data);
+        setLoading(false);
 
     }
 
@@ -101,7 +104,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                             {`${userPosts} posts ${userLikes} likes`} <br />
                             <Typography variant="body1" color="text.secondary">
                                 {biography}
-                                <Submit width={isMobile ? '100%' : null} label="Follow" func={follow} disabledButton={following} />
+                                <Submit loading={loading} width={isMobile ? '100%' : null} label="Follow" func={follow} disabledButton={following || loading} />
                             </Typography>
                         </Typography>
                     }

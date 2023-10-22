@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { CustomInput, Media } from '../../styles/Fields.Styles.ts';
+import { CustomInput, Media, isLoading } from '../../styles/Fields.Styles.ts';
 import { Button, Grid, InputLabel, FormHelperText, CardMedia } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 import { SubmitButton } from '../../styles/Buttons.Styles.ts';
+import useWindowDimensions from '../../hooks/GetWindowDimensions.tsx';
 
 interface IInputField {
     row: Object;
@@ -12,6 +13,8 @@ interface IInputField {
 }
 
 const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, image }) => {
+    const { isMobile } = useWindowDimensions();
+
     return (
         <Grid
             container
@@ -40,11 +43,13 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, im
             {/* render image */}
             {image && (
                 <InputLabel htmlFor={row.name}>
-                    <Media
-                        component="img"
-                        image={image}
-                        alt={row.name}
-                    />
+                    {isSubmitting ?
+                        <CircularProgress thickness={2.6} size={isMobile ? 140 : 204} color="success" /> :
+                        <Media
+                            component="img"
+                            image={image}
+                            alt={row.name}
+                        />}
                 </InputLabel>
             )}
         </Grid>

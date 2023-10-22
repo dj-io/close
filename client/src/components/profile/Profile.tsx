@@ -37,7 +37,8 @@ interface IProfileState {
     posts: number;
     editing: boolean;
     pictures: string; // TODO: make IFields
-    fields: any
+    fields: any;
+    loading: boolean;
 }
 
 export type ProfileProps = IProfileStateToProps & IProfileDispatchToProps & IProfileProps;
@@ -48,6 +49,7 @@ class Profile extends React.Component<ProfileProps> {
         posts: 0,
         editing: false,
         profilePic: profilePicUrl(this.props.user.id),
+        loading: false,
         fields: {
             username: this.props.user.username,
             biography: this.props.user.biography
@@ -58,19 +60,20 @@ class Profile extends React.Component<ProfileProps> {
     likes = this.props.user?.post?.forEach(post => this.state.userLikes += post.likes);
     following = this.props?.user?.followed?.map((id) => id.followedId)
         .find((id) => id === this.props.user.id);
-
+    setLoading = loading => this.setState({ loading })
     saveName = username => this.setState({ fields: { ...this.state.fields, username } })
     saveBio = biography => this.setState({ fields: { ...this.state.fields, biography } });
     savePic = picture => this.setState({ fields: { ...this.state.fields, picture } });
 
     handleUpload = async (file) => {
+        this.setLoading(true)
         const { id } = this.props.user;
 
         const formData = new FormData();
         formData.append("file", file);
 
         await uploadProfilePic(id, formData);
-        this.setState({ editing: !this.state.editing })
+        this.setState({ loading: false, editing: !this.state.editing })
     }
 
     handleEditing = async () => {
@@ -145,6 +148,7 @@ class Profile extends React.Component<ProfileProps> {
                                                 <InputField
                                                     row={profileFields}
                                                     image={this.state.profilePic}
+                                                    isSubmitting={this.state.loading}
                                                 />
                                             }
                                         />

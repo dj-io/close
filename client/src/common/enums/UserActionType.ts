@@ -18,10 +18,12 @@ export enum UserActionTypes {
     FIND_FRIENDS = 'Find Friends',
     FOLLOW_MESSAGE = 'When you follow friends, you\'ll see the photos and videos they post here',
     FOLLOW_FRIENDS = 'Follow your first Friend',
+    FOLLOW_MORE_FRIENDS = 'Follow More Friends',
     SHARE_PHOTOS = 'Share Photos',
     SHARE_MESSAGE = 'When you share photos, they will appear on your profile',
     SHARE_LINK = 'Share your first photo',
     SHARE_PATH = '/share',
     NO_POSTS = 'No Posts Yet',
     NO_POSTS_MESSAGE = 'When a friend posts, their photos and videos will appear here',
+    NO_FRIENDS_POSTED = 'When Friends you follow upload posts you will see them here'
 }

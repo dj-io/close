@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import GroupAddTwoToneIcon from '@mui/icons-material/GroupAddTwoTone';
+import ImageNotSupportedTwoToneIcon from '@mui/icons-material/ImageNotSupportedTwoTone';
 import { PostCard } from '../../common/components/cards/PostCard.tsx';
 import { Seperate } from './Home.Styles.ts';
 import { returnUsers } from '../../common/api/user/Users.Api.ts';
@@ -8,6 +9,7 @@ import { IHomeStateToProps, IHomeDispatchToProps } from '../../types/app.ts';
 import { Nav, Find } from '../index.ts';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
+import { UserActions } from '../../redux/actionTypes/UserActionTypes.js';
 
 
 interface IHomeProps {
@@ -52,16 +54,26 @@ class Home extends React.Component<HomeProps> {
             >
                 {this.props.following.length > 0 ?
                     this.props.following.map((user) => (
-                        user.post.map((post) => (
-                            <>
-                                <PostCard
-                                    page="home"
-                                    post={post}
-                                    user={user}
-                                />
-                                <Seperate />
-                            </>
-                        ))
+                        user.post.length ? (
+                            user.post.map((post) => (
+                                <>
+                                    <PostCard
+                                        page="home"
+                                        post={post}
+                                        user={user}
+                                    />
+                                    <Seperate />
+                                </>
+                            ))
+                        ) : (
+                            <NoActivity
+                                icon={<ImageNotSupportedTwoToneIcon fontSize="large" />}
+                                title={UserActionTypes.NO_POSTS}
+                                description={UserActionTypes.NO_FRIENDS_POSTED}
+                                link={UserActionTypes.FOLLOW_MORE_FRIENDS}
+                                func={() => this.props.openFind(!this.props.isFindOpen)}
+                            />
+                        )
                     )) : (
                         <NoActivity
                             icon={<GroupAddTwoToneIcon fontSize="large" />}

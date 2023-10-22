@@ -111,7 +111,7 @@ class Navigation extends React.Component<NavProps> {
                         <CustomAvatar
                             onClick={() => this.closeFind('profile', !this.state.profile)}
                             page={this.state.profile}
-                            alt="Apple"
+                            alt={this.props.user.username}
                             src={profilePicUrl(this.props.user.id)}
                         />
                     </Link>
