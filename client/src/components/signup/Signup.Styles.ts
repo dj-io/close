@@ -21,7 +21,7 @@ export const BackGroundHeader = styled(Typography)(() => ({
 
         '@media (max-width: 790px)': {
             display: 'flex',
-            fontSize: '140px',
+            fontSize: '120px',
         }
     }
 }));

@@ -23,8 +23,8 @@ const App = ({
         {loggedIn && <SignOut />}
         <Routes>
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
-          <Route exact path='/home' element={<Home />} />
           <Route element={<Protected hasAccount={hasAccount} />}>
+            <Route exact path='/home' element={<Home />} />
             <Route key='home-post' path='/home/:post' element={<Post currentUser={user} />} />
             <Route path='/share' element={<Share />} />
             <Route path='/profile/:profileId' element={<Profile />} />
