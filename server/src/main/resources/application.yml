@@ -3,6 +3,7 @@ rsa:
   public-key: classpath:certs/public.pem
 
 server:
+  port: 5000
   error:
     include-message: always
     include-binding-errors: always
@@ -14,22 +15,25 @@ aws:
       user: close-web-v1
 
 spring:
-  h2:
-    console:
-      enabled: true
+#  h2:
+#    console:
+#      enabled: true
   datasource:
+#    username: closeco
+#    password: Stayahead33
+#    url: jdbc:postgresql://close-web-v1-db.c67jtqiye14y.us-east-1.rds.amazonaws.com:5432/closewebdb
     username: sadu
     password: jujuotb
     url: jdbc:postgresql://localhost:5432/close_db
     generate-unique-name: false
     name: close
   jpa:
-    hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
     show-sql: true
   main:
     web-application-type: servlet

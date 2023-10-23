@@ -44,7 +44,7 @@ public class RegistrationService {
                 )
         );
 
-        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
+        String link = "http://close.us-east-1.elasticbeanstalk.com/api/v1/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getName(), link));
 
         return token;
