@@ -47,9 +47,10 @@ export const HeaderText = styled(Typography)(() => ({
     '&&': {
         fontWeight: 'bold',
         color: '#3C414270',
+        fontFamily: "'Ruda', sans-serif",
 
         '@media (max-width: 790px)': {
-            fontSize: '2.125rem',
+            fontSize: '1.975rem',
         },
     }
 }))
