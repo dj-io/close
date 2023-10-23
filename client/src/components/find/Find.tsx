@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { Suggested } from './Suggested.tsx';
 import withWindowDimensions from '../../common/hooks/WithWindowDimensions.tsx';
+import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 
 interface IFindProps {
 
@@ -96,6 +97,7 @@ class Find extends React.Component<FindProps> {
                                 <FindLink to={`/${this.props.foundUser.username}`}>
                                     <CardHeader
                                         sx={{ width: 300 }}
+                                        onClick={() => this.props.openFind(!this.props.isFindOpen)}
                                         avatar={
                                             <IconButton>
                                                 <Avatar

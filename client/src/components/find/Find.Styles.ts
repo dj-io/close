@@ -16,7 +16,7 @@ export const FindDrawer = styled(Drawer)((props: any) => ({
         boxShadow: '3px 0 4px rgba(0, 0, 0,.15)',
 
         '@media (max-width: 790px)': {
-            height: props.isFindOpen ? 559 : '0px',
+            height: props.isFindOpen ? 459 : '0px',
             left: '0 !important',
             width: '100vw',
             bottom: '100px !important',

@@ -50,7 +50,7 @@ export const HeaderText = styled(Typography)(() => ({
         fontFamily: "'Ruda', sans-serif",
 
         '@media (max-width: 790px)': {
-            fontSize: '1.975rem',
+            fontSize: '1.925rem',
         },
     }
 }))
