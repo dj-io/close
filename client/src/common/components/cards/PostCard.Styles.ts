@@ -49,7 +49,7 @@ export const CardWrapper = styled(Card)((props: any) => ({
         boxShadow: 'none',
 
         '@media (max-width: 790px)': {
-            maxWidth: 335,
+            maxWidth: !props.expanded ? 335 : 325,
             marginTop: '0'
         }
     }
