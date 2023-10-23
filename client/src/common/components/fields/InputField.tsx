@@ -34,15 +34,16 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, im
             />
             {/* render text button */}
             {row.label && (
-                <InputLabel htmlFor={row.name}>
-                    <SubmitButton disabled={isSubmitting} variant="contained" component="span">
-                        {isSubmitting ? <CircularProgress color="success" /> : row.label}
-                    </SubmitButton>
-                </InputLabel>
+                // <InputLabel htmlFor={row.name}>
+                <SubmitButton disabled={isSubmitting} variant="contained" component="span">
+                    {isSubmitting ? <CircularProgress color="success" /> : row.label}
+                </SubmitButton>
+                // </InputLabel>
             )}
             {/* render image */}
             {image && (
-                <InputLabel htmlFor={row.name}>
+                // <InputLabel htmlFor={row.name}>
+                <>
                     {isSubmitting ?
                         <CircularProgress thickness={2.6} size={isMobile ? 140 : 204} color="success" /> :
                         <Media
@@ -50,7 +51,8 @@ const InputField: React.FC<IInputField> = ({ row, isSubmitting, handleChange, im
                             image={image}
                             alt={row.name}
                         />}
-                </InputLabel>
+                </>
+                // </InputLabel>
             )}
         </Grid>
     );

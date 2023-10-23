@@ -41,8 +41,12 @@ class Share extends React.Component<ShareProps> {
     setOpen = ({ open }) => this.setState({ open });
 
     handlePreview = (files) => {
+
+        console.log("PREVIEWW: ----->", files)
         // SET PREVIEW IMAGE IN COMPONENT 
         const file = URL.createObjectURL(files);
+
+        console.log("BLOB VIEW: ------> ", file)
 
         if (!files.type.startsWith('image'))
             this.setState({ mediaType: 'video' });
