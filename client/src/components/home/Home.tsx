@@ -27,7 +27,9 @@ export type HomeProps = IHomeStateToProps & IHomeDispatchToProps & IHomeProps;
  * @class Home @extends React.Component<HomeProps>
  */
 class Home extends React.Component<HomeProps> {
-    state: IHomeState = {}
+    state: IHomeState = {
+        posts: false,
+    }
 
     renderFeed = async () => {
         const res = await returnUsers();
@@ -38,8 +40,21 @@ class Home extends React.Component<HomeProps> {
         this.props.feed(users)
     }
 
+    hasPosts = () => {
+        for (const user of this.props?.following) {
+            if (user?.post?.length) {
+                this.setState({ posts: true })
+            }
+        }
+    }
+
     componentDidMount() {
         this.renderFeed();
+        this.hasPosts();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.following !== this.props.following) this.hasPosts();
     }
 
     render(): JSX.Element {
@@ -53,8 +68,8 @@ class Home extends React.Component<HomeProps> {
                 sx={{ minHeight: '45vh' }}
             >
                 {this.props.following.length > 0 ?
-                    this.props.following.map((user) => (
-                        user.post.length ? (
+                    this.state.posts ? (
+                        this.props.following.map((user) => (
                             user.post.map((post) => (
                                 <>
                                     <PostCard
@@ -65,16 +80,16 @@ class Home extends React.Component<HomeProps> {
                                     <Seperate />
                                 </>
                             ))
-                        ) : (
-                            <NoActivity
-                                icon={<ImageNotSupportedTwoToneIcon fontSize="large" />}
-                                title={UserActionTypes.NO_POSTS}
-                                description={UserActionTypes.NO_FRIENDS_POSTED}
-                                link={UserActionTypes.FOLLOW_MORE_FRIENDS}
-                                func={() => this.props.openFind(!this.props.isFindOpen)}
-                            />
-                        )
-                    )) : (
+
+                        ))) : (
+                        <NoActivity
+                            icon={<ImageNotSupportedTwoToneIcon fontSize="large" />}
+                            title={UserActionTypes.NO_POSTS}
+                            description={UserActionTypes.NO_FRIENDS_POSTED}
+                            link={UserActionTypes.FOLLOW_MORE_FRIENDS}
+                            func={() => this.props.openFind(!this.props.isFindOpen)}
+                        />
+                    ) : (
                         <NoActivity
                             icon={<GroupAddTwoToneIcon fontSize="large" />}
                             title={UserActionTypes.FIND_FRIENDS}
