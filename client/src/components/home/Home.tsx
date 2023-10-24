@@ -50,7 +50,6 @@ class Home extends React.Component<HomeProps> {
 
     componentDidMount() {
         this.renderFeed();
-        this.hasPosts();
     }
 
     componentDidUpdate(prevProps, prevState) {

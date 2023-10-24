@@ -25,9 +25,7 @@ class SignOut extends React.Component<SignOutProps> {
     state: ISignOutState = {
         open: false,
         badCredentials: false,
-        user: {
-            username: this.props.user.username,
-        }
+        user: {}
     }
 
     initialValues = {
@@ -41,7 +39,6 @@ class SignOut extends React.Component<SignOutProps> {
 
         this.setState({
             user: {
-                ...this.state.user,
                 [name]: e.target.value
             }
         });
@@ -51,13 +48,18 @@ class SignOut extends React.Component<SignOutProps> {
         const { user } = this.state;
         const { navigate } = this.props;
 
-        const res = await auth(user);
+        const userLogin = {
+            username: this.props.user.username,
+            password: user.password,
+        };
+
+        const res = await auth(userLogin);
         if (!res) this.setState({ badCredentials: true });
 
         if (res?.status === 200) {
             this.props.login(res.data);
             this.props.expiredToken(false);
-            const loggedIn = await find(user.username)
+            const loggedIn = await find(userLogin.username)
             this.props.profiles(loggedIn.data)
         }
 
