@@ -48,7 +48,7 @@ export const NavWrapper = styled(Grid)(() => ({
         '@media (max-width: 790px)': {
             display: 'flex',
             flexDirection: 'column',
-            marginLeft: '10px',
+            marginLeft: '5px',
             gap: 20,
             width: '100vw',
             maxHeight: '90px',
