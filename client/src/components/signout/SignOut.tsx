@@ -65,6 +65,12 @@ class SignOut extends React.Component<SignOutProps> {
 
     }
 
+    handleLogout = () => {
+        this.props.logout();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+    }
+
     render(): JSX.Element {
         return (
             this.props.token && (
@@ -83,7 +89,7 @@ class SignOut extends React.Component<SignOutProps> {
                         title="Your session has expired"
                         description="Enter password below to stay logged in"
                         link="I am Logging out"
-                        func={() => this.props.logout()}
+                        func={() => this.handleLogout()}
                     />
                     <Form
                         fields={signOutFields}

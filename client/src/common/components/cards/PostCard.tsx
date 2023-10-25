@@ -87,13 +87,13 @@ export const PostCard: React.FC<IPostcardProps> = ({
             <CardMedia
                 component="img"
                 height="auto"
-                image={postImageUrl(post.id)}
+                image={postImageUrl(post?.id)}
                 sx={{ border: '1px solid #3C414260', borderRadius: 1 }}
-                alt={post.caption}
+                alt={post?.caption}
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    <PostLink to={`/${user?.username}`}> <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span></PostLink> {excerpt(post.caption, UserActionTypes.CHAR_MAX)}
+                    <PostLink to={`/${user?.username}`}> <span style={{ fontWeight: 'bold', color: '#238636' }}>{user?.username}</span></PostLink> {excerpt(post?.caption, UserActionTypes.CHAR_MAX)}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -101,7 +101,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                     <FavoriteIcon />
                 </IconButton>
                 <Typography sx={{ marginTop: '5px', marginRight: '5px', color: '#238636' }} variant="subtitle1" color="text.secondary">
-                    <PostLink id='post-link' to={!expanded && `/${page}/${post.id}`}>
+                    <PostLink id='post-link' to={!expanded && `/${page}/${post?.id}`}>
                         <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title={`view all ${numOfComments} comments`} placement="bottom">
                             <ShortTextIcon />
                         </Tooltip>
@@ -112,7 +112,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                     variant="subtitle2"
                     color="text.secondary"
                 >
-                    {post.likes} likes
+                    {post?.likes} likes
                 </Typography>
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
@@ -131,7 +131,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                     }
                 </CardContent>
                 <Content>
-                    {post.comment?.map(comment => (
+                    {post?.comment?.map(comment => (
                         <CardHeader
                             avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={profilePicUrl(comment?.user_id)} /> </Link>}
                             action={
@@ -142,9 +142,9 @@ export const PostCard: React.FC<IPostcardProps> = ({
                             title={
                                 <Typography variant="body1" color="text.primary">
                                     <span style={{ fontWeight: 'bold', color: '#238636' }}>
-                                        <PostLink to={`/${comment?.username}`}> {comment.username} </PostLink>
+                                        <PostLink to={`/${comment?.username}`}> {comment?.username} </PostLink>
                                     </span>
-                                    <span> {comment.comment} </span>
+                                    <span> {comment?.comment} </span>
                                 </Typography>
                             }
                             subheader={
@@ -153,7 +153,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                                     variant="subtitle2"
                                     color="text.secondary"
                                 >
-                                    {`${comment.likes} likes`}
+                                    {`${comment?.likes} likes`}
                                 </Typography>
                             }
                         />
