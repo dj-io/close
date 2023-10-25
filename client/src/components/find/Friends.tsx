@@ -115,11 +115,11 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                 {post?.length ?
                     <CustomImageList cols={3} rowHeight={isMobile ? 295 : 365}>
                         {post?.map((posts) => (
-                            <Link id='profile-post-link' to={`/user/${posts.id}`}>
-                                <ImageListItem key={postImageUrl(posts.id)}>
+                            <Link id='profile-post-link' to={`/user/${posts?.id}`}>
+                                <ImageListItem key={postImageUrl(posts?.id)}>
                                     <img
-                                        src={`${postImageUrl(posts.id)}`}
-                                        srcSet={`${postImageUrl(posts.id)}`}
+                                        src={`${postImageUrl(posts?.id)}`}
+                                        srcSet={`${postImageUrl(posts?.id)}`}
                                         alt={posts.caption}
                                         loading="lazy"
                                     />
