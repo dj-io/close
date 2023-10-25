@@ -49,7 +49,7 @@ class SignOut extends React.Component<SignOutProps> {
         const { navigate } = this.props;
 
         const userLogin = {
-            username: this.props.user.username,
+            username: JSON.parse(localStorage.getItem('user')),
             password: user.password,
         };
 
