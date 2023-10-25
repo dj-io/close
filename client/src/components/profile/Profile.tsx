@@ -11,14 +11,13 @@ import SaveAsTwoToneIcon from '@mui/icons-material/SaveAsTwoTone';
 import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 import CloudSyncTwoToneIcon from '@mui/icons-material/CloudSyncTwoTone';
 import NoPhotographyTwoToneIcon from '@mui/icons-material/NoPhotographyTwoTone';
-import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import Fade from '@mui/material/Fade';
+import { Avatar, CardContent, CardHeader, IconButton, Tooltip, Typography } from '@mui/material';
 import { IProfileDispatchToProps, IProfileStateToProps } from '../../types/user.ts';
 import { Seperate } from '../find/Find.Styles.ts';
-import { profilePicUrl, retreiveProfile, share, uploadProfilePic } from '../../common/api/user/Users.Api.ts';
+import { find, profilePicUrl, retreiveProfile, share, uploadProfilePic } from '../../common/api/user/Users.Api.ts';
 import { profiles } from '../../redux/actions/UserActions.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
-import InputField from '../../common/components/fields/InputField.tsx'
 import { profileFields } from '../../common/constants/formFields.ts';
 import { BodyEditor, CustomCardHeader, CustomImageList, HeaderEditor, HeaderText, ProfileWrapper } from './Profile.Styles.ts';
 import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
@@ -26,6 +25,7 @@ import { Toll } from '@mui/icons-material';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { postImageUrl } from '../../common/api/user/Post.Api.ts';
+import InputField from '../../common/components/fields/InputField.tsx'
 import withWindowDimensions from '../../common/hooks/WithWindowDimensions.tsx';
 
 interface IProfileProps {
@@ -48,7 +48,7 @@ class Profile extends React.Component<ProfileProps> {
         userLikes: 0,
         posts: 0,
         editing: false,
-        profilePic: profilePicUrl(this.props.user.id),
+        profilePic: profilePicUrl(this.props?.user?.id),
         loading: false,
         fields: {
             username: this.props.user.username,
@@ -56,14 +56,16 @@ class Profile extends React.Component<ProfileProps> {
         }
     }
 
-    posts = this.props.user?.post?.forEach(post => this.state.posts += 1);
-    likes = this.props.user?.post?.forEach(post => this.state.userLikes += post.likes);
+    posts = this.props?.user?.post?.forEach(post => this.setState({ posts: this.state.posts += 1 }));
+    likes = this.props?.user?.post?.forEach(post => this.setState({ userLikes: this.state.userLikes += post.likes }));
     following = this.props?.user?.followed?.map((id) => id.followedId)
         .find((id) => id === this.props.user.id);
-    setLoading = loading => this.setState({ loading })
+
+    setLoading = loading => this.setState({ loading });
+
     saveName = username => this.setState({ fields: { ...this.state.fields, username } })
     saveBio = biography => this.setState({ fields: { ...this.state.fields, biography } });
-    savePic = picture => this.setState({ fields: { ...this.state.fields, picture } });
+    savePic = picture => this.setState({ fields: { ...this.state.fields } });
 
     handleUpload = async (file) => {
         this.setLoading(true)

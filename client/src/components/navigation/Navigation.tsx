@@ -61,6 +61,8 @@ class Navigation extends React.Component<NavProps> {
 
     onLogout = () => {
         this.props.logout();
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.props.navigate('/');
         if (this.props.isFindOpen) this.props.openFind(false)
     }
@@ -112,7 +114,7 @@ class Navigation extends React.Component<NavProps> {
                             onClick={() => this.closeFind('profile', !this.state.profile)}
                             page={this.state.profile}
                             alt={this.props.user.username}
-                            src={profilePicUrl(this.props.user.id)}
+                            src={profilePicUrl(this.props?.user?.id)}
                         />
                     </Link>
                 </StyledTip>

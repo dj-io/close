@@ -46,6 +46,16 @@ class Signin extends React.Component<SigninProps> {
         });
     };
 
+    setLoginCredentials = (token, username) => {
+        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('user', JSON.stringify(username));
+
+        this.props.login(
+            JSON.parse(localStorage.getItem('token')),
+            JSON.parse(localStorage.getItem('user'))
+        );
+    }
+
     handleSignin = async () => {
         const { user } = this.state;
         const { navigate, authenticatedUser } = this.props;
@@ -55,11 +65,9 @@ class Signin extends React.Component<SigninProps> {
         if (!res) this.setState({ badCredentials: true });
 
         if (res?.status === 200) {
-            this.props.login(res.data)
-            const loggedIn = await find(userLogin.username)
-            this.props.profiles(loggedIn.data)
-            this.props.userCredentials({})
-            navigate('/home')
+            this.setLoginCredentials(res.data, userLogin.username);
+            this.props.userCredentials({});
+            navigate('/home');
         }
 
     }

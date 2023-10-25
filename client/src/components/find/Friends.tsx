@@ -40,7 +40,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
     let userLikes = 0;
     const posts = friend?.post?.forEach(post => userPosts += 1);
     const likes = friend?.post?.forEach(post => userLikes += post.likes);
-    const following = currentUser.followed.map((id) => id.followedId)
+    const following = currentUser.followed?.map((id) => id.followedId)
         .find((id) => id === friend.id);
 
     const returnFriend = async () => {

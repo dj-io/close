@@ -13,8 +13,10 @@ import { returnFind } from './redux/actions/AppActions.ts';
 const mapStateToprops = (state) => ({
     hasAccount: state.UserState.hasAccount,
     user: state.UserState.user,
+    following: state.UserState.following,
     foundUser: state.FindState.foundUser,
     token: state.AuthState.token,
+    username: state.AuthState.username,
 });
 
 /**

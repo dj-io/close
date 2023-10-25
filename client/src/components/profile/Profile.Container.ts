@@ -15,6 +15,7 @@ const mapStateToprops = (state: any): IProfileStateToProps => ({
     user: state.UserState.user,
     following: state.UserState.following,
     foundUser: state.FindState.foundUser,
+    username: state.AuthState.username,
 });
 
 /**
@@ -25,7 +26,7 @@ const mapStateToprops = (state: any): IProfileStateToProps => ({
  */
 const mapDispatchToProps = (dispatch: any): IProfileDispatchToProps => ({
     profiles: bindActionCreators(profiles, dispatch),
-    profilePictures: bindActionCreators(profilePictures, dispatch)
+    profilePictures: bindActionCreators(profilePictures, dispatch),
 });
 
 export const ProfileContainer = connect(

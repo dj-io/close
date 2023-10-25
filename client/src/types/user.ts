@@ -37,6 +37,7 @@ export interface IProfileStateToProps {
     user: any // TODO: Create Iprofile
     foundUser: any // TODO: create IFoundUser
     following: any // TODO: Create IFollowing
+    username: String;
 }
 
 export interface IProfileDispatchToProps {

@@ -79,7 +79,7 @@ export const Suggested: React.FC<ISuggestedProps> = ({ currentUser, following, p
                                 <IconButton>
                                     <Avatar
                                         alt={user.username}
-                                        src={profilePicUrl(user.id)}
+                                        src={profilePicUrl(user?.id)}
                                     />
                                 </IconButton>
                             </SuggestedLink>

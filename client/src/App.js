@@ -4,6 +4,8 @@ import { Post } from './components/profile/Post.tsx';
 import { Signup, Signin, Nav, Profile, Home, Find, Share, SignOut } from './components/index.ts';
 import Friends from './components/find/Friends.tsx';
 import { Protected } from './common/api/auth/Protected.tsx';
+import { useEffect } from 'react';
+import { find } from './common/api/user/Users.Api.ts';
 
 
 const App = ({
@@ -11,9 +13,22 @@ const App = ({
   profiles,
   user,
   token,
+  username,
+  following
 }) => {
 
   const loggedIn = user && token;
+
+  const getProfile = async () => {
+    if (token) {
+      const profile = await find(username);
+      if (profile.status === 200) profiles(profile.data);
+    }
+  }
+
+  useEffect(() => {
+    getProfile();
+  }, [token])
 
   return (
     <div className="App">

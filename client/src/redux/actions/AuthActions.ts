@@ -1,9 +1,9 @@
 import { AuthActions } from '../actionTypes/AuthActionTypes.ts';
 
 
-export const login = (userToken: any) => ({
+export const login = (userToken: String, username: String) => ({
     type: AuthActions.AUTHENTICATE_TOKEN,
-    payload: userToken,
+    payload: { userToken, username },
 });
 
 export const logout = () => ({

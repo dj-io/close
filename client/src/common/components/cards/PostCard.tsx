@@ -133,7 +133,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 <Content>
                     {post.comment?.map(comment => (
                         <CardHeader
-                            avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={profilePicUrl(comment.user_id)} /> </Link>}
+                            avatar={<Link to={`/${comment?.username}`}> <Avatar alt="Apple" src={profilePicUrl(comment?.user_id)} /> </Link>}
                             action={
                                 <IconButton disabled={true} aria-label="settings">
                                     <FavoriteIcon />

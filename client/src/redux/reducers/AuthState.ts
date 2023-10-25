@@ -6,7 +6,8 @@ export interface AuthStateConfig {
 
 const initialState: AuthStateConfig = {
     authenticatedUser: {},
-    token: null,
+    token: localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : '',
+    username: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : '',
     isExpired: false,
     returnUrl: '/'
 }
@@ -16,7 +17,8 @@ export default function reduce(state: AuthStateConfig = initialState, action: an
         case AuthActions.AUTHENTICATE_TOKEN: {
             return {
                 ...state,
-                token: action.payload,
+                token: action.payload.userToken,
+                username: action.payload.username
             }
         }
 
@@ -30,7 +32,8 @@ export default function reduce(state: AuthStateConfig = initialState, action: an
         case AuthActions.LOGOUT: {
             return {
                 ...state,
-                token: action.payload
+                token: action.payload,
+                user: action.payload
             }
         }
 

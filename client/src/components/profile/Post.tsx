@@ -20,7 +20,6 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
     const [user, setUser] = useState([]);
     const [newComments, setNewComments] = useState({
         comment: '',
-        picture: profilePicUrl(currentUser.id),
         user_id: currentUser.id,
         username: currentUser.username,
         likes: 0

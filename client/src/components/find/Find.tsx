@@ -102,7 +102,7 @@ class Find extends React.Component<FindProps> {
                                             <IconButton>
                                                 <Avatar
                                                     alt={this.props.foundUser.username}
-                                                    src={profilePicUrl(this.props.foundUser.id)}
+                                                    src={profilePicUrl(this.props?.foundUser?.id)}
                                                 />
                                             </IconButton>
                                         }
