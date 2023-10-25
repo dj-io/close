@@ -79,7 +79,7 @@ class SignOut extends React.Component<SignOutProps> {
                     openDialog={() => this.setOpen(true)}
                     closeDialog={() => {
                         this.setOpen(false);
-                        this.props.logout();
+                        this.handleLogout();
                     }}
                     title={this.props.user.username}
                     spacing={2}
