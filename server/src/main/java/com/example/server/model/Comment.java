@@ -23,18 +23,15 @@ public class Comment {
 
     private String comment;
     private Long likes;
-    private String picture;
     private String username;
     private Long user_id;
 
     public Comment(String comment,
                    Long likes,
-                   String picture,
                    String username,
                    Long user_id) {
         this.comment = comment;
         this.likes = likes;
-        this.picture = picture;
         this.username = username;
         this.user_id = user_id;
     }

@@ -37,7 +37,6 @@ public class User implements UserDetails {
 
 
     private String name;
-    private String picture;
     private String username;
     private String pronouns;
     private String biography;
@@ -81,7 +80,6 @@ public class User implements UserDetails {
     private List<Following> followed;
 
     public User(String name,
-                String picture,
                 String username,
                 String pronouns,
                 String biography,
@@ -90,7 +88,6 @@ public class User implements UserDetails {
                 String password,
                 UserRole userRole) {
         this.name = name;
-        this.picture = picture;
         this.username = username;
         this.pronouns = pronouns;
         this.biography = biography;
@@ -101,7 +98,6 @@ public class User implements UserDetails {
     }
 
     public User(String name,
-                String picture,
                 String username,
                 String pronouns,
                 String biography,
@@ -110,7 +106,7 @@ public class User implements UserDetails {
                 String password,
                 String profileImageId,
                 UserRole userRole) {
-        this(name, picture, username, pronouns, biography, links, email, password, userRole);
+        this(name, username, pronouns, biography, links, email, password, userRole);
         this.profileImageId = profileImageId;
     }
 
@@ -167,7 +163,6 @@ public class User implements UserDetails {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", picture='" + picture + '\'' +
                 ", username='" + username + '\'' +
                 ", pronouns='" + pronouns + '\'' +
                 ", biography='" + biography + '\'' +

@@ -62,7 +62,7 @@ public class WebSecurityConfig {
                 .authorizeRequests(auth -> auth
                         .antMatchers("/api/v*/registration/**", "/api/v*/auth/**")
                         .permitAll()
-                        .antMatchers(HttpMethod.GET, "/api/v*/users/*/profile-image", "/api/v*/post/*/post-image")
+                        .antMatchers(HttpMethod.GET,"/ping", "/api/v*/users/*/profile-image", "/api/v*/post/*/post-image")
                         .permitAll()
                         .anyRequest()
                         .authenticated()
