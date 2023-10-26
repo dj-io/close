@@ -19,7 +19,7 @@ import { find, profilePicUrl, retreiveProfile, share, uploadProfilePic } from '.
 import { profiles } from '../../redux/actions/UserActions.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { profileFields } from '../../common/constants/formFields.ts';
-import { BodyEditor, CustomCardHeader, CustomImageList, HeaderEditor, HeaderText, ProfileWrapper } from './Profile.Styles.ts';
+import { BodyEditor, CustomCardHeader, CustomImageList, HeaderEditor, HeaderText, PostLink, ProfileWrapper, Source, Video } from './Profile.Styles.ts';
 import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
 import { Toll } from '@mui/icons-material';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
@@ -74,8 +74,8 @@ class Profile extends React.Component<ProfileProps> {
         const formData = new FormData();
         formData.append("file", file);
 
-        await uploadProfilePic(id, formData);
-        this.setState({ loading: false, editing: !this.state.editing })
+        const profileImage = await uploadProfilePic(id, formData);
+        if (profileImage.status === 200) this.setState({ loading: false, editing: !this.state.editing })
     }
 
     handleEditing = async () => {
@@ -91,6 +91,7 @@ class Profile extends React.Component<ProfileProps> {
         if (this.state.editing) {
             const edited = await share(data);
             this.props.profiles(edited.data);
+            localStorage.setItem('user', JSON.stringify(this.state.fields.username));
         }
 
     }
@@ -106,7 +107,7 @@ class Profile extends React.Component<ProfileProps> {
             ]
         };
 
-        const updatedProfile = share(data);
+        const updatedProfile = await share(data);
 
         this.props.profiles(updatedProfile.data);
     }
@@ -131,7 +132,7 @@ class Profile extends React.Component<ProfileProps> {
                                 <EasyEdit
                                     allowEdit={false}
                                     type={Types.FILE}
-                                    value={this.state.profilePic || 'Upload a picture'}
+                                    value={profilePicUrl(this.props?.user?.id) || 'Upload a picture'}
                                     onSave={this.savePic}
                                     editMode={this.state.editing}
                                     saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
@@ -141,7 +142,7 @@ class Profile extends React.Component<ProfileProps> {
                                     displayComponent={
                                         <Avatar
                                             alt={username}
-                                            src={this.state.profilePic}
+                                            src={profilePicUrl(this.props?.user?.id)}
                                         />}
                                     editComponent={
                                         <MyDropzone
@@ -149,7 +150,7 @@ class Profile extends React.Component<ProfileProps> {
                                             children={
                                                 <InputField
                                                     row={profileFields}
-                                                    image={this.state.profilePic}
+                                                    image={profilePicUrl(this.props?.user?.id)}
                                                     isSubmitting={this.state.loading}
                                                 />
                                             }
@@ -216,16 +217,27 @@ class Profile extends React.Component<ProfileProps> {
                     {post?.length ?
                         <CustomImageList cols={3} rowHeight={this.props.isMobile ? 295 : 395}>
                             {post.map((posts) => (
-                                <Link id='profile-post-link' to={`/user/${posts?.id}`}>
+                                <PostLink id='profile-post-link' to={`/user/${posts?.id}`}>
                                     <ImageListItem key={postImageUrl(posts?.id)}>
-                                        <img
-                                            src={`${postImageUrl(posts?.id)}`}
-                                            srcSet={`${postImageUrl(posts?.id)}`}
-                                            alt={posts.caption}
-                                            loading="lazy"
-                                        />
+                                        {posts?.mediaType === 'img' ? (
+                                            <img
+                                                src={`${postImageUrl(posts?.id)}`}
+                                                srcSet={`${postImageUrl(posts?.id)}`}
+                                                alt={posts.caption}
+                                                loading="lazy"
+                                            />
+                                        ) : (
+                                            <Video width="auto" height={this.props.isMobile ? 295 : 395} controls>
+                                                <Source
+                                                    src={`${postImageUrl(posts?.id)}`}
+                                                    srcSet={`${postImageUrl(posts?.id)}`}
+                                                    alt={posts.caption}
+                                                    loading="lazy"
+                                                />
+                                            </Video>
+                                        )}
                                     </ImageListItem>
-                                </Link>
+                                </PostLink>
                             ))}
                         </CustomImageList> :
                         (

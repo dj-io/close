@@ -61,9 +61,9 @@ class Navigation extends React.Component<NavProps> {
 
     onLogout = () => {
         this.props.logout();
+        this.props.navigate('/');
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.props.navigate('/');
         if (this.props.isFindOpen) this.props.openFind(false)
     }
 

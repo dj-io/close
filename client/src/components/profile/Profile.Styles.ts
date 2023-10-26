@@ -1,6 +1,7 @@
 import { Card, CardHeader, ImageList, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 import EasyEdit from 'react-easy-edit';
+import { Link } from "react-router-dom";
 
 
 export const CustomImageList = styled(ImageList)(() => ({
@@ -26,6 +27,46 @@ export const CustomImageList = styled(ImageList)(() => ({
         }
     }
 }))
+
+export const Source = styled('source')(() => ({
+    '&&': {
+        width: 220,
+        height: 395,
+
+        '@media (max-width: 790px)': {
+            height: 295,
+            width: '100%',
+        },
+    }
+}));
+
+export const Video = styled('video')(() => ({
+    '&&': {
+        width: 'auto',
+        height: 395,
+
+        '@media (max-width: 790px)': {
+            height: 295,
+        },
+    }
+}));
+
+export const PostLink = styled(Link)(() => ({
+    '&&': {
+        textDecoration: 'none',
+        color: 'inherit',
+        height: 400,
+
+        '&:hover': {
+            background: '#3C414240'
+        },
+
+        '@media (max-width: 790px)': {
+            height: 300,
+            width: '100%',
+        },
+    }
+}));
 
 export const CustomCardHeader = styled(CardHeader)(() => ({
     '&&': {

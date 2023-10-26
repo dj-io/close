@@ -41,7 +41,7 @@ class Home extends React.Component<HomeProps> {
     }
 
     hasPosts = () => {
-        for (const user of this.props?.following) {
+        for (const user of this.props.following) {
             if (user?.post?.length) {
                 this.setState({ posts: true })
             }

@@ -20,8 +20,8 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
     const [user, setUser] = useState([]);
     const [newComments, setNewComments] = useState({
         comment: '',
-        user_id: currentUser.id,
-        username: currentUser.username,
+        user_id: currentUser?.id,
+        username: currentUser?.username,
         likes: 0
     });
     const [text, setText] = useState({
@@ -68,10 +68,10 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
     useEffect(() => {
         returnPost();
 
-        if (post.user_id) returnUser();
+        if (post?.user_id) returnUser();
     }, [
         postId,
-        post.user_id,
+        post?.user_id,
         text
     ]);
 
@@ -81,7 +81,7 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
             openDialog={() => setOpen(true)}
             closeDialog={() => setOpen(false)}
             label={<ShortTextIcon />}
-            title={user.username}
+            title={user?.username}
             spacing={2}
         >
             <PostCard
@@ -90,7 +90,7 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
                 change={handleChange}
                 post={post}
                 user={user}
-                value={newComments.comment}
+                value={newComments?.comment}
                 expand={true}
             />
         </ConfirmDialog>

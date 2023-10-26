@@ -85,7 +85,10 @@ export const PostCard: React.FC<IPostcardProps> = ({
                 subheader={excerpt(user?.biography, UserActionTypes.CHAR_MAX)}
             />
             <CardMedia
-                component="img"
+                component={post?.mediaType || "img"}
+                autoPlay={expanded}
+                loop
+                controls
                 height="auto"
                 image={postImageUrl(post?.id)}
                 sx={{ border: '1px solid #3C414260', borderRadius: 1 }}
