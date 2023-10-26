@@ -15,8 +15,8 @@ aws:
       user: close-app-v1
 
 spring:
-#  profiles:
-#    active: @spring.profiles.active@
+  profiles:
+    active: prod
   h2:
     console:
       enabled: true
@@ -40,6 +40,7 @@ spring:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+      enabled: true
   codec:
     max-in-memory-size: 10MB
 

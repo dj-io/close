@@ -40,7 +40,6 @@ public class Post {
             unique = true
     )
     private String postImageId;
-    private String caption;
 
     @Column(name = "created", nullable = false, updatable = false)
     @CreationTimestamp
@@ -50,6 +49,8 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime updated;
 
+    private String caption;
+    private String mediaType;
     private Long likes = 0L;
     private Long shares = 0L;
 
@@ -65,6 +66,7 @@ public class Post {
 
     public Post(String postImageId,
                 String caption,
+                String mediaType,
                 Long likes,
                 Long shares,
                 LocalDateTime created,
@@ -72,6 +74,7 @@ public class Post {
                 Long user_id) {
         this.postImageId = postImageId;
         this.caption = caption;
+        this.mediaType = mediaType;
         this.likes = likes;
         this.shares = shares;
         this.created = created;
