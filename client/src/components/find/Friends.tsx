@@ -44,7 +44,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
         .find((id) => id === friend.id);
 
     const returnFriend = async () => {
-        const res = await find(name)
+        const res = await find(name);
         setFriend(res.data);
     }
 
@@ -69,7 +69,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
         returnFriend();
     }, [name, following])
 
-    const { id, username, biography, post } = friend;
+    const { username, biography, post } = friend;
     return (
         <Grid
             container
@@ -84,7 +84,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                     avatar={
                         <FriendsAvatar
                             alt={username}
-                            src={profilePicUrl(id)}
+                            src={profilePicUrl(friend?.id)}
                         />
                     }
                     action={
