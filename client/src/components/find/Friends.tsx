@@ -69,7 +69,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
         returnFriend();
     }, [name, following])
 
-    const { username, biography, post } = friend;
+    const { id, username, biography, post } = friend;
     return (
         <Grid
             container
@@ -84,7 +84,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                     avatar={
                         <FriendsAvatar
                             alt={username}
-                            src={profilePicUrl(friend?.id)}
+                            src={profilePicUrl(id)}
                         />
                     }
                     action={
@@ -113,7 +113,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
             <Grid item xs={8}>
                 <Seperate />
                 {post?.length ?
-                    <CustomImageList cols={3} rowHeight={isMobile ? 295 : 365}>
+                    <CustomImageList cols={3} rowHeight={isMobile ? 295 : 395}>
                         {post?.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts?.id}`}>
                                 <ImageListItem key={postImageUrl(posts?.id)}>
@@ -125,7 +125,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                                             loading="lazy"
                                         />
                                     ) : (
-                                        <Video width="auto" height={this.props.isMobile ? 295 : 395} controls>
+                                        <Video width="auto" height={isMobile ? 295 : 395}>
                                             <Source
                                                 src={`${postImageUrl(posts?.id)}`}
                                                 srcSet={`${postImageUrl(posts?.id)}`}

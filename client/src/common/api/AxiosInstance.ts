@@ -17,7 +17,7 @@ utils.interceptors.request.use((request) => {
     const token = state?.AuthState?.token;
     const isExpired = state?.AuthState?.isExpired;
 
-    if (token) request.headers["Authorization"] = `Bearer ${token}`;
+    if (token && !isExpired) request.headers["Authorization"] = `Bearer ${token}`;
 
     console.log(' request sent ')
 
@@ -33,7 +33,7 @@ utils.interceptors.response.use(
     }, (err) => {
         console.log(`ERR: ${err}`)
         const error = `${err}`;
-        // if (error.endsWith('401')) store.dispatch(expiredToken(true)); // TODO: Implement precise auth token exp. logic for tokenExp exec.
+        if (error.endsWith('401')) store.dispatch(expiredToken(true)); // TODO: Implement precise auth token exp. logic for tokenExp exec.
         // if (err.response.status === 404) throw err.response; // SET UP 404 NOT FOUND PAGE 
         return Promise.reject(err)
     })

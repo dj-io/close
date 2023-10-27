@@ -229,7 +229,7 @@ class Profile extends React.Component<ProfileProps> {
                                                 loading="lazy"
                                             />
                                         ) : (
-                                            <Video width="auto" height={this.props.isMobile ? 295 : 395} controls>
+                                            <Video width="auto" height={this.props.isMobile ? 295 : 395}>
                                                 <Source
                                                     src={`${postImageUrl(posts?.id)}`}
                                                     srcSet={`${postImageUrl(posts?.id)}`}
