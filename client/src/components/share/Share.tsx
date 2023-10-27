@@ -30,7 +30,6 @@ export type ShareProps = IShareStateToProps & IShareDispatchToProps & IShareProp
 class Share extends React.Component<ShareProps> {
     state: IShareState = {
         open: true,
-        // mediaType: 'img',
         files: '',
         picture: '',
         post: {

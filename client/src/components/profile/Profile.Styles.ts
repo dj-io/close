@@ -56,14 +56,10 @@ export const PostLink = styled(Link)(() => ({
     '&&': {
         textDecoration: 'none',
         color: 'inherit',
-        height: 400,
-
-        '&:hover': {
-            background: '#3C414240'
-        },
+        height: 395,
 
         '@media (max-width: 790px)': {
-            height: 300,
+            height: 295,
             width: '100%',
         },
     }
