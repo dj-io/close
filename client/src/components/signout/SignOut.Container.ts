@@ -14,6 +14,7 @@ import { expiredToken, login, logout } from '../../redux/actions/AuthActions.ts'
  */
 const mapStateToprops = (state: any): ISignOutStateToProps => ({
     user: state.UserState.user,
+    username: state.AuthState.username,
     isExpired: state.AuthState.isExpired,
     token: state.AuthState.token,
 });

@@ -42,10 +42,11 @@ export const Source = styled('source')(() => ({
 
 export const Video = styled('video')(() => ({
     '&&': {
-        width: 'auto',
+        width: 220,
         height: 395,
 
         '@media (max-width: 790px)': {
+            width: 120,
             height: 295,
         },
     }
