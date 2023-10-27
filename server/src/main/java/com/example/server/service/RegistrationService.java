@@ -33,7 +33,6 @@ public class RegistrationService {
         String token = userService.userSignup(
                 new User(
                         request.getName(),
-                        request.getPicture(),
                         request.getUsername(),
                         request.getPronouns(),
                         request.getBiography(),
@@ -44,7 +43,7 @@ public class RegistrationService {
                 )
         );
 
-        String link = "http://close.us-east-1.elasticbeanstalk.com/api/v1/registration/confirm?token=" + token;
+        String link = "https://www.closeapp.io/api/v1/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getName(), link));
 
         return token;
