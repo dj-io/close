@@ -21,7 +21,7 @@ import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { postImageUrl } from '../../common/api/user/Post.Api.ts';
-import { CustomCardHeader, CustomImageList, HeaderText } from '../profile/Profile.Styles.ts';
+import { CustomCardHeader, CustomImageList, HeaderText, Source, Video } from '../profile/Profile.Styles.ts';
 import useWindowDimensions from '../../common/hooks/GetWindowDimensions.tsx';
 
 interface IFriends {
@@ -117,12 +117,23 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                         {post?.map((posts) => (
                             <Link id='profile-post-link' to={`/user/${posts?.id}`}>
                                 <ImageListItem key={postImageUrl(posts?.id)}>
-                                    <img
-                                        src={`${postImageUrl(posts?.id)}`}
-                                        srcSet={`${postImageUrl(posts?.id)}`}
-                                        alt={posts.caption}
-                                        loading="lazy"
-                                    />
+                                    {posts?.mediaType === 'img' ? (
+                                        <img
+                                            src={`${postImageUrl(posts?.id)}`}
+                                            srcSet={`${postImageUrl(posts?.id)}`}
+                                            alt={posts.caption}
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <Video width="auto" height={this.props.isMobile ? 295 : 395} controls>
+                                            <Source
+                                                src={`${postImageUrl(posts?.id)}`}
+                                                srcSet={`${postImageUrl(posts?.id)}`}
+                                                alt={posts.caption}
+                                                loading="lazy"
+                                            />
+                                        </Video>
+                                    )}
                                 </ImageListItem>
                             </Link>
                         ))}

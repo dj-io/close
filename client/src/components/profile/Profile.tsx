@@ -181,6 +181,7 @@ class Profile extends React.Component<ProfileProps> {
                                         allowEdit={false}
                                         type={Types.TEXT}
                                         placeholder={username || 'Choose a username'}
+                                        defaultValue={username || 'Choose a username'}
                                         onSave={this.saveName}
                                         editMode={this.state.editing}
                                         saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
@@ -199,6 +200,7 @@ class Profile extends React.Component<ProfileProps> {
                                             allowEdit={false}
                                             type={Types.TEXT}
                                             placeholder={biography || 'Add a Bio'}
+                                            defaultValue={biography || 'Add a Bio'}
                                             onSave={this.saveBio}
                                             editMode={this.state.editing}
                                             saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
