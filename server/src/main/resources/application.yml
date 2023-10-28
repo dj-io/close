@@ -16,7 +16,7 @@ aws:
 
 spring:
   profiles:
-    active: prod
+    active:
   h2:
     console:
       enabled: true
@@ -28,7 +28,7 @@ spring:
     name: close
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -45,14 +45,16 @@ spring:
     max-in-memory-size: 10MB
 
   mail:
-    host: smtp.gmail.com
-    port: 587
-    username: withloveclose.co@gmail.com
-    password: zhfy rqsh hfmy rtcw
+    host: localhost
+    port: 1025
+    username: hello
+    password: hello
 
     properties:
       mail:
         smtp:
+          ssl:
+            trust: "*"
           auth: true
           starttls:
             enable: true

@@ -44,7 +44,7 @@ public class RegistrationService {
         );
 
         String link = "https://www.closeapp.io/api/v1/registration/confirm?token=" + token;
-        emailSender.send(request.getEmail(), buildEmail(request.getName(), link));
+        emailSender.send(request.getEmail(), buildEmail(request.getName(), request.getEmail(), link));
 
         return token;
     }
