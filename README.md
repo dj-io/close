@@ -1,7 +1,7 @@
 # Social Media App
 
 ## Deployed app
-...
+https://www.closeapp.co
 
 ## which API I'm using
 /server
