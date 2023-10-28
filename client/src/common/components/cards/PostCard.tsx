@@ -8,6 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import DeleteForeverTwoToneIcon from '@mui/icons-material/DeleteForeverTwoTone';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
@@ -27,7 +28,8 @@ import { Pop } from '../popover/Pop.tsx';
 import { excerpt } from '../../utils/global.ts';
 import { UserActionTypes } from '../../enums/UserActionType.ts';
 import { profilePicUrl } from '../../api/user/Users.Api.ts';
-import { postImageUrl } from '../../api/user/Post.Api.ts';
+import { deletePost, postImageUrl } from '../../api/user/Post.Api.ts';
+import { Confirm } from '../buttons/Confirm.tsx';
 
 
 /**
@@ -38,6 +40,7 @@ import { postImageUrl } from '../../api/user/Post.Api.ts';
 interface IPostCardProps {
     page: string;
     func: Function;
+    removeItem?: Function;
     change: Function;
     value: string;
     expand?: boolean;
@@ -55,6 +58,7 @@ export const PostCard: React.FC<IPostcardProps> = ({
     value,
     page,
     func,
+    removeItem,
     change,
     expand,
 }) => {
@@ -74,13 +78,13 @@ export const PostCard: React.FC<IPostcardProps> = ({
 
     const handleSeeMore = () => {
         setMore(!more)
-    }
+    };
 
     return (
         <CardWrapper expanded={expanded} >
             <CardHeader
                 avatar={<Link to={`/${user?.username}`}> <Avatar alt="Apple" src={profilePicUrl(user?.id)} /> </Link>}
-                action={<Pop tip="More" label={<MoreVertIcon />} children="Follow" />}
+                action={<Pop tip="More" label={<MoreVertIcon />} children={<Confirm label={<DeleteForeverTwoToneIcon />} func={removeItem} />} />}
                 title={<PostLink to={`/${user?.username}`}> {user?.username} ∙ {`${postCreated}`} </PostLink>}
                 subheader={excerpt(user?.biography, UserActionTypes.CHAR_MAX)}
             />

@@ -43,7 +43,7 @@ const App = ({
             <Route key='home-post' path='/home/:post' element={<Post currentUser={user} />} />
             <Route path='/share' element={<Share />} />
             <Route path='/profile/:profileId' element={<Profile />} />
-            <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} />} />
+            <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} profiles={profiles} />} />
             <Route exact path='/:name' element={<Friends currentUser={user} profiles={profiles} />} />
           </Route>
         </Routes>

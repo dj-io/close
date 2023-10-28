@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import ShortTextIcon from '@mui/icons-material/ShortText';
 import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
 import { PostCard } from '../../common/components/cards/PostCard.tsx';
-import { profilePicUrl, retreiveProfile } from '../../common/api/user/Users.Api.ts';
-import { retreivePost, newComment } from '../../common/api/user/Post.Api.ts';
+import { find, profilePicUrl, retreiveProfile } from '../../common/api/user/Users.Api.ts';
+import { retreivePost, newComment, deletePost } from '../../common/api/user/Post.Api.ts';
 import { Grid } from '@mui/material';
 
 interface IPost {
@@ -13,7 +13,7 @@ interface IPost {
 }
 
 
-export const Post: React.FC<IPost> = ({ currentUser }) => {
+export const Post: React.FC<IPost> = ({ currentUser, profiles }) => {
 
     const [open, setOpen] = useState(true);
     const [post, setPost] = useState([]);
@@ -42,6 +42,17 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
     const returnPost = async () => {
         const res = await retreivePost(postId)
         setPost(res.data)
+    }
+
+    const removePost = async () => {
+        deletePost(postId)
+            .then(async () => {
+                const newUser = await retreiveProfile(post?.user_id);
+                profiles(newUser.data);
+            }).catch((err) => console.error('POST ERR: ', err))
+
+        setOpen(false);
+        window.history.back();
     }
 
     // returning user associated with post
@@ -87,6 +98,7 @@ export const Post: React.FC<IPost> = ({ currentUser }) => {
             <PostCard
                 page="user"
                 func={addComment}
+                removeItem={removePost}
                 change={handleChange}
                 post={post}
                 user={user}

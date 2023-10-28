@@ -24,7 +24,7 @@ import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
 import { Toll } from '@mui/icons-material';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
-import { postImageUrl } from '../../common/api/user/Post.Api.ts';
+import { deletePost, postImageUrl } from '../../common/api/user/Post.Api.ts';
 import InputField from '../../common/components/fields/InputField.tsx'
 import withWindowDimensions from '../../common/hooks/WithWindowDimensions.tsx';
 
@@ -95,7 +95,6 @@ class Profile extends React.Component<ProfileProps> {
         }
 
     }
-
 
     follow = async () => {
         const { authorities, ...rest } = this.props.user
