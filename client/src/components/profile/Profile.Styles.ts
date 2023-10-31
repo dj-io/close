@@ -65,6 +65,17 @@ export const PostLink = styled(Link)(() => ({
     }
 }));
 
+export const Anchor = styled('a')(() => ({
+    '&&': {
+        textDecoration: 'none',
+        cursor: 'pointer',
+        color: '#3C414280',
+        '@media (max-width: 790px)': {
+            fontSize: 14,
+        },
+    }
+}))
+
 export const CustomCardHeader = styled(CardHeader)(() => ({
     '&&': {
 

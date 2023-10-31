@@ -89,7 +89,7 @@ class Find extends React.Component<FindProps> {
                         <Seperate />
                     </FindHeader>
                     <Grid sx={{ marginTop: '25px', marginRight: 32, }} container direction='column' alignItems='start'>
-                        {Object.keys(this.props.foundUser).length > 1 && (
+                        {Object.keys(this.props.foundUser)?.length > 1 && (
                             <>
                                 <Typography sx={{ marginRight: 32, p: 2, color: '#3C414270' }} variant='button'>
                                     {UserActionTypes.RECENT}
@@ -124,8 +124,8 @@ class Find extends React.Component<FindProps> {
                             </Typography>
                         </Grid>
                     )}
-                    {!this.props.following.length &&
-                        !Object.keys(this.props.foundUser).length && (
+                    {!this.props?.following?.length &&
+                        !Object.keys(this.props.foundUser)?.length && (
                             <Suggested
                                 currentUser={this.props.user}
                                 following={this.props.following}

@@ -58,3 +58,14 @@ export const ConfirmStatusWrapper = styled('div')(() => ({
     }
 }))
 
+export const ConfirmText = styled(Typography)(() => ({
+    '&&': {
+        fontWeight: 'bold',
+        whiteSpace: 'nowrap',
+
+        '@media (max-width: 790px)': {
+            fontSize: '0.78rem',
+        }
+    }
+}))
+

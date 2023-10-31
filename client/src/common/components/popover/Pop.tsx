@@ -2,7 +2,7 @@ import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { IconButton, Tooltip } from '@mui/material';
+import { Grid, IconButton, Tooltip } from '@mui/material';
 import Fade from '@mui/material/Fade';
 
 interface IPop {
@@ -28,8 +28,24 @@ export const Pop: React.FC<IPop> = ({ label, children, tip, func }) => {
 
     return (
         <div>
-            <IconButton aria-describedby={id} variant="text" onClick={handleClick}>
-                <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title={tip} placement="right">{label}</Tooltip>
+            <IconButton
+                sx={{
+                    "&.MuiButtonBase-root:hover": {
+                        bgcolor: "transparent"
+                    }
+                }}
+                aria-describedby={id}
+                variant="text"
+                onClick={handleClick}
+            >
+                <Tooltip
+                    TransitionComponent={Fade}
+                    TransitionProps={{ timeout: 600 }}
+                    enterDelay={2000} title={tip}
+                    placement="right"
+                >
+                    {label}
+                </Tooltip>
             </IconButton>
             <Popover
                 id={id}
@@ -44,8 +60,9 @@ export const Pop: React.FC<IPop> = ({ label, children, tip, func }) => {
                     vertical: 'center',
                     horizontal: 'center',
                 }}
+                sx={{ maxHeight: 300 }}
             >
-                <Typography sx={{ p: 2 }}>{children}</Typography>
+                <Grid item sx={{ p: 2 }}>{children}</Grid>
             </Popover>
         </div>
     );

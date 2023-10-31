@@ -8,6 +8,7 @@ export interface IHomeStateToProps {
 export interface IHomeDispatchToProps {
     feed: Function;
     openFind: Function;
+    profiles: Function;
 }
 
 export interface IFindStateToProps {

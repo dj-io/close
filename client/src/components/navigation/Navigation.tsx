@@ -39,19 +39,14 @@ export type NavProps = INavStateToProps & INavDispatchToProps & INavProps;
 
 class Navigation extends React.Component<NavProps> {
     state: INavigationState = {
-        pages: {
-            home: false,
-            find: false,
-            share: false,
-            profile: false,
-        },
+        pages: {},
     }
 
 
     onNavSelect = (page, open) => {
-        const newState = { ...this.state.pages };
+        const newState = {};
         newState[page] = open;
-        this.setState(newState)
+        this.setState({ pages: newState })
     }
 
     closeFind = (page, open) => {
@@ -77,9 +72,9 @@ class Navigation extends React.Component<NavProps> {
                 justifyContent="start"
             >
                 <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Home" placement="right">
-                    <Link style={{ color: this.state.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
+                    <Link style={{ color: this.state.pages.home ? '#228B22' : '#3C4142' }} to='/home' id='home' >
                         <HomeTwoToneIcon
-                            onClick={() => this.closeFind('home', !this.state.home)}
+                            onClick={() => this.closeFind('home', true)}
                             fontSize="large"
                         />
                     </Link>
@@ -88,22 +83,22 @@ class Navigation extends React.Component<NavProps> {
                     <IconLink
                         style={{
                             color: this.props.isFindOpen &&
-                                this.state.find ? '#228B22' : '#3C4142'
+                                this.state.pages.find ? '#228B22' : '#3C4142'
                         }}
                         onClick={() => {
                             this.props.openFind(!this.props.isFindOpen)
-                            this.onNavSelect('find', !this.state.find)
+                            this.onNavSelect('find', !this.state.pages.find)
                         }}
                         fontSize="large"
                     />
                 </StyledTip>
                 <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Share" placement="right">
-                    <Link style={{ color: this.state.share ? '#228B22' : '#3C4142' }}
+                    <Link style={{ color: this.state.pages.share ? '#228B22' : '#3C4142' }}
                         to='/share'
                         id='share'
                     >
                         <AddAPhotoTwoToneIcon
-                            onClick={() => this.closeFind('share', !this.state.share)}
+                            onClick={() => this.closeFind('share', true)}
                             fontSize="large"
                         />
                     </Link>
@@ -111,8 +106,8 @@ class Navigation extends React.Component<NavProps> {
                 <StyledTip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Profile" placement="right">
                     <Link to={`/profile/${this.props.user.id}`} id='profile' >
                         <CustomAvatar
-                            onClick={() => this.closeFind('profile', !this.state.profile)}
-                            page={this.state.profile}
+                            onClick={() => this.closeFind('profile', true)}
+                            page={this.state.pages.profile}
                             alt={this.props.user.username}
                             src={profilePicUrl(this.props?.user?.id)}
                         />

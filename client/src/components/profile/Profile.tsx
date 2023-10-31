@@ -19,7 +19,7 @@ import { find, profilePicUrl, retreiveProfile, share, uploadProfilePic } from '.
 import { profiles } from '../../redux/actions/UserActions.ts';
 import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { profileFields } from '../../common/constants/formFields.ts';
-import { BodyEditor, CustomCardHeader, CustomImageList, HeaderEditor, HeaderText, PostLink, ProfileWrapper, Source, Video } from './Profile.Styles.ts';
+import { BodyEditor, CustomCardHeader, CustomImageList, HeaderEditor, HeaderText, PostLink, ProfileWrapper, Source, Video, Anchor } from './Profile.Styles.ts';
 import { MyDropzone } from '../../common/hooks/Dropzone.tsx';
 import { Toll } from '@mui/icons-material';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
@@ -52,12 +52,22 @@ class Profile extends React.Component<ProfileProps> {
         loading: false,
         fields: {
             username: this.props.user.username,
-            biography: this.props.user.biography
+            biography: this.props.user.biography,
+            links: this.props.user.links,
         }
     }
 
     posts = this.props?.user?.post?.forEach(post => this.setState({ posts: this.state.posts += 1 }));
-    likes = this.props?.user?.post?.forEach(post => this.setState({ userLikes: this.state.userLikes += post.likes }));
+    likes = this.props?.user?.post
+        ?.map(post => post?.like)
+        ?.filter(like => like?.length > 0)
+        ?.forEach(
+            () =>
+                this.setState({
+                    userLikes:
+                        this.state.userLikes += 1
+                }));
+
     following = this.props?.user?.followed?.map((id) => id.followedId)
         .find((id) => id === this.props.user.id);
 
@@ -65,6 +75,7 @@ class Profile extends React.Component<ProfileProps> {
 
     saveName = username => this.setState({ fields: { ...this.state.fields, username } })
     saveBio = biography => this.setState({ fields: { ...this.state.fields, biography } });
+    saveLink = links => this.setState({ fields: { ...this.state.fields, links } })
     savePic = picture => this.setState({ fields: { ...this.state.fields } });
 
     handleUpload = async (file) => {
@@ -113,7 +124,7 @@ class Profile extends React.Component<ProfileProps> {
 
 
     render(): JSX.Element {
-        const { username, biography, post } = this.props.user;
+        const { username, biography, post, links } = this.props.user;
 
         return (
             <Grid
@@ -191,8 +202,8 @@ class Profile extends React.Component<ProfileProps> {
                             </HeaderText>
                         }
                         subheader={
-                            <Typography variant='button'>
-                                {`${this.state.posts} posts ${this.state.userLikes} likes`} <br />
+                            <Typography sx={{ fontWeight: 600, color: '#238636' }} color='text.secondary' variant='button'>
+                                {`${this.state.posts} posts ${this.state.userLikes}`} {this.state.userLikes > 1 ? 'likes' : 'like'} <br />
                                 <Typography variant="body1" color="text.secondary">
                                     <BodyEditor>
                                         <EasyEdit
@@ -206,8 +217,19 @@ class Profile extends React.Component<ProfileProps> {
                                             attributes={{ name: "biography" }}
                                             hideCancelButton
                                         />
+                                        <EasyEdit
+                                            allowEdit={false}
+                                            type={Types.TEXT}
+                                            placeholder={(this.state.editing ? links : <Anchor target='_blank' rel='external nofollow' href={links}>{links}</Anchor>) || 'Add a Link'}
+                                            defaultValue={(this.state.editing ? links : <Anchor target='_blank' rel='external nofollow' href={links}>{links}</Anchor>) || 'Add a Link'}
+                                            onSave={this.saveLink}
+                                            editMode={this.state.editing}
+                                            saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
+                                            attributes={{ name: "link" }}
+                                            hideCancelButton
+                                        />
                                     </BodyEditor>
-                                    <Submit width={this.props.isMobile ? '100%' : null} label="Follow" func={this.follow} disabledButton={!this.following} />
+                                    <Submit width={this.props.isMobile ? '100%' : null} label="Follow" func={this.follow} disabledButton={true} />
                                 </Typography>
                             </Typography>
                         }

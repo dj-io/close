@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Home from './Home.tsx';
 import { IHomeDispatchToProps, IHomeStateToProps } from '../../types/app.js';
-import { feed } from '../../redux/actions/UserActions.ts';
+import { feed, profiles } from '../../redux/actions/UserActions.ts';
 import { openFind } from '../../redux/actions/AppActions.ts';
 
 
@@ -26,7 +26,8 @@ const mapStateToprops = (state: any): IHomeStateToProps => ({
  */
 const mapDispatchToProps = (dispatch: any): IHomeDispatchToProps => ({
     feed: bindActionCreators(feed, dispatch),
-    openFind: bindActionCreators(openFind, dispatch)
+    openFind: bindActionCreators(openFind, dispatch),
+    profiles: bindActionCreators(profiles, dispatch)
 });
 
 export const HomeContainer = connect(

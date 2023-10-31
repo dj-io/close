@@ -6,6 +6,9 @@ export const SubmitButton = styled(Button)((props: any) => ({
     '&&': {
         marginTop: '10px',
         minWidth: props.width || 275,
+        fontSize: 12,
+        fontWeight: 500,
+        height: 34,
         backgroundColor: props.viewChange ? 'red' : '#238636',
         borderRadius: '9px',
         color: '#3C4142',

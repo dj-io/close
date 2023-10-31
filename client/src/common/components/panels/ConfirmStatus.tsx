@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Confirm } from '../buttons/Confirm.tsx';
 import { Grid, Typography } from '@mui/material';
-import { ConfirmStatusWrapper } from './Panels.Styles.ts';
+import { ConfirmStatusWrapper, ConfirmText } from './Panels.Styles.ts';
 
 interface IConfirmStatusProps {
     title: string;
@@ -28,7 +28,7 @@ export const ConfirmStatus: React.FC<IConfirmStatusProps> = ({
         <ConfirmStatusWrapper>
             <Grid
                 container
-                spacing={1}
+                spacing={0}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
@@ -36,21 +36,20 @@ export const ConfirmStatus: React.FC<IConfirmStatusProps> = ({
                 <Grid item sx={12} >
                     {icon}
                 </Grid>
-                <Typography
-                    sx={{ fontWeight: 'bold' }}
+                <ConfirmText
                     variant="subtitle1"
                     color="text.primary"
                 >
                     {title}
-                </Typography>
+                </ConfirmText>
                 <Confirm label={link} func={func} />
                 <Grid item sx={8} >
-                    <Typography
+                    <ConfirmText
                         variant="body2"
                         color="text.secondary"
                     >
                         {description}
-                    </Typography>
+                    </ConfirmText>
                 </Grid>
             </Grid>
         </ConfirmStatusWrapper>

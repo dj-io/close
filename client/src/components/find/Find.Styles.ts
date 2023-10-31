@@ -95,6 +95,19 @@ export const SuggestedLink = styled(Link)(() => ({
     }
 }));
 
+export const ExternalLink = styled('a')(() => ({
+    '&&': {
+        textDecoration: 'none',
+        cursor: 'pointer',
+        color: '#3C414280',
+        fontSize: 14,
+
+        '@media (max-width: 790px)': {
+            fontSize: 12,
+        },
+    }
+}))
+
 export const FriendsAvatar = styled(Avatar)(() => ({
     '&&': {
         width: 204,

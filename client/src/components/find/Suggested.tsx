@@ -5,6 +5,7 @@ import { Submit } from '../../common/components/buttons/Submit.tsx';
 import { FindLink, SuggestedLink } from './Find.Styles.ts';
 import { Avatar, CardHeader, Grid, IconButton, Typography } from '@mui/material';
 import { NoActivity } from '../../common/components/panels/NoActivity.tsx';
+import { FriendCard } from '../../common/components/cards/FriendCard.tsx';
 
 interface ISuggestedProps {
     currentUser: any //TODO: make IUser
@@ -34,7 +35,7 @@ export const Suggested: React.FC<ISuggestedProps> = ({ currentUser, following, p
 
     const getFriends = async () => {
         const res = await returnUsers();
-        setUsers(res.data)
+        setUsers(res?.data)
     }
 
     const updateFeed = async () => {
@@ -69,30 +70,12 @@ export const Suggested: React.FC<ISuggestedProps> = ({ currentUser, following, p
                     Suggested
                 </Typography>
             </Grid>
-
             {users &&
                 users.map((user) => (
-                    <CardHeader
-                        sx={{ width: 300 }}
-                        avatar={
-                            <SuggestedLink to={`/${user.username}`}>
-                                <IconButton>
-                                    <Avatar
-                                        alt={user.username}
-                                        src={profilePicUrl(user?.id)}
-                                    />
-                                </IconButton>
-                            </SuggestedLink>
-                        }
-                        title={user.username}
-                        subheader={user.name}
-                        action={
-                            <Submit
-                                label="Follow"
-                                func={() => follow(user)}
-                                width={50}
-                            />
-                        }
+                    <FriendCard
+                        user={user}
+                        currentUser={currentUser}
+                        follow={follow}
                     />
                 ))
             }

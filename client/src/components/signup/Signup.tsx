@@ -111,26 +111,25 @@ class Signup extends React.Component<SignupProps> {
                         submit={this.handleRegistration}
                         disableValue='username'
                     />
-                    {
-                        <ConfirmDialog
-                            isOpen={this.state.accountCreated}
-                            openDialog={() => this.setOpen(true)}
-                            closeDialog={() => {
-                                this.setOpen(false);
-                                this.props.userHasAccount(true)
-                            }}
-                            title={this.state.user.email}
-                            spacing={2}
-                        >
-                            <ConfirmStatus
-                                icon={<ScheduleSendTwoToneIcon fontSize="large" />}
-                                title={UserActionTypes.CONFIRM_EMAIL}
-                                description={`${UserActionTypes.ACTIVATE_NOW} ${this.state.user.email || 'your email'}`}
-                                link={UserActionTypes.EMAIL_CONFIRMED}
-                                func={() => this.props.userHasAccount(true)}
-                            />
-                        </ConfirmDialog>
-                    }
+                    <ConfirmDialog
+                        isOpen={this.state.accountCreated}
+                        openDialog={() => this.setOpen(true)}
+                        closeDialog={() => {
+                            this.setOpen(false);
+                            this.props.userHasAccount(true)
+                        }}
+                        enableClose={true}
+                        title={this.state.user.email}
+                        spacing={2}
+                    >
+                        <ConfirmStatus
+                            icon={<ScheduleSendTwoToneIcon fontSize="large" />}
+                            title={UserActionTypes.CONFIRM_EMAIL}
+                            description={`${UserActionTypes.ACTIVATE_NOW} ${this.state.user.email || 'your email'}`}
+                            link={UserActionTypes.EMAIL_CONFIRMED}
+                            func={() => this.props.userHasAccount(true)}
+                        />
+                    </ConfirmDialog>
                     <Typography
                         sx={{
                             marginTop: '10px',

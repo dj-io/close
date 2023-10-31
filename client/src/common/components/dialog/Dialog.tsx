@@ -22,6 +22,7 @@ interface IDialog {
     closeDialog: Function;
     isOpen: boolean;
     spacing: number;
+    enableClose: boolean;
     enableBack?: boolean;
     back?: Function;
 }
@@ -41,6 +42,7 @@ export const ConfirmDialog: React.FC<IDialog> = ({
     closeDialog,
     isOpen,
     spacing,
+    enableClose,
     enableBack,
     back,
 }) => {
@@ -62,7 +64,7 @@ export const ConfirmDialog: React.FC<IDialog> = ({
                         sx={{
                             position: 'absolute',
                             left: 8,
-                            top: 8,
+                            top: 12,
                             color: (theme) => theme.palette.grey[500],
                         }}
                     >
@@ -71,21 +73,23 @@ export const ConfirmDialog: React.FC<IDialog> = ({
                 <DialogTitle sx={{ m: 0, p: 2, marginLeft: enableBack && '32px' }} id="customized-dialog-title">
                     {title}
                 </DialogTitle>
-                <IconButton
-                    aria-label="close"
-                    onClick={() => {
-                        closeDialog();
-                        window.history.back()
-                    }}
-                    sx={{
-                        position: 'absolute',
-                        right: 8,
-                        top: 8,
-                        color: (theme) => theme.palette.grey[500],
-                    }}
-                >
-                    <CloseIcon />
-                </IconButton>
+                {enableClose &&
+                    <IconButton
+                        aria-label="close"
+                        onClick={() => {
+                            closeDialog();
+                            window.history.back()
+                        }}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                }
                 <Children dividers>
                     {children}
                 </Children>

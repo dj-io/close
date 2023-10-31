@@ -22,13 +22,13 @@ const App = ({
   const getProfile = async () => {
     if (token) {
       const profile = await find(username);
-      if (profile.status === 200) profiles(profile.data);
+      if (profile?.status === 200) profiles(profile.data);
     }
   }
 
   useEffect(() => {
     getProfile();
-  }, [token])
+  }, [])
 
   return (
     <div className="App">
@@ -40,7 +40,7 @@ const App = ({
           <Route exact path='/' element={hasAccount ? <Signin /> : <Signup />} />
           <Route element={<Protected hasAccount={hasAccount} />}>
             <Route exact path='/home' element={<Home />} />
-            <Route key='home-post' path='/home/:post' element={<Post currentUser={user} />} />
+            <Route key='home-post' path='/home/:post' element={<Post currentUser={user} profiles={profiles} />} />
             <Route path='/share' element={<Share />} />
             <Route path='/profile/:profileId' element={<Profile />} />
             <Route key='profile-post' exact path='/user/:post' element={<Post currentUser={user} profiles={profiles} />} />

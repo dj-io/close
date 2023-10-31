@@ -6,6 +6,7 @@ const {
     REACT_APP_BASE_URL,
     REACT_APP_USERS_ENDPOINT,
     REACT_APP_POST_ENDPOINT,
+    REACT_APP_FOLLOWING_ENDPOINT,
     REACT_APP_S3_IMAGE_ENDPOINT
 } = process.env;
 
@@ -33,4 +34,7 @@ export const find = async (field: string) => {
 
 export const share = async (post) =>
     await utils.patch(`${REACT_APP_USERS_ENDPOINT}`, post);
+
+export const unfollow = async (followedId) =>
+    await utils.delete(`${REACT_APP_FOLLOWING_ENDPOINT}${followedId}`)
 

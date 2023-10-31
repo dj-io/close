@@ -119,6 +119,7 @@ class Share extends React.Component<ShareProps> {
                 <ConfirmDialog
                     title="Share New Post"
                     spacing={!this.state.picture && 20}
+                    enableClose={true}
                     enableBack={true}
                     isOpen={this.state.open}
                     openDialog={() => this.setOpen(true)}
