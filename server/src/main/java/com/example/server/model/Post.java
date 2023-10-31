@@ -51,7 +51,6 @@ public class Post {
 
     private String caption;
     private String mediaType;
-    private Long likes = 0L;
     private Long shares = 0L;
 
     private Long user_id;
@@ -64,10 +63,17 @@ public class Post {
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private List<Comment> comment;
 
+    @OneToMany(
+            targetEntity = Like.class,
+            cascade = CascadeType.ALL
+//            orphanRemoval = true
+    )
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private List<Like> like;
+
     public Post(String postImageId,
                 String caption,
                 String mediaType,
-                Long likes,
                 Long shares,
                 LocalDateTime created,
                 LocalDateTime updated,
@@ -75,7 +81,6 @@ public class Post {
         this.postImageId = postImageId;
         this.caption = caption;
         this.mediaType = mediaType;
-        this.likes = likes;
         this.shares = shares;
         this.created = created;
         this.updated = updated;
