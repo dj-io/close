@@ -44,6 +44,16 @@ class SignOut extends React.Component<SignOutProps> {
         });
     }
 
+    setLoginCredentials = (token, username) => {
+        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('user', JSON.stringify(username));
+
+        this.props.login(
+            JSON.parse(localStorage.getItem('token')),
+            JSON.parse(localStorage.getItem('user'))
+        );
+    }
+
     handleSignin = async () => {
         const { user } = this.state;
         const { navigate } = this.props;
@@ -57,10 +67,10 @@ class SignOut extends React.Component<SignOutProps> {
         if (!res) this.setState({ badCredentials: true });
 
         if (res?.status === 200) {
-            this.props.login(res.data);
+            this.setLoginCredentials(res.data, userLogin.username)
             this.props.expiredToken(false);
-            const loggedIn = await find(userLogin.username)
-            if (loggedIn.status === 200) this.props.profiles(loggedIn.data)
+            const loggedIn = await find(userLogin.username);
+            if (loggedIn.status === 200) this.props.profiles(loggedIn.data);
         }
 
     }
@@ -82,7 +92,7 @@ class SignOut extends React.Component<SignOutProps> {
                         this.handleLogout();
                     }}
                     enableClose={true}
-                    title={this.props.user.username}
+                    title={this.props.username}
                     spacing={2}
                 >
                     <ConfirmStatus

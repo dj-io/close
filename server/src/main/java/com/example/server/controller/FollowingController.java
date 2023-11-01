@@ -18,6 +18,11 @@ public class FollowingController {
         return followingService.getFollowed();
     }
 
+    @GetMapping("{id}")
+    public Iterable<Following> getFollowedByUserId(@PathVariable Long id) {
+        return followingService.getFollowedByUserId(id);
+    }
+
     @PatchMapping
     public Following updateFollowed(@RequestBody Following id) {
         return followingService.follow(id);

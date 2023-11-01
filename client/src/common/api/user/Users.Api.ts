@@ -17,7 +17,7 @@ export const retreiveProfile = async (profileId: number) =>
     await utils.get(`${REACT_APP_USERS_ENDPOINT}${profileId}`);
 
 export const uploadProfilePic = async (id, formData) =>
-    await utils.post(`${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}`, formData, { 'Content-Type': 'multipart/form-data' });
+    await utils.post(`${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 
 export const profilePicUrl = (id) =>
     id ? `${REACT_APP_BASE_URL}${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}` : null

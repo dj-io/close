@@ -58,6 +58,8 @@ class Profile extends React.Component<ProfileProps> {
     }
 
     posts = this.props?.user?.post?.forEach(post => this.setState({ posts: this.state.posts += 1 }));
+    following = this.props?.user?.followed?.map((id) => id.followedId)
+        .find((id) => id === this.props.user.id);
     likes = this.props?.user?.post
         ?.map(post => post?.like)
         ?.filter(like => like?.length > 0)
@@ -68,8 +70,6 @@ class Profile extends React.Component<ProfileProps> {
                         this.state.userLikes += 1
                 }));
 
-    following = this.props?.user?.followed?.map((id) => id.followedId)
-        .find((id) => id === this.props.user.id);
 
     setLoading = loading => this.setState({ loading });
 
@@ -102,7 +102,8 @@ class Profile extends React.Component<ProfileProps> {
         if (this.state.editing) {
             const edited = await share(data);
             if (edited.status === 200) this.props.profiles(edited.data);
-            localStorage.setItem('user', JSON.stringify(this.state.fields.username));
+            const userName = this.state.fields.username ? this.state.fields.username : this.props.user.username;
+            localStorage.setItem('user', JSON.stringify(userName));
         }
 
     }

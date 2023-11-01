@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Card, Typography } from '@mui/material';
+import { Card, Grid, Typography } from '@mui/material';
 
 export const StyledCard = styled(Card)({
     '&&': {
@@ -8,9 +8,26 @@ export const StyledCard = styled(Card)({
         justifyContent: 'center',
         alignItems: 'center',
         width: '325px',
+        // zIndex: 1000,
+        background: 'none',
+        border: 'none',
+        boxShadow: 'none',
+
+        '@media (max-width: 790px)': {
+        },
         // borderBottom: '2px solid green'
     }
 });
+
+export const SigninWrapper = styled(Grid)(() => ({
+    '&&': {
+        minHeight: '90vh',
+
+        '@media (max-width: 790px)': {
+            minHeight: '70vh',
+        }
+    },
+}));
 
 
 export const BackGroundHeader = styled(Typography)(() => ({

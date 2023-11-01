@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Card, Typography, Grid } from '@mui/material';
+import { Card, Typography, Grid, CardMedia } from '@mui/material';
 import ScheduleSendTwoToneIcon from '@mui/icons-material/ScheduleSendTwoTone';
 import { Form } from '../../common/components/form/Form.tsx';
-import { BackGroundHeader, BackGroundText, StyledCard } from './Signup.Styles.ts';
+import { BackGroundHeader, BackGroundText, CloseIcon, SignupWrapper, StyledCard } from './Signup.Styles.ts';
 import { signUpfields } from '../../common/constants/formFields.ts';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import { ISignupDispatchToProps, ISignupStateToProps } from '../../types/user.ts';
@@ -75,33 +75,29 @@ class Signup extends React.Component<SignupProps> {
 
     render(): JSX.Element {
         return (
-            <Grid
+            <SignupWrapper
                 container
                 spacing={0}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{ minHeight: '75vh' }}
             >
                 <Grid
                     container
-                    justifyContent="flex-start"
-                    alignItems="flex-start"
+                    justifyContent="center"
+                    alignItems="center"
                 >
-                    <BackGroundHeader color="#228B22" >
+                    <BackGroundHeader color="#228B22">
                         Close
                     </BackGroundHeader>
                 </Grid>
-                <Grid
-                    container
-                    justifyContent="flex-start"
-                    alignItems="center"
-                >
-                    <BackGroundText color="text.secondary">
-                        Share The Weird Stuff
-                    </BackGroundText>
-                </Grid>
-                <StyledCard sx={{ minWidth: 275, zIndex: 1000 }}>
+                <StyledCard sx={{ p: 1 }}>
+                    <CloseIcon
+                        component={"img"}
+                        height="auto"
+                        image='https://www.onlygfx.com/wp-content/uploads/2017/11/abstract-watercolor-circle-2-5.png'
+                        alt='close-logo'
+                    />
                     <Form
                         buttonLabel="Sign up"
                         fields={signUpfields}
@@ -143,7 +139,7 @@ class Signup extends React.Component<SignupProps> {
                         func={() => this.props.userHasAccount(true)}
                     />
                 </StyledCard>
-            </Grid >
+            </SignupWrapper >
 
         );
     }

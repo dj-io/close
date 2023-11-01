@@ -16,6 +16,8 @@ public class FollowingService {
         return followingRepository.findAll();
     }
 
+    public Iterable<Following> getFollowedByUserId(Long id) { return followingRepository.getFollowingByUserId(id); }
+
     public Following follow(Following id) {
        //TODO: ensure users can not follow themselves (compare new id to current id)
         return followingRepository.save(id);

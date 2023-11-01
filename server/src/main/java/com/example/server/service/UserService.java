@@ -94,11 +94,19 @@ public class UserService implements UserDetailsService {
     public User updateUser(User user) {
 
         Optional<User> currentUser = userRepository.findById(user.getId());
+        User updatedUser = currentUser.get();
 
-        if (currentUser.isPresent()) {
-            User updatedUser = currentUser.get();
-            user.setPassword(updatedUser.getPassword());
+        boolean usernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
+
+        if (usernameExists && !user.getUsername().equals(updatedUser.getUsername())) {
+            throw new IllegalStateException("username already taken");
         }
+
+        if (currentUser.isPresent()) { user.setPassword(updatedUser.getPassword()); }
+
+        if (currentUser.isPresent() && user.getUsername() == null) { user.setUsername(updatedUser.getUsername()); }
+        if (currentUser.isPresent() && user.getBiography() == null) { user.setBiography(updatedUser.getBiography()); }
+        if (currentUser.isPresent() && user.getLinks() == null) { user.setLinks(updatedUser.getLinks()); }
 
         return userRepository.save(user);
     }

@@ -1,17 +1,18 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import { BackGroundHeader, BackGroundText, StyledCard } from './Signin.Styles.ts';
+import { BackGroundHeader, BackGroundText, SigninWrapper, StyledCard } from './Signin.Styles.ts';
 import { Form } from '../../common/components/form/Form.tsx';
 import { signInfields } from '../../common/constants/formFields.ts';
 import { Confirm } from '../../common/components/buttons/Confirm.tsx';
 import { ISigninDispatchToProps, ISigninStateToProps } from '../../types/user.ts';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
-import { Typography } from '@mui/material';
+import { CardMedia, Typography } from '@mui/material';
 import { FormValues } from '../../common/types.ts';
 import { signinSchema } from '../../common/utils/validation.ts';
 import { auth } from '../../common/api/auth/Authenticate.Api.ts';
 import withRouter from '../../common/hooks/WithRouter.tsx';
 import { find } from '../../common/api/user/Users.Api.ts';
+import { CloseIcon } from '../signup/Signup.Styles.ts';
 
 interface ISigninProps {
 
@@ -75,34 +76,29 @@ class Signin extends React.Component<SigninProps> {
     render(): JSX.Element {
         return (
             <>
-
-                <Grid
+                <SigninWrapper
                     container
                     spacing={0}
                     direction="column"
                     alignItems="center"
                     justifyContent="center"
-                    sx={{ minHeight: '75vh' }}
                 >
                     <Grid
                         container
-                        justifyContent="flex-start"
-                        alignItems="flex-end"
+                        justifyContent="center"
+                        alignItems="center"
                     >
-                        <BackGroundHeader color="#228B22" >
+                        <BackGroundHeader color="#228B22">
                             Close
                         </BackGroundHeader>
                     </Grid>
-                    <Grid
-                        container
-                        justifyContent="flex-start"
-                        alignItems="center"
-                    >
-                        <BackGroundText color="text.secondary">
-                            Share The Weird Stuff
-                        </BackGroundText>
-                    </Grid>
-                    <StyledCard sx={{ minWidth: 275, zIndex: 1000 }}>
+                    <StyledCard sx={{ p: 1 }}>
+                        <CloseIcon
+                            component={"img"}
+                            height="auto"
+                            image='https://www.onlygfx.com/wp-content/uploads/2017/11/abstract-watercolor-circle-2-5.png'
+                            alt='close-logo'
+                        />
                         <Form
                             buttonLabel="Sign in"
                             fields={signInfields}
@@ -132,7 +128,7 @@ class Signin extends React.Component<SigninProps> {
                             func={() => this.props.userHasAccount(false)}
                         />
                     </StyledCard>
-                </Grid>
+                </SigninWrapper>
             </>
 
         );

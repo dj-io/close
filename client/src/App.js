@@ -28,7 +28,7 @@ const App = ({
 
   useEffect(() => {
     getProfile();
-  }, [])
+  }, [username])
 
   return (
     <div className="App">

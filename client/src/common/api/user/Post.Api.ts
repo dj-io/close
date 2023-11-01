@@ -15,7 +15,7 @@ export const deletePost = async (postId: number) =>
     await utils.delete(`${REACT_APP_POST_ENDPOINT}${postId}`)
 
 export const uploadPostImage = async (id, formData) =>
-    await utils.post(`${REACT_APP_POST_ENDPOINT}${id}${REACT_APP_S3_POST_ENDPOINT}`, formData, { 'Content-Type': 'multipart/form-data' });
+    await utils.post(`${REACT_APP_POST_ENDPOINT}${id}${REACT_APP_S3_POST_ENDPOINT}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 
 export const postImageUrl = (id) =>
     id ? `${REACT_APP_BASE_URL}${REACT_APP_POST_ENDPOINT}${id}${REACT_APP_S3_POST_ENDPOINT}` : null
