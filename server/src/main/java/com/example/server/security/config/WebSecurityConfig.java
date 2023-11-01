@@ -59,16 +59,17 @@ public class WebSecurityConfig {
         return http
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests(auth -> auth
-                        .antMatchers("/api/v*/registration/**", "/api/v*/auth/**")
-                        .permitAll()
-                        .antMatchers(HttpMethod.GET,"/ping", "/api/v*/users/*/profile-image", "/api/v*/post/*/post-image")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated()
-                )
+                .authorizeRequests(auth -> {
+                    auth
+                        .antMatchers("/api/v*/registration/**", "/api/v*/auth/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/ping", "/api/v*/users/*/profile-image", "/api/v*/post/*/post-image").permitAll();
+                })
+                .authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
                 .userDetailsService(userService)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
                 .build();
     }

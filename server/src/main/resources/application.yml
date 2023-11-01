@@ -16,7 +16,7 @@ aws:
 
 spring:
   profiles:
-    active:
+    active: prod
   h2:
     console:
       enabled: true
