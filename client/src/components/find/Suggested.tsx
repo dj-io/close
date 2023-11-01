@@ -29,7 +29,7 @@ export const Suggested: React.FC<ISuggestedProps> = ({ currentUser, following, p
         };
 
         const followed = await share(data);
-        profiles(followed.data);
+        if (followed.status === 200) profiles(followed.data);
 
     }
 

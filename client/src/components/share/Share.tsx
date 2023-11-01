@@ -104,7 +104,7 @@ class Share extends React.Component<ShareProps> {
 
                 // UPDATE REDUX STATE WITH NEW PROFILE WITH UPDATED POST OBJECT 
                 //(RETURNED FROM UPLOAD IMAGE PROMISE)
-                this.props.profiles(uploadedImage.data);
+                if (uploadedImage.status === 200) this.props.profiles(uploadedImage.data);
 
             }).catch((err) => {
                 console.error("SHARE ERR: ", err)

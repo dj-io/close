@@ -60,7 +60,7 @@ class SignOut extends React.Component<SignOutProps> {
             this.props.login(res.data);
             this.props.expiredToken(false);
             const loggedIn = await find(userLogin.username)
-            this.props.profiles(loggedIn.data)
+            if (loggedIn.status === 200) this.props.profiles(loggedIn.data)
         }
 
     }

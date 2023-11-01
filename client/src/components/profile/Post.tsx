@@ -120,7 +120,7 @@ export const Post: React.FC<IPost> = ({ currentUser, profiles }) => {
         };
 
         const user = await share(data);
-        profiles(user.data);
+        if (user.status === 200) profiles(user.data);
 
     }
 

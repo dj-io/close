@@ -83,7 +83,7 @@ class Home extends React.Component<HomeProps> {
 
         const updatedProfile = await share(data);
 
-        this.props.profiles(updatedProfile.data);
+        if (updatedProfile.status === 200) this.props.profiles(updatedProfile.data);
     }
 
     setFollowedId = (post) => {

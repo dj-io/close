@@ -101,7 +101,7 @@ class Profile extends React.Component<ProfileProps> {
 
         if (this.state.editing) {
             const edited = await share(data);
-            this.props.profiles(edited.data);
+            if (edited.status === 200) this.props.profiles(edited.data);
             localStorage.setItem('user', JSON.stringify(this.state.fields.username));
         }
 
@@ -119,7 +119,7 @@ class Profile extends React.Component<ProfileProps> {
 
         const updatedProfile = await share(data);
 
-        this.props.profiles(updatedProfile.data);
+        if (updatedProfile.status === 200) this.props.profiles(updatedProfile.data);
     }
 
 
@@ -244,16 +244,16 @@ class Profile extends React.Component<ProfileProps> {
                                     <ImageListItem key={postImageUrl(posts?.id)}>
                                         {posts?.mediaType === 'img' ? (
                                             <img
-                                                src={`${postImageUrl(posts?.id)}`}
-                                                srcSet={`${postImageUrl(posts?.id)}`}
+                                                src={postImageUrl(posts?.id)}
+                                                srcSet={postImageUrl(posts?.id)}
                                                 alt={posts.caption}
                                                 loading="lazy"
                                             />
                                         ) : (
                                             <Video width="auto" height={this.props.isMobile ? 295 : 395}>
                                                 <Source
-                                                    src={`${postImageUrl(posts?.id)}`}
-                                                    srcSet={`${postImageUrl(posts?.id)}`}
+                                                    src={postImageUrl(posts?.id)}
+                                                    srcSet={postImageUrl(posts?.id)}
                                                     alt={posts.caption}
                                                     loading="lazy"
                                                 />

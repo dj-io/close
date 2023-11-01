@@ -31,19 +31,21 @@ export const removePost = async (
     setFollowedId,
     renderFeed,
 ) => {
-    deletePost(post?.id)
-        .then(async () => {
+    if (post?.id) {
+        deletePost(post?.id)
+            .then(async () => {
 
-            // UPDATES PROFILE
-            const newUser = await retreiveProfile(user?.id);
-            profiles(newUser?.data);
+                // UPDATES PROFILE
+                const newUser = await retreiveProfile(user?.id);
+                if (newUser.status === 200) profiles(newUser?.data);
 
-            //UPDATES HOME PAGE
-            renderFeed && renderFeed();
-        }).catch((err) => console.error('POST ERR: ', err))
+                //UPDATES HOME PAGE
+                renderFeed && renderFeed();
+            }).catch((err) => console.error('POST ERR: ', err))
+        setOpen(post?.id, false);
+        window && window();
+    }
 
-    setOpen(post?.id, false);
-    window && window();
 }
 
 export const removeFriend = async (
@@ -62,7 +64,7 @@ export const removeFriend = async (
             .then(async () => {
                 // UPDATES PROFILE
                 const newUser = await retreiveProfile(user?.id);
-                profiles(newUser?.data);
+                if (newUser.status === 200) profiles(newUser?.data);
 
                 // UPDATES HOME PAGE
                 renderFeed && renderFeed()

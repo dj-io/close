@@ -66,7 +66,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
         };
 
         const user = await share(data);
-        profiles(user.data);
+        if (user.status === 200) profiles(user.data);
         setLoading(false);
 
     }
@@ -80,7 +80,7 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
             .then(async () => {
                 // UPDATES FRIEND PROFILE
                 const newUser = await retreiveProfile(currentUser?.id);
-                profiles(newUser?.data);
+                if (newUser.status === 200) profiles(newUser?.data);
 
 
             }).catch((err) => console.error('POST ERR: ', err))
@@ -145,16 +145,16 @@ const Friends: React.FC<IFriends> = ({ currentUser, profiles }) => {
                                 <ImageListItem key={postImageUrl(posts?.id)}>
                                     {posts?.mediaType === 'img' ? (
                                         <img
-                                            src={`${postImageUrl(posts?.id)}`}
-                                            srcSet={`${postImageUrl(posts?.id)}`}
+                                            src={postImageUrl(posts?.id)}
+                                            srcSet={postImageUrl(posts?.id)}
                                             alt={posts.caption}
                                             loading="lazy"
                                         />
                                     ) : (
                                         <Video width="auto" height={isMobile ? 295 : 395}>
                                             <Source
-                                                src={`${postImageUrl(posts?.id)}`}
-                                                srcSet={`${postImageUrl(posts?.id)}`}
+                                                src={postImageUrl(posts?.id)}
+                                                srcSet={postImageUrl(posts?.id)}
                                                 alt={posts.caption}
                                                 loading="lazy"
                                             />

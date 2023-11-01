@@ -17,10 +17,10 @@ export const retreiveProfile = async (profileId: number) =>
     await utils.get(`${REACT_APP_USERS_ENDPOINT}${profileId}`);
 
 export const uploadProfilePic = async (id, formData) =>
-    utils.post(`${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}`, formData, { 'Content-Type': 'multipart/form-data' });
+    await utils.post(`${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}`, formData, { 'Content-Type': 'multipart/form-data' });
 
 export const profilePicUrl = (id) =>
-    `${REACT_APP_BASE_URL}${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}`
+    id ? `${REACT_APP_BASE_URL}${REACT_APP_USERS_ENDPOINT}${id}${REACT_APP_S3_IMAGE_ENDPOINT}` : null
 
 export const find = async (field: string) => {
     const payload = {
