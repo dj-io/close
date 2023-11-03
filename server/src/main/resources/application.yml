@@ -10,6 +10,7 @@ server:
 
 aws:
   region: us-east-2
+  baseurl: http://localhost:8080
   s3:
     buckets:
       user: close-app-v1

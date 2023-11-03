@@ -7,6 +7,7 @@ import com.example.server.utils.EmailSender;
 import com.example.server.utils.EmailValidator;
 import com.example.server.utils.UserRole;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,7 @@ public class RegistrationService {
                 )
         );
 
-        String link = "https://www.close-web-dev.us-east-1.elasticbeanstalk.com/api/v1/registration/confirm?token=" + token;
+        String link = "https://www.cdev.services/api/v1/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getName(), request.getEmail(), link));
 
         return token;
