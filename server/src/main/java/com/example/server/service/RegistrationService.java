@@ -44,7 +44,7 @@ public class RegistrationService {
                 )
         );
 
-        String link = "https://www.cdev.services/api/v1/registration/confirm?token=" + token;
+        String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getName(), request.getEmail(), link));
 
         return token;
