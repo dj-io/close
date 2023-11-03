@@ -72,7 +72,6 @@ public class UserService implements UserDetailsService {
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
-
         user.setPassword(encodedPassword);
 
         userRepository.save(user);
@@ -103,7 +102,6 @@ public class UserService implements UserDetailsService {
         }
 
         if (currentUser.isPresent()) { user.setPassword(updatedUser.getPassword()); }
-
         if (currentUser.isPresent() && user.getUsername() == null) { user.setUsername(updatedUser.getUsername()); }
         if (currentUser.isPresent() && user.getBiography() == null) { user.setBiography(updatedUser.getBiography()); }
         if (currentUser.isPresent() && user.getLinks() == null) { user.setLinks(updatedUser.getLinks()); }
