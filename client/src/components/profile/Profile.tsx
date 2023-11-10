@@ -193,7 +193,7 @@ class Profile extends React.Component<ProfileProps> {
                                         type={Types.TEXT}
                                         placeholder={username || 'Choose a username'}
                                         defaultValue={username || 'Choose a username'}
-                                        onSave={(value) => this.saveName(value.toLowerCase())}
+                                        onSave={(value) => this.saveName(value?.toLowerCase())}
                                         editMode={this.state.editing}
                                         saveButtonLabel={<CloudSyncTwoToneIcon fontSize="small" />}
                                         attributes={{ name: "username" }}
