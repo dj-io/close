@@ -113,6 +113,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
+    public Iterable<User> searchUsers(String username) { return userRepository.searchUsersByUsername(username); }
+
     public Iterable<User> getCloseUsers() {
         return userRepository.findAll();
     }

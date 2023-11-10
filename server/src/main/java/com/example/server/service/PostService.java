@@ -45,9 +45,7 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Optional<Post> getPostsByCaption(String keyword) {
-        return postRepository.findByCaption(keyword);
-    }
+    public Iterable<Post> searchPostsByCaption(String keyword) { return postRepository.searchPostsByCaption(keyword); }
 
     public Post getPostById(Long id) {
         return postRepository.findById(id).get();

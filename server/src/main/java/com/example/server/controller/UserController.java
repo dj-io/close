@@ -21,14 +21,18 @@ public class UserController {
         return userService.getCloseUsers();
     }
 
+    @GetMapping(path = "find")
+    public Iterable<User> searchUsersByUsername(@RequestParam("username") String username) {
+        return userService.searchUsers(username.toLowerCase());
+    }
+
     @GetMapping(path = "search")
-    public Optional<User> getUser(@RequestParam("username") String username) {
-        return userService.getUser(username);
+    public Optional<User> searchUserByUsername(@RequestParam("username") String username) {
+        return userService.getUser(username.toLowerCase());
     }
 
     @GetMapping(path = "{id}")
     public User getUserById(@PathVariable Long id) {
-
         return userService.getUserById(id);
     }
 

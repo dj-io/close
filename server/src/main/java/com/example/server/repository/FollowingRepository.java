@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface FollowingRepository extends JpaRepository<Following, Long> {
 
     @Transactional
-    @Modifying
     @Query(value = "SELECT * FROM FOLLOWING a WHERE a.user_id = ?1", nativeQuery = true)
     Iterable<Following> getFollowingByUserId(Long id);
 }

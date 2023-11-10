@@ -18,6 +18,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUserById(Long id);
 
     @Transactional
+    @Query(value = "SELECT * FROM Users a WHERE a.username LIKE %?1% OR LOWER(a.name) LIKE %?1%", nativeQuery = true)
+    Iterable<User> searchUsersByUsername(String username);
+
+    @Transactional
     @Modifying
     @Query("UPDATE User a " + "SET a.enabled = TRUE WHERE a.email = ?1")
     int enableUser(String email);

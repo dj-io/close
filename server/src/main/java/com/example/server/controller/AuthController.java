@@ -31,7 +31,7 @@ public class AuthController {
     public String token(@RequestBody LoginRequest userLogin) throws AuthenticationException {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
-                        userLogin.username(), userLogin.password()
+                        userLogin.username().toLowerCase(), userLogin.password()
                 ));
         return tokenService.generateToken(authentication);
     }

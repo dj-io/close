@@ -7,7 +7,6 @@ import com.example.server.utils.EmailSender;
 import com.example.server.utils.EmailValidator;
 import com.example.server.utils.UserRole;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +33,7 @@ public class RegistrationService {
         String token = userService.userSignup(
                 new User(
                         request.getName(),
-                        request.getUsername(),
+                        request.getUsername().toLowerCase(),
                         request.getPronouns(),
                         request.getBiography(),
                         request.getLinks(),

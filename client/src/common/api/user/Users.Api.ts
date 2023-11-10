@@ -32,6 +32,17 @@ export const find = async (field: string) => {
     return await utils.get(`${REACT_APP_USERS_ENDPOINT}search`, payload)
 }
 
+export const findfuzzy = async (field: string) => {
+    const payload = {
+        params: {
+            username: `${field}`,
+        }
+    }
+
+    return await utils.get(`${REACT_APP_USERS_ENDPOINT}find`, payload)
+}
+
+
 export const share = async (post) =>
     await utils.patch(`${REACT_APP_USERS_ENDPOINT}`, post);
 

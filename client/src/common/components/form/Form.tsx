@@ -62,7 +62,7 @@ export const Form: React.FC<IFormProps> = (props: IFormProps) => {
                             disabledButton={
                                 !formikProps.isValid ||
                                 formikProps.isSubmitting ||
-                                !formikProps.values[props.disableValue]
+                                !formikProps.values[props.disableValue].trim()
                             }
                             loading={formikProps.isSubmitting}
                         />

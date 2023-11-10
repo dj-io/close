@@ -6,7 +6,7 @@ import { IFindDispatchToProps, IFindStateToProps } from '../../types/app.ts';
 import { FindDrawer, FindHeader, FindLink, Seperate } from './Find.Styles.ts';
 import { Form } from '../../common/components/form/Form.tsx';
 import { FindFields } from '../../common/constants/formFields.ts';
-import { find, profilePicUrl } from '../../common/api/user/Users.Api.ts';
+import { findfuzzy, profilePicUrl } from '../../common/api/user/Users.Api.ts';
 import { Link } from 'react-router-dom';
 import { UserActionTypes } from '../../common/enums/UserActionType.ts';
 import { Suggested } from './Suggested.tsx';
@@ -39,17 +39,21 @@ class Find extends React.Component<FindProps> {
         find: ''
     }
 
-    handleChange = (e) => this.setState({ find: e.target.value });
+    handleChange = (e) => {
+        if (e.target.value.trim()) {
+            this.setState({ find: e.target.value }, this.search)
+        }
+    }
 
     search = async () => {
-        const res = await find(this.state.find);
+        const res = await findfuzzy(this.state.find);
 
         if (res.data) {
             this.props.returnFind(res.data);
-            this.setState({ found: true })
+            if (res.data.length) this.setState({ found: true })
         }
 
-        if (!res.data) this.setState({ found: false })
+        if (!res.data.length) this.setState({ found: false })
 
     }
 
@@ -89,29 +93,31 @@ class Find extends React.Component<FindProps> {
                         <Seperate />
                     </FindHeader>
                     <Grid sx={{ marginTop: '25px', marginRight: 32, }} container direction='column' alignItems='start'>
-                        {Object.keys(this.props.foundUser)?.length > 1 && (
+                        {this.props.foundUser.length > 0 &&
                             <>
                                 <Typography sx={{ marginRight: 32, p: 2, color: '#3C414270' }} variant='button'>
                                     {UserActionTypes.RECENT}
                                 </Typography >
-                                <FindLink to={`/${this.props.foundUser.username}`}>
-                                    <CardHeader
-                                        sx={{ width: 300 }}
-                                        onClick={() => this.props.openFind(!this.props.isFindOpen)}
-                                        avatar={
-                                            <IconButton>
-                                                <Avatar
-                                                    alt={this.props.foundUser.username}
-                                                    src={profilePicUrl(this.props?.foundUser?.id)}
-                                                />
-                                            </IconButton>
-                                        }
-                                        title={this.props.foundUser.username}
-                                        subheader={this.props.foundUser.name}
-                                    />
-                                </FindLink>
+                                {this.props.foundUser.map((user) => (
+                                    <FindLink to={`/${user?.username}`}>
+                                        <CardHeader
+                                            sx={{ width: 300 }}
+                                            onClick={() => this.props.openFind(!this.props.isFindOpen)}
+                                            avatar={
+                                                <IconButton>
+                                                    <Avatar
+                                                        alt={user?.username}
+                                                        src={profilePicUrl(user?.id)}
+                                                    />
+                                                </IconButton>
+                                            }
+                                            title={user?.username}
+                                            subheader={user?.name}
+                                        />
+                                    </FindLink>
+                                ))}
                             </>
-                        )}
+                        }
                     </Grid>
                     {!this.state.found && (
                         <Grid container direction='column' alignItems='center' >
