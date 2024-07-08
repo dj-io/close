@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { Grid } from '@mui/material';
-import SelectMedia from './SelectMedia.tsx'
-import Caption from './Caption.tsx';
-import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
-import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
-import { IShareStateToProps, IShareDispatchToProps } from '../../types/user.ts'
-import { userValues } from '../../common/constants/requests.ts';
+import * as React from 'react';
 import { uploadPostImage } from '../../common/api/user/Post.Api.ts';
+import { retreiveProfile, share } from '../../common/api/user/Users.Api.ts';
+import { ConfirmDialog } from '../../common/components/dialog/Dialog.tsx';
+import { userValues } from '../../common/constants/requests.ts';
+import { IShareDispatchToProps, IShareStateToProps } from '../../types/user.ts';
+import Caption from './Caption.tsx';
+import SelectMedia from './SelectMedia.tsx';
 
 interface IPost {
     picture: string;
@@ -76,6 +76,7 @@ class Share extends React.Component<ShareProps> {
     };
 
     post = async () => {
+        // destructoring user obj, isolating items we do not want to include in post/patch body - where ...rest repr. all items to include
         const { authorities, updated, created, ...rest } = this.props.user;
 
         const data = {
