@@ -9,11 +9,11 @@ server:
     include-binding-errors: always
 
 aws:
-  region: us-east-2
+  region: us-east-1
   baseurl: http://localhost:8080
   s3:
     buckets:
-      user: close-app-v1
+      user: close-web-v2
 
 spring:
   profiles:

@@ -46,7 +46,7 @@ public class PostController {
             value = "{id}/post-image",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
-    public void uploadUserProfileImage(
+    public void uploadUserPostImage(
             @PathVariable("id") Long id,
             @RequestParam("file") MultipartFile file) {
         postService.uploadUserPostImage(id, file);
@@ -56,7 +56,7 @@ public class PostController {
             value = "{id}/post-image",
             produces = MediaType.IMAGE_JPEG_VALUE
     )
-    public byte[] getCustomerProfileImage(
+    public byte[] getUserPostImage(
             @PathVariable("id") Long id) {
         return postService.getUserPostImage(id);
     }
