@@ -1,6 +1,6 @@
-# Social Platform (Close) [⬅️ BACK](#table-of-contents)
+# Social Platform (Close) (Server) ⬅️ 
 
-The backend is built using Spring Boot and provides APIs for user authentication, user management, content management, etc. It integrates with AWS services like S3 and Elastic Transcoder for scalable storage, secure video uploading, and content distribution. Spring Security has been configured for role-based access control, to secure API endpoints, and encryption of passwords. CORS has also been configured to enable secure communication between the frontend and backend.
+The server app is built using Spring Boot and provides APIs for user authentication, user management, content management, etc. It integrates with AWS services like S3 and Elastic Transcoder for scalable storage, secure video uploading, and content distribution. Spring Security has been configured for role-based access control, to secure API endpoints, and encryption of passwords. CORS has also been configured to enable secure communication between the frontend and backend.
 
 - [Link To Web App](https://closeapp.co)
 
@@ -46,3 +46,11 @@ The backend is built using Spring Boot and provides APIs for user authentication
    ```bash
    git clone https://github.com/yourusername/your-backend-repo.git
    cd your-backend-repo```
+
+2. Install dependencies:
+    ```mvn install```
+
+3. ```Set up the database and AWS services as described in the Configuration section.```
+   
+4. or, if using Gradle:
+    ```./gradlew build```
