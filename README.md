@@ -1,23 +1,48 @@
-# Social Media App
+# Social Platform (Close) [⬅️ BACK](#table-of-contents)
 
-## Deployed app
-https://www.closeapp.co
+The backend is built using Spring Boot and provides APIs for user authentication, user management, content management, etc. It integrates with AWS services like S3 and Elastic Transcoder for scalable storage, secure video uploading, and content distribution. Spring Security has been configured for role-based access control, to secure API endpoints, and encryption of passwords. CORS has also been configured to enable secure communication between the frontend and backend.
 
-## which API I'm using
-/server
+- [Link To Web App](https://closeapp.co)
 
-## technologies used
-languages - HTML5, CSS3, Typescript, Java |
-libraries - React.js, redux, react router, axios, yup, formik, react-easy-edit, material-ui, Styled-Components, Spring, PostgreSql
-tools - AWS Amplify, Elastic Beanstalk
+---
 
+## Table of Contents
+- [Social Platform (Close) ⬅️ BACK](#social-platform)
+  - [Table of Contents](#table-of-contents)
+  - [Technologies Used](#technologies-used)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
 
-## problem statement
-A Social Platform creating a space for users to upload photos, videos and connect with friends, those of us who are interested in sharing an up close look at our day to day lives/activity can take advantage of this social platform to update old and new friends in real time.
+---
 
-## target users
-Anyone who is interested in sharing updates on day to day activity they would not share elsewhere via photo, video and live broadcast. 
+## Technologies Used
 
+- Java 18
+- Spring Boot 3.x
+- Spring Security
+- Maven
+- Hibernate/JPA
+- PostgreSQL
+- Docker
+- AWS S3, Elastic Transcoder
+- Postman
 
-## wireframe
-![Close wireframe]( "Close")
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Java 17+
+- Maven 3.x or Gradle
+- MySQL/PostgreSQL (or your chosen database)
+- AWS Account with access to S3, Elastic Transcoder
+- [Any other tools] (e.g., Docker)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/your-backend-repo.git
+   cd your-backend-repo```
