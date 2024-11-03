@@ -1,5 +1,35 @@
-# Social Platform (monorepo)
+<h1 align="center">:selfie: Close </h1>
 
+# Table of Contents
+  - [Application](#application)
+      - [Login Credentials](#login-credentials-demo)
+      - [Key Features](#key-features)
+  - [Repository](#repository)
+      - [Technologies Used](#technologies-used)
+      - [Getting Started](#getting-started)
+        - [Prerequisites](#prerequisites)
+        - [Installation](#installation)
+        - [Running the Applications](#running-the-applications)
+      - [Configuration](#configuration)
+
+# Application
+<h4>Close is a social platform that allows users to securely share content and connect with others around the world: <a href="https://closeapp.co" target="_blank" rel="noreferrer"> :champagne: Live Site</a> 
+</h4>
+
+## Login Credentials (demo)
+Email  | Password
+------------- | -------------
+withloveclose@gmail.com  | @love_close_111
+
+## Key Features
+- **In-Place Profile Editing**: Allows users to update and edit profile information (profile img, bio, username, links etc.) in place, removing the need for an additional edit profile page.
+- **Share**: Securely share content (photo/video) with optional captions by taking a photo or selecting photos from your device.
+- **Enhanced Search**: Users can search for friends and others through the find tab, Utilizing SQL close returns all usernames related to the input and refines results to match the specification of the input.
+- **Home**: Displays all followed users posts in a chronological feed
+- **Comments,Likes,Shares**: Users can comment, like and share other users posts
+- **Conversations**: Direct Message between users (coming soon)
+
+# Repository
 **This is a monorepo containing two main applications**:
 
 - **Client**: A React application located in the `/client` directory.
@@ -12,27 +42,26 @@
     - Integrates with AWS services like S3 and Elastic Transcoder for scalable storage, secure photo/video uploading, and
       content distribution.
     - Configured with Spring Email to automate email verification during user registration.
-    - Configured with Spring Security for auth-based access control, to secure API endpoints, and encryption of passwords.
-    - CORS has also been configured to enable secure communication between the frontend and backend. 
-
-### Live Web App
-
-- [https://www.closeapp.co](https://closeapp.co)
-
-## Table of Contents
-- [Social Platformn (Monorepo)](#social-platform-monorepo)
-  - [Technologies Used](#technologies-used)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Running the Applications](#running-the-applications)
-  - [Configuration](#configuration)
-
+    - Configured with Spring Security for auth-based access control (JWT), to secure API endpoints, and encryption of passwords.
+    - CORS has also been configured to enable secure communication between the frontend and backend.
 
 ## Technologies Used
+ 
+- **Client**
+    - React
+    - TypeScript
+    - Axios
+    - Redux/React Router
+    - Material UI/React-Emotion/Styled Components
+    - React-Easy-Edit
+    - Formik/Yup
 
-- **Client**: React, Typescript, Axios, Redux, React Router, Material UI, React-Emotion, Styled Components, React-Easy-Edit, Formik, Yup
-- **Server**: Java 18, Spring Boot 3.x, Spring Security, Spring Email, Maven, Hibernate/JPA, PostgreSQL, Docker, JWTs, AWS S3, Elastic Transcoder, CloudFront, Postman
+- **Server**
+    - Java 18, Spring Boot 3.x, Spring Security, Spring Email
+    - Maven, Hibernate/JPA
+    - PostgreSQL, Docker
+    - AWS S3, Elastic Transcoder, CloudFront
+    - Postman
 
 
 ## Getting Started
