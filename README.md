@@ -13,8 +13,8 @@
       - [Configuration](#configuration)
 
 # Application
-<h4>Close is a social platform that allows users to securely share content and connect with others around the world: <a href="https://closeapp.co" target="_blank" rel="noreferrer"> :champagne: Live Site</a> 
-</h4>
+<h5>Close is a social platform that allows users to securely share content and connect with others around the world: <a href="https://closeapp.co" target="_blank" rel="noreferrer"> :champagne: Live Site</a> 
+</h5>
 
 ## Login Credentials (demo)
 Email  | Password
