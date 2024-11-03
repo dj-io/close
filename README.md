@@ -13,7 +13,7 @@
       - [Configuration](#configuration)
 
 # Application
-<h4>A social platform that allows users to securely share content and connect with others around the world: <a href="https://closeapp.co" target="_blank" rel="noreferrer"> :champagne: Live Site</a> 
+<h4>Social platform - Securely share content and connect with others around the world: <a href="https://closeapp.co" target="_blank" rel="noreferrer"> :champagne: Live Site</a> 
 </h4>
 
 ## Login Credentials (demo)
