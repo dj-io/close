@@ -17,9 +17,9 @@
 </h4>
 
 ## Login Credentials (demo)
-Email  | Password
+Username  | Password
 ------------- | -------------
-withloveclose@gmail.com  | @love_close_111
+close  | @loveclose1
 
 ## Key Features
 - **In-Place Profile Editing**: Allows users to update and edit profile information (profile img, bio, username, links etc.) in place, removing the need for an additional edit profile page.
