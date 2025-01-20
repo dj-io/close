@@ -83,7 +83,7 @@ Ensure you have the following installed:
 1. **Clone the repository:**
    
    ```bash
-   git clone https://github.com/yourusername/your-monorepo.git
+   git clone https://github.com/dj-io/close.git
    cd your-monorepo
 
 3. **Install client Dependencies:** Navigate to the ```client``` directory and install dependencies
